@@ -1,6 +1,10 @@
 project:
   type: website
   output-dir: _site
+  render:
+    - index.qmd
+    - articles/index.qmd
+    - population_parameter_and_sample_statistic/population_and_samples.ipynb
 
 website:
   title: "Reinventing the Wheel"
