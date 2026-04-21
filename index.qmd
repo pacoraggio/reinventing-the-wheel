@@ -7,7 +7,7 @@ and building them from first principles using Python.
 
 ---
 
-## "We don't want to reinvent the wheel, because we don't know how to it"
+## "We don't want to reinvent the wheel, because we don't know how to do it"
 
 A generation of people grew up watching *The Flintstones* and were 
 repeatedly told, by parents, teachers, and senior colleagues, not to 
