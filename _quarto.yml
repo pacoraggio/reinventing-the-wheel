@@ -1,0 +1,19 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Reinventing the Wheel"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: articles/index.qmd
+        text: Articles
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+
+jupyter: rtw

@@ -1,0 +1,8 @@
+---
+title: "Articles"
+listing:
+  contents:
+    - "../population-parameter-and-sample-statistic/population_and_samples.ipynb"
+  type: default
+  sort: "date desc"
+---

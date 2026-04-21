@@ -1,0 +1,6 @@
+---
+title: "Reinventing the Wheel"
+---
+
+A series of articles deconstructing Data Science methods 
+and building them from first principles using Python.
