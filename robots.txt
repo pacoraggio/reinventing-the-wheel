@@ -1,1 +1,1 @@
-Sitemap: https://pacoraggio.github.io/reinventing-the-weel/sitemap.xml
+Sitemap: https://pacoraggio.github.io/reinventing-the-wheel/sitemap.xml
