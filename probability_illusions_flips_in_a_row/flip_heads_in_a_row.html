@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The Coin Has No Memory, But You Do – Reinventing the Wheel</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Reinventing the Wheel</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../articles/index.html"> 
+<span class="menu-text">Articles</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#surprisingly-likely-the-mathematics-of-streaks" id="toc-surprisingly-likely-the-mathematics-of-streaks" class="nav-link active" data-scroll-target="#surprisingly-likely-the-mathematics-of-streaks">Surprisingly Likely: The Mathematics of Streaks</a></li>
+  <li><a href="#heads-in-a-row-counting-and-probabilities" id="toc-heads-in-a-row-counting-and-probabilities" class="nav-link" data-scroll-target="#heads-in-a-row-counting-and-probabilities">Heads in a Row, Counting and Probabilities</a></li>
+  <li><a href="#computing-the-probability-in-the-general-case.-or-the-superpower-i-wish-i-had." id="toc-computing-the-probability-in-the-general-case.-or-the-superpower-i-wish-i-had." class="nav-link" data-scroll-target="#computing-the-probability-in-the-general-case.-or-the-superpower-i-wish-i-had.">Computing the probability in the general case. Or the superpower I wish I had.</a>
+  <ul class="collapse">
+  <li><a href="#introducing-the-complement-rule" id="toc-introducing-the-complement-rule" class="nav-link" data-scroll-target="#introducing-the-complement-rule">Introducing the complement rule</a></li>
+  <li><a href="#the-general-case-finally" id="toc-the-general-case-finally" class="nav-link" data-scroll-target="#the-general-case-finally">The general Case, finally</a></li>
+  </ul></li>
+  <li><a href="#from-theory-to-practice-lets-flip-again" id="toc-from-theory-to-practice-lets-flip-again" class="nav-link" data-scroll-target="#from-theory-to-practice-lets-flip-again">From theory to practice: Let’s flip again</a></li>
+  <li><a href="#conclusion-are-you-surprised" id="toc-conclusion-are-you-surprised" class="nav-link" data-scroll-target="#conclusion-are-you-surprised">Conclusion: Are you surprised?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Coin Has No Memory, But You Do</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="79040f5c" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"whitegrid"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><em>Against Your Gut: The Hidden Probability of Coin Streaks</em></p>
+<section id="surprisingly-likely-the-mathematics-of-streaks" class="level2">
+<h2 class="anchored" data-anchor-id="surprisingly-likely-the-mathematics-of-streaks">Surprisingly Likely: The Mathematics of Streaks</h2>
+<p>There is a branch of mathematics I always found fascinating but hard to manipulate: counting methods, permutation and combination. I sincerely admire people able to compute probability on the spot just using counting methods also because you often find yourself amazed by the final result. And if you think that being able to calculate probability outcome on the spot is useless, well maybe Vegas is not your favourite place on Earth. For sure very expensive.</p>
+<p>In “How we know what isn’t so: The fallibility of human reason in everyday life.”, a remarkable 1991 book by <a href="https://en.wikipedia.org/wiki/Thomas_Gilovich">Thomas Gilovich</a>, there are several examples the author shows how the probability of events challenge our beliefs. Carl Sagan called it “a most illuminating book” that “shows how people systematically err in understanding numbers, in rejecting unpleasant evidence, in being influenced by the opinions of others. We’re good in some things, but not in everything. Wisdom lies in understanding our limitations.”.</p>
+<p>“Rejecting unpleasant evidence” looks like a perfect topic a curious and inquisitive mind loves to get deep.</p>
+<p>In the book, Gilovich introduces the concept of the <a href="https://en.wikipedia.org/wiki/Hot_hand">Hot hand fallacy</a> which is the tendency, for an athlete, to have streaks of success higher than their average performance. The story of the Hot Hand (phenomenon or fallacy?) has multiple, interesting angles but, in this notebook, I will concentrate on one of the reasons Gilovich uses to explain what is the psychological side leading us to blindly believe in the Hot hand concept in basketball. In the words of the author:</p>
+<blockquote class="blockquote">
+<p>“<em>People expect sequences of coin flips, for example, to alternate between heads and tails more than they actually do. Because chance produces less alternation than our intuition leads us to expect, truly random sequences look too ordered or ”lumpy.” Streaks of 4, 5, or 6 heads in a row clash with our expectations about the behavior of a fair coin, although in a series of 20 tosses there is a 50-50 chance of getting 4 heads in a row, a 25 percent chance of five in a row, and a 10 percent chance of a streak of six. Because the average basketball player makes about 50% of his shots, he has a reasonably good chance of looking like he has the hot hand by making four, five, or even six shots in a row if he takes 20 shots in a game (as many players do).</em>”</p>
+</blockquote>
+<p>I will make some further remarks at the end of the article about the current statistical analysis of the phenomenon, but it’s true that most of the people would find very unusual streaks of 4, 5 or 6 heads in a row in a series of 20 tosses. I personally asked people if they would find awkward having 4 heads in a row in general, and the majority conceded it would not be impossible but extremely rare. For sure, a very small subset would go as far as not being surprised that actually the percentage of having 4 heads in a row in a series of 20 tosses is very close to 50%. The book does not give any demonstration this probability is true and we have no reason to doubt that Gilovich just made up this number.</p>
+<p>In the spirit of Reinventing the Wheel, I will take apart the claim, see how it works in its components and put it back to show that, in the end, the claim is true. In doing so, I will first show the mathematical background and, since we want to verify that math and reality match, I will perform several simulations of series of 20 tosses and see that almost half of them contains a series of 4 Heads in a row.</p>
+<p>Talking about statistics, when I personally asked people if they would find awkward having 4 heads in a row in a series of tosses, the vast majority of them found me awkward. The only ones finding me normal were my closest friends.</p>
+</section>
+<section id="heads-in-a-row-counting-and-probabilities" class="level2">
+<h2 class="anchored" data-anchor-id="heads-in-a-row-counting-and-probabilities">Heads in a Row, Counting and Probabilities</h2>
+<p>The problem we want to solve is: what is the probability of getting 4 heads in a row in 20 tosses? This can be written as:</p>
+<p><span class="math display">\[
+P(\text{having four heads in a row}) = \frac{\text{number of times I have four heads in a row}}{\text{number of all possible combination of the tosses}}
+\]</span></p>
+<p>We will get there, but first let’s build the method on a simpler case: consider the case 3 heads in a row across 5 tosses, where the numbers are small enough to check everything by hand.</p>
+<p>Using H for heads and T for tails, a possible outcome of 5 tosses might be <code>THHTT</code> or <code>TTHHT</code>. How many possible outcomes are there in total? Math tells us that we can have <span class="math inline">\(2^{5} = 32\)</span> possible outcomes, small enough that we can write them all down:</p>
+<div id="c2d011d6" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> product</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sequences <span class="op">=</span> [<span class="st">""</span>.join(s) <span class="cf">for</span> s <span class="kw">in</span> product(<span class="st">"HT"</span>, repeat<span class="op">=</span>n)]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, seq <span class="kw">in</span> <span class="bu">enumerate</span>(sequences):</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">:&gt;2}</span><span class="ss">. </span><span class="sc">{</span>seq<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> 1. HHHHH
+ 2. HHHHT
+ 3. HHHTH
+ 4. HHHTT
+ 5. HHTHH
+ 6. HHTHT
+ 7. HHTTH
+ 8. HHTTT
+ 9. HTHHH
+10. HTHHT
+11. HTHTH
+12. HTHTT
+13. HTTHH
+14. HTTHT
+15. HTTTH
+16. HTTTT
+17. THHHH
+18. THHHT
+19. THHTH
+20. THHTT
+21. THTHH
+22. THTHT
+23. THTTH
+24. THTTT
+25. TTHHH
+26. TTHHT
+27. TTHTH
+28. TTHTT
+29. TTTHH
+30. TTTHT
+31. TTTTH
+32. TTTTT</code></pre>
+</div>
+</div>
+<p>Let’s put the output in a table:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><code>seq</code></th>
+<th><code>seq</code></th>
+<th><code>seq</code></th>
+<th><code>seq</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>HHHHH</code></td>
+<td><code>HHHHT</code></td>
+<td><code>HHHTH</code></td>
+<td><code>HHHTT</code></td>
+</tr>
+<tr class="even">
+<td><code>HHTHH</code></td>
+<td><code>HHTHT</code></td>
+<td><code>HHTTH</code></td>
+<td><code>HHTTT</code></td>
+</tr>
+<tr class="odd">
+<td><code>HTHHH</code></td>
+<td><code>HTHHT</code></td>
+<td><code>HTHTH</code></td>
+<td><code>HTHTT</code></td>
+</tr>
+<tr class="even">
+<td><code>HTTHH</code></td>
+<td><code>HTTHT</code></td>
+<td><code>HTTTH</code></td>
+<td><code>HTTTT</code></td>
+</tr>
+<tr class="odd">
+<td><code>THHHH</code></td>
+<td><code>THHHT</code></td>
+<td><code>THHTH</code></td>
+<td><code>THHTT</code></td>
+</tr>
+<tr class="even">
+<td><code>THTHH</code></td>
+<td><code>THTHT</code></td>
+<td><code>THTTH</code></td>
+<td><code>THTTT</code></td>
+</tr>
+<tr class="odd">
+<td><code>TTHHH</code></td>
+<td><code>TTHHT</code></td>
+<td><code>TTHTH</code></td>
+<td><code>TTHTT</code></td>
+</tr>
+<tr class="even">
+<td><code>TTTHH</code></td>
+<td><code>TTTHT</code></td>
+<td><code>TTTTH</code></td>
+<td><code>TTTTT</code></td>
+</tr>
+</tbody>
+</table>
+<p>We have 32 possible combinations. How many of them contains at least 3 heads in a row?</p>
+<div id="bbf11d26" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>streak <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> <span class="st">"H"</span> <span class="op">*</span> streak</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>matching <span class="op">=</span> [seq <span class="cf">for</span> seq <span class="kw">in</span> sequences <span class="cf">if</span> target <span class="kw">in</span> seq]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Sequences containing at least </span><span class="sc">{</span>streak<span class="sc">}</span><span class="ss"> heads in a row: </span><span class="sc">{</span><span class="bu">len</span>(matching)<span class="sc">}</span><span class="ss"> out of </span><span class="sc">{</span><span class="bu">len</span>(sequences)<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, seq <span class="kw">in</span> <span class="bu">enumerate</span>(matching):</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>i<span class="op">+</span><span class="dv">1</span><span class="sc">:&gt;2}</span><span class="ss">. </span><span class="sc">{</span>seq<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sequences containing at least 3 heads in a row: 8 out of 32
+
+ 1. HHHHH
+ 2. HHHHT
+ 3. HHHTH
+ 4. HHHTT
+ 5. HTHHH
+ 6. THHHH
+ 7. THHHT
+ 8. TTHHH</code></pre>
+</div>
+</div>
+<p>Updating the table to highlight sequences containing at least 3 consecutive heads:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><code>seq</code></th>
+<th><code>seq</code></th>
+<th><code>seq</code></th>
+<th><code>seq</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>HHHHH</code></td>
+<td><code>HHHHT</code></td>
+<td><code>HHHTH</code></td>
+<td><code>HHHTT</code></td>
+</tr>
+<tr class="even">
+<td><del><code>HHTHH</code></del></td>
+<td><del><code>HHTHT</code></del></td>
+<td><del><code>HHTTH</code></del></td>
+<td><del><code>HHTTT</code></del></td>
+</tr>
+<tr class="odd">
+<td><code>HTHHH</code></td>
+<td><del><code>HTHHT</code></del></td>
+<td><del><code>HTHTH</code></del></td>
+<td><del><code>HTHTT</code></del></td>
+</tr>
+<tr class="even">
+<td><del><code>HTTHH</code></del></td>
+<td><del><code>HTTHT</code></del></td>
+<td><del><code>HTTTH</code></del></td>
+<td><del><code>HTTTT</code></del></td>
+</tr>
+<tr class="odd">
+<td><code>THHHH</code></td>
+<td><code>THHHT</code></td>
+<td><del><code>THHTH</code></del></td>
+<td><del><code>THHTT</code></del></td>
+</tr>
+<tr class="even">
+<td><del><code>THTHH</code></del></td>
+<td><del><code>THTHT</code></del></td>
+<td><del><code>THTTH</code></del></td>
+<td><del><code>THTTT</code></del></td>
+</tr>
+<tr class="odd">
+<td><code>TTHHH</code></td>
+<td><del><code>TTHHT</code></del></td>
+<td><del><code>TTHTH</code></del></td>
+<td><del><code>TTHTT</code></del></td>
+</tr>
+<tr class="even">
+<td><del><code>TTTHH</code></del></td>
+<td><del><code>TTTHT</code></del></td>
+<td><del><code>TTTTH</code></del></td>
+<td><del><code>TTTTT</code></del></td>
+</tr>
+</tbody>
+</table>
+<p>We have 8 sequences with at least 3 consecutive Heads out of 32 and the resulting probability is:</p>
+<p><span class="math display">\[
+P(\text{3 heads in a row}) = \frac{\text{number of times 3 heads in a row}}{\text{number of all possible combination of a sequence of 5 tosses}} = \frac{8}{32} = 0.25
+\]</span></p>
+<p>At the end, the probability is <span class="math inline">\(25\%\)</span>, or one out of four. Is it the number you would have expected? The idea one has in mind of what is likely or unlikely is very often subjective, but if you flip a coin 5 times and you get three Heads in a row I am sure you would consider something worth noticing. By the way, the probability of having three heads in a row in a sequence of five tosses, it’s different from the probability to have three heads in a row <em>at the start of the sequence</em>. I think this difference is not immediate in our mind and is a “surprise factor” we tend to underestimate. We notice streaks when they start appearing and forget what happened right before and this, possibly, leverages our surprise when we start noticing a phenomenon (the probability to start a sequence with at least 3 heads in a row is 4 out of 32 or <span class="math inline">\(12.5\%\)</span>, the half of the probability we just calculated).</p>
+<p>With small numbers is easier to compute the probability by listing all possible outcomes, but when the numbers start growing, we need to find mathematical way to compute the probability. In a scenario where we want to consider a series of 20 tosses, all the possible outcomes are more than one million and I don’t think I have enough space in my notebook to list them all.</p>
+<p>Notice what we just did: rather than counting the sequences with the streak, we identified the ones without it and subtracted. That move has a name and we will see how to apply it in the next sections.</p>
+</section>
+<section id="computing-the-probability-in-the-general-case.-or-the-superpower-i-wish-i-had." class="level2">
+<h2 class="anchored" data-anchor-id="computing-the-probability-in-the-general-case.-or-the-superpower-i-wish-i-had.">Computing the probability in the general case. Or the superpower I wish I had.</h2>
+<p>How can we compute the probability of the event we are discussing without resorting to manually counting all occurrences? That’s the kind of superpower I wish to have: to be able to quickly be able to compute chances with so called counting methods. More than a superpower, it might just be the right combination of learning the right methods and time to devote to learn the skill. But at least, if you have the willingness to learn, you can understand how to do it and derive a mathematical formula to compute this probability.</p>
+<p>To make things easy, let’s derive the formula for the case of 5 flips and we will then use the general case when we will turn to 20 flips.</p>
+<section id="introducing-the-complement-rule" class="level3">
+<h3 class="anchored" data-anchor-id="introducing-the-complement-rule">Introducing the complement rule</h3>
+<p>The complement rule is the way to go when computing the number of an event <strong>not</strong> occurring is easier than computing the number of an event occurring. The rule follows from something very simple: any event either happens or it does not, and one of the two must be true. This means <span class="math inline">\(P(E) + P(\neg E) = 1\)</span>, which gives us <span class="math inline">\(P(E) = 1 - P(\neg E)\)</span>. If computing <span class="math inline">\(P(\neg E)\)</span> is easier than computing <span class="math inline">\(P(E)\)</span> directly, we use the latter to obtain the former.</p>
+<p>In the case of calculating the number of times we have 3 heads in a row in a series of 5 flips, the idea is that rather than counting sequences with 3 heads in a row (messy), count those without, then subtract:</p>
+<p><span class="math display">\[
+P(\text{at least 3 in a row}) =  1 - P(\text{no run with 3 or more Heads})
+\]</span></p>
+<p>We can think in a recursive way: let <span class="math inline">\(f(n)\)</span> be the number of valid sequence of length <span class="math inline">\(n\)</span> with no run of 3 or more Heads. To make more intuitive what <span class="math inline">\(f(n)\)</span> is, let’s consider our simpler case with <span class="math inline">\(n=5\)</span>. To stress it more, we consider a valid sequence a sequence in which we don’t have 3 or more consecutive heads, like <code>HHTHH</code> or <code>THHTH</code>.</p>
+<p><em><span class="math inline">\(f(0)\)</span> is the number of valid sequence of length <span class="math inline">\(0\)</span> with no run of 3 or more Heads.</em></p>
+<p><span class="math inline">\(f(0) = 1\)</span> by convention. It’s not very intuitive, I know, but you can see it as if you don’t toss the coin, it’s the empty sequence and so there’s nothing in it, and nothing can violate the rule.</p>
+<p><em><span class="math inline">\(f(1)\)</span> is the number of valid sequence of length <span class="math inline">\(1\)</span> with no run of 3 or more Heads.</em></p>
+<p>If we flip a coin once, we obtain two possible results: <code>H</code> or <code>T</code>. Both are valid sequences, meaning that they do not contain three or more Heads. So we can conclude <span class="math inline">\(f(1) = 2\)</span></p>
+<p><em><span class="math inline">\(f(2)\)</span> is the number of valid sequence of length <span class="math inline">\(2\)</span> with no run of 3 or more Heads.</em></p>
+<p>We flip the coin twice, we can have four possible results: <code>HH</code>, <code>TT</code>, <code>HT</code>, <code>TH</code>. All four results form a valid sequence as they do not have three or more Heads. We conclude: <span class="math inline">\(f(2) = 4\)</span></p>
+<p><em><span class="math inline">\(f(3)\)</span> is the number of valid sequence of length <span class="math inline">\(3\)</span> with no run of 3 or more Heads.</em></p>
+<p>What about flipping the coin three times in a row? Well, in this case all sequences are valid except one: <code>HHH</code>. The latter is not a valid sequence, while all the remaining 7 are (the ones like <code>TTT</code>, <code>HTH</code>, <code>TTH</code> and so on). We conclude <span class="math inline">\(f(3) = 7\)</span></p>
+<p>Notice that for <span class="math inline">\(n &lt; 3\)</span> you can’t even fit a run of 3, so all <span class="math inline">\(2^n\)</span> sequences are valid. At <span class="math inline">\(n=3\)</span> you subtract exactly 1 (the <code>HHH</code> sequence).</p>
+<p>You can build all cases in a recursive way. The key observation is that every valid sequence must contain at least one T: a sequence ending in an unbroken run of 3 or more heads is, by definition, not valid. So we can ask: where does the last T appear? It can only be in one of three positions relative to the end of the sequence, and each case pins down exactly how many heads come after it. These are the only three cases, we cannot add a fourth one like <span class="math inline">\(\dots, H, H, H, T\)</span>: if three heads appear before the last tail, the sequence already contains a run of three consecutive heads and is therefore not valid. Any valid sequence must end with one of these cases:</p>
+<ul>
+<li><span class="math inline">\(\dots, T\)</span> and all the preceding <span class="math inline">\(n-1\)</span> flips are valid. We call them <span class="math inline">\(f(n-1)\)</span></li>
+<li><span class="math inline">\(\dots, H,T\)</span> and all the preceding <span class="math inline">\(n-2\)</span> flips are valid. We call them <span class="math inline">\(f(n-2)\)</span></li>
+<li><span class="math inline">\(\dots, H, H, T\)</span> and all the preceding <span class="math inline">\(n-3\)</span> flips are valid. We call them <span class="math inline">\(f(n-3)\)</span></li>
+</ul>
+<p>We can now write the general formula in the case of <strong><em>three consecutive</em></strong> heads:</p>
+<p><span class="math display">\[
+f(n) = f(n-1) + f(n-2) + f(n-3)
+\]</span></p>
+<p>Using recursion to compute a function is one of the funniest, surprising and exhilarating things you can do in math. OK, that’s maybe a bit of a stretch, it’s more a personal statement. Let’s plug our numbers in and:</p>
+<p><span class="math display">\[
+f(5) = f(5-1) + f(5-2) + f(5-3) = f(4) + f(3) + f(2) = f(4) + 7 + 4 = f(4) + 11
+\]</span></p>
+<p>We already calculated <span class="math inline">\(f(3) = 7\)</span> and <span class="math inline">\(f(2) = 4\)</span>. What about <span class="math inline">\(f(4)\)</span>? Using the very same formula, we can calculate <span class="math inline">\(f(4)\)</span> being <span class="math inline">\(f(4) = f(3) + f(2) + f(1) = 7 + 4 + 2 = 13\)</span>. So, finally, we have <span class="math inline">\(f(5) = 13 + 11 = 24\)</span>, meaning we have 24 possible outcomes that do not contain three or more Heads in a row. At the same time, for the complementary rule, this means we have <span class="math inline">\(32-24=8\)</span> outcomes with three or more Heads in a row. And the result we get using recursion is the same we obtained by manually listing all the possible cases.</p>
+</section>
+<section id="the-general-case-finally" class="level3">
+<h3 class="anchored" data-anchor-id="the-general-case-finally">The general Case, finally</h3>
+<p>Using the same reasoning, we can compute the number of valid sequences if we want to consider 4 Heads in a row in a series of 20 tosses. In this case, the valid sequences are defined as:</p>
+<ul>
+<li><span class="math inline">\(\dots, T\)</span> and all the preceding <span class="math inline">\(n-1\)</span> flips are valid. We call them <span class="math inline">\(f(n-1)\)</span></li>
+<li><span class="math inline">\(\dots, H,T\)</span> and all the preceding <span class="math inline">\(n-2\)</span> flips are valid. We call them <span class="math inline">\(f(n-2)\)</span></li>
+<li><span class="math inline">\(\dots, H, H, T\)</span> and all the preceding <span class="math inline">\(n-3\)</span> flips are valid. We call them <span class="math inline">\(f(n-3)\)</span></li>
+<li><span class="math inline">\(\dots, H, H, H, T\)</span> and all the preceding <span class="math inline">\(n-4\)</span> flips are valid. We call them <span class="math inline">\(f(n-4)\)</span></li>
+</ul>
+<p>What we have done, is to also add a new possible sequence, <span class="math inline">\(f(n-4)\)</span>, as we allow, in the general case, sequences with three consecutive Heads (but not with 4 or more). In this case, the recursive formula is:</p>
+<p><span class="math display">\[
+f(n) = f(n-1) + f(n-2) + f(n-3) + f(n-4)
+\]</span></p>
+<p>The base cases are now <span class="math inline">\(f(0)=1\)</span>, <span class="math inline">\(f(1)=2\)</span>, <span class="math inline">\(f(2)=4\)</span>, <span class="math inline">\(f(3)=8\)</span> (all sequences of length <span class="math inline">\(\leq 3\)</span> are valid), and <span class="math inline">\(f(4)=15\)</span> (all 16 minus <code>HHHH</code>). Notice how the base cases change too, not only the formula: since we now allow runs of up to three heads, <code>HHH</code> is a valid sequence and <span class="math inline">\(f(3) = 8\)</span>.</p>
+<p>What we need to compute is <span class="math inline">\(f(20)\)</span>, the sequence of 20 valid consecutive tosses:</p>
+<p><span class="math display">\[
+f(20) = f(19) + f(18) + f(17) + f(16)
+\]</span></p>
+<p>Each term calculated using the same recursive formula. Now, we can spend our week computing this number by hand or implementing a python cell doing the job for us. The choice is up to us and it’s very clear: the following is the python cell.</p>
+<div id="eff4800a" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(n):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    base_cases <span class="op">=</span> {<span class="dv">0</span>: <span class="dv">1</span>, <span class="dv">1</span>: <span class="dv">2</span>, <span class="dv">2</span>: <span class="dv">4</span>, <span class="dv">3</span>: <span class="dv">8</span>, <span class="dv">4</span>: <span class="dv">15</span>}</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="kw">in</span> base_cases:</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> base_cases[n]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    memo <span class="op">=</span> <span class="bu">dict</span>(base_cases)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>, n <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        memo[i] <span class="op">=</span> memo[i<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> memo[i<span class="op">-</span><span class="dv">2</span>] <span class="op">+</span> memo[i<span class="op">-</span><span class="dv">3</span>] <span class="op">+</span> memo[i<span class="op">-</span><span class="dv">4</span>]</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> memo[n]</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>n_tosses <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>valid <span class="op">=</span> f(n_tosses)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> n_tosses</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Valid sequences (no 4 heads in a row): </span><span class="sc">{</span>valid<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total sequences:                       </span><span class="sc">{</span>total<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"P(at least 4 heads in a row):          </span><span class="sc">{</span><span class="dv">1</span> <span class="op">-</span> valid<span class="op">/</span>total<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Valid sequences (no 4 heads in a row): 547337
+Total sequences:                       1048576
+P(at least 4 heads in a row):          0.4780</code></pre>
+</div>
+</div>
+<p>So, from a theoretical point of view, the probability to obtain at least 4 heads in a row is approximately <span class="math inline">\(47.8 \%\)</span>. In his book, Gilovich rounded it further to 50-50 but we can definitely agree with him.</p>
+</section>
+</section>
+<section id="from-theory-to-practice-lets-flip-again" class="level2">
+<h2 class="anchored" data-anchor-id="from-theory-to-practice-lets-flip-again">From theory to practice: Let’s flip again</h2>
+<p>Have you ever heard someone saying “I don’t care about numbers. I am a practical guy”? It happened to me and I think it’s a feeling you can understand especially if people are not used to mathematical demonstrations and proofs. If you look back at the demonstration I gave in the previous sections, and if you are not familiar with concepts like recursion or building functions, it’s easy you need to read it more than once to understand it. I will not lie and say that I came up with it all by myself: I checked books and online articles to verify it works and used Claude to double check I was doing the right passages. How can we be sure that the probability we arrived at with the mathematical formula is correct? One possible way to verify it, is to do it. Flip a coin 20 times in a row and record the results; we then flag all outputs containing 4 or more Heads in a row and calculate the ratio between that number and the total number of trials. That’s the kind of task you can perform if you find yourself in a situation where you have nothing better to do, like you’re in prison, or stuck in a working meeting you couldn’t care less about, or watching the latest Marvel movie. I found all three scenarios more or less equivalent. Or, we can simulate with python the toss of the coins and record results. It’s up to you. In this notebook, I will go on with python.</p>
+<p>The next cell simulates the flipping of 20 coins with a given number of trials and computes the ratio, i.e.&nbsp;the probability, of the number of sequences with our constraint divided by the total number of trials, to see if the simulation results match the expected result obtained theoretically.</p>
+<div id="96c36c3b" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> flip_coins(n_tosses, seed):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    rng <span class="op">=</span> np.random.default_rng(seed)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [<span class="st">"H"</span> <span class="cf">if</span> x <span class="op">==</span> <span class="dv">1</span> <span class="cf">else</span> <span class="st">"T"</span> <span class="cf">for</span> x <span class="kw">in</span> rng.integers(<span class="dv">0</span>, <span class="dv">2</span>, size<span class="op">=</span>n_tosses)]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> has_streak(sequence, streak<span class="op">=</span><span class="dv">4</span>):</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> coin <span class="kw">in</span> sequence:</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> coin <span class="op">==</span> <span class="st">"H"</span>:</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> count <span class="op">&gt;=</span> streak:</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>            count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># --- parameters ---</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>n_trials <span class="op">=</span> <span class="dv">10_000</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>streak   <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>n_tosses <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>theory   <span class="op">=</span> <span class="fl">0.4780</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> trial <span class="kw">in</span> <span class="bu">range</span>(n_trials):</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>    sequence <span class="op">=</span> flip_coins(n_tosses<span class="op">=</span>n_tosses, seed<span class="op">=</span>trial)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    results.append(has_streak(sequence, streak<span class="op">=</span>streak))</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co"># cumulative proportion after each trial</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>cumulative <span class="op">=</span> np.cumsum(results) <span class="op">/</span> np.arange(<span class="dv">1</span>, n_trials <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Trials:                    </span><span class="sc">{</span>n_trials<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Trials with streak of </span><span class="sc">{</span>streak<span class="sc">}</span><span class="ss">+: </span><span class="sc">{</span><span class="bu">sum</span>(results)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Proportion:                </span><span class="sc">{</span><span class="bu">sum</span>(results)<span class="op">/</span>n_trials<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Theory:                    </span><span class="sc">{</span>theory<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>, n_trials <span class="op">+</span> <span class="dv">1</span>), y<span class="op">=</span>cumulative, ax<span class="op">=</span>ax, label<span class="op">=</span><span class="st">"Simulated proportion"</span>)</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>ax.axhline(theory, color<span class="op">=</span><span class="st">"red"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, label<span class="op">=</span><span class="ss">f"Theoretical (</span><span class="sc">{</span>theory<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Number of trials"</span>)</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Proportion with streak"</span>)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"Simulated probability of at least </span><span class="sc">{</span>streak<span class="sc">}</span><span class="ss"> heads in a row (</span><span class="sc">{</span>n_tosses<span class="sc">}</span><span class="ss"> tosses)"</span>)</span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Trials:                    10000
+Trials with streak of 4+: 4718
+Proportion:                0.4718
+Theory:                    0.478</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="flip_heads_in_a_row_files/figure-html/cell-6-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The graph shows that simulations confirm the theoretical value. With fewer trials, the estimate is noisier: it can land well above or below the theoretical value. As the number of trials grows, the simulation stabilises around 0.4780, which is exactly what we expect from the law of large numbers. So reality matches theory, and this is not a surprise.</p>
+<p>Without repeating the full derivation, let’s also simulate the cases for 5 and 6 or more consecutive Heads, just to confirm the pattern holds.</p>
+<div id="f095b90b" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> theoretical_probability(n_tosses, streak):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    base_cases <span class="op">=</span> {i: <span class="dv">2</span><span class="op">**</span>i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(streak)}</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    base_cases[streak] <span class="op">=</span> <span class="dv">2</span><span class="op">**</span>streak <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    memo <span class="op">=</span> <span class="bu">dict</span>(base_cases)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(streak <span class="op">+</span> <span class="dv">1</span>, n_tosses <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        memo[i] <span class="op">=</span> <span class="bu">sum</span>(memo[i <span class="op">-</span> j] <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, streak <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span> <span class="op">-</span> memo[n_tosses] <span class="op">/</span> <span class="dv">2</span><span class="op">**</span>n_tosses</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simulate_streaks(n_tosses, streak, n_trials):</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> []</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> trial <span class="kw">in</span> <span class="bu">range</span>(n_trials):</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        sequence <span class="op">=</span> flip_coins(n_tosses<span class="op">=</span>n_tosses, seed<span class="op">=</span>trial)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        results.append(has_streak(sequence, streak<span class="op">=</span>streak))</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.cumsum(results) <span class="op">/</span> np.arange(<span class="dv">1</span>, n_trials <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co"># --- parameters ---</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>n_trials <span class="op">=</span> <span class="dv">10_000</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>n_tosses <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>streaks  <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">6</span>]</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">"darkorange"</span>, <span class="st">"seagreen"</span>]</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> streak, color <span class="kw">in</span> <span class="bu">zip</span>(streaks, colors):</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    theory <span class="op">=</span> theoretical_probability(n_tosses, streak)</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    cumulative <span class="op">=</span> simulate_streaks(n_tosses, streak, n_trials)</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    sns.lineplot(x<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>, n_trials <span class="op">+</span> <span class="dv">1</span>), y<span class="op">=</span>cumulative,</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>                 ax<span class="op">=</span>ax, color<span class="op">=</span>color, label<span class="op">=</span><span class="ss">f"Simulated streak ≥ </span><span class="sc">{</span>streak<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>    ax.axhline(theory, color<span class="op">=</span>color, linestyle<span class="op">=</span><span class="st">"--"</span>, alpha<span class="op">=</span><span class="fl">0.6</span>,</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>               label<span class="op">=</span><span class="ss">f"Theory streak ≥ </span><span class="sc">{</span>streak<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>theory<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Number of trials"</span>)</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Proportion with streak"</span>)</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"Simulated vs theoretical probability of head streaks (</span><span class="sc">{</span>n_tosses<span class="sc">}</span><span class="ss"> tosses)"</span>)</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="flip_heads_in_a_row_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Again, simulation and theoretical values lead to the same results. And having a <span class="math inline">\(25\%\)</span> chance of getting 5 Heads in a row when flipping a coin 20 times is quite remarkable, if you ask me.</p>
+</section>
+<section id="conclusion-are-you-surprised" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-are-you-surprised">Conclusion: Are you surprised?</h2>
+<p><a href="https://www.sciencedirect.com/science/article/abs/pii/0010028585900106">The original paper about the hot hand fallacy</a> was published in 1985 and met with scepticism from the start, particularly from people working in basketball. Recent studies have shown that a very small effect may exist, in the order of a few percentage points. This does not change the central point of this article.</p>
+<p>From a probabilistic standpoint, there is a consistent gap between what we expect to see and what actually happens. As we showed both mathematically and through simulation, streaks are far more common than our intuition suggests. We notice them, we remember them, and we treat them as meaningful. The coin, as the title says, has no memory. We do.</p>
+<p>That gap between intuition and reality is also one of the reasons it is so hard to beat a casino or a bookmaker. They know the actual probabilities. Quite often, we do not. But that is a story for another article.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pacoraggio\.github\.io\/reinventing-the-wheel\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
