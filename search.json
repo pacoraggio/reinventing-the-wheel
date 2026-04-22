@@ -67,7 +67,14 @@
     "href": "population_parameter_and_sample_statistic/population_and_samples.html",
     "title": "Measuring the Measurement: Variation, Samples and the Precision of an Estimate",
     "section": "",
-    "text": "# importing libraries\n\nimport pandas as pd\nimport numpy as np\nfrom scipy import stats\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nsns.set_style(\"whitegrid\")\nThis notebook explores the relationship between population parameters and sample statistics through simulation. We will build intuition for the Central Limit Theorem, the Standard Error of the Mean (SEM), and how sample size affects the precision of our estimates.\nAll results are derived from a simulated population, so we always know the ground truth and can check how well our estimates recover it."
+    "text": "# importing libraries\n\nimport pandas as pd\nimport numpy as np\nfrom scipy import stats\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nsns.set_style(\"whitegrid\")\nWhy your sample is lying to you: the surprisingly honest art of not knowing everything"
+  },
+  {
+    "objectID": "population_parameter_and_sample_statistic/population_and_samples.html#surprisingly-uncertain-why-one-measurement-is-never-enoug",
+    "href": "population_parameter_and_sample_statistic/population_and_samples.html#surprisingly-uncertain-why-one-measurement-is-never-enoug",
+    "title": "Measuring the Measurement: Variation, Samples and the Precision of an Estimate",
+    "section": "Surprisingly Uncertain: Why One Measurement Is Never Enoug",
+    "text": "Surprisingly Uncertain: Why One Measurement Is Never Enoug\nThis notebook explores the relationship between population parameters and sample statistics through simulation. We will build intuition for the Central Limit Theorem, the Standard Error of the Mean (SEM), and how sample size affects the precision of our estimates.\nAll results are derived from a simulated population, so we always know the ground truth and can check how well our estimates recover it."
   },
   {
     "objectID": "population_parameter_and_sample_statistic/population_and_samples.html#the-population",

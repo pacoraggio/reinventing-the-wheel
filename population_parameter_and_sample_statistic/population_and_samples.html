@@ -182,7 +182,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-population" id="toc-the-population" class="nav-link active" data-scroll-target="#the-population">The Population</a></li>
+  <li><a href="#surprisingly-uncertain-why-one-measurement-is-never-enoug" id="toc-surprisingly-uncertain-why-one-measurement-is-never-enoug" class="nav-link active" data-scroll-target="#surprisingly-uncertain-why-one-measurement-is-never-enoug">Surprisingly Uncertain: Why One Measurement Is Never Enoug</a></li>
+  <li><a href="#the-population" id="toc-the-population" class="nav-link" data-scroll-target="#the-population">The Population</a></li>
   <li><a href="#visualising-the-population" id="toc-visualising-the-population" class="nav-link" data-scroll-target="#visualising-the-population">2. Visualising the population</a></li>
   <li><a href="#drawing-a-single-sample" id="toc-drawing-a-single-sample" class="nav-link" data-scroll-target="#drawing-a-single-sample">3. Drawing a single sample</a></li>
   <li><a href="#repeating-the-draw-the-sampling-distribution-of-the-mean" id="toc-repeating-the-draw-the-sampling-distribution-of-the-mean" class="nav-link" data-scroll-target="#repeating-the-draw-the-sampling-distribution-of-the-mean">4. Repeating the draw: the sampling distribution of the mean</a></li>
@@ -228,8 +229,12 @@ window.Quarto = {
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"whitegrid"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p><em>Why your sample is lying to you: the surprisingly honest art of not knowing everything</em></p>
+<section id="surprisingly-uncertain-why-one-measurement-is-never-enoug" class="level2">
+<h2 class="anchored" data-anchor-id="surprisingly-uncertain-why-one-measurement-is-never-enoug">Surprisingly Uncertain: Why One Measurement Is Never Enoug</h2>
 <p>This notebook explores the relationship between population parameters and sample statistics through simulation. We will build intuition for the Central Limit Theorem, the Standard Error of the Mean (SEM), and how sample size affects the precision of our estimates.</p>
 <p>All results are derived from a simulated population, so we always know the ground truth and can check how well our estimates recover it.</p>
+</section>
 <section id="the-population" class="level2">
 <h2 class="anchored" data-anchor-id="the-population">The Population</h2>
 <p>We simulate a population of around 7 million heights (in cm). In a real scenario you would never have access to the entire population, but here we do, deliberately, so we can treat the values computed directly from this dataset as the true parameters.</p>
