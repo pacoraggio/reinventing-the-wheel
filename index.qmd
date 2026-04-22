@@ -7,7 +7,7 @@ and building them from first principles using Python.
 
 ---
 
-## "We don't want to reinvent the wheel, because we don't know how to do it"
+## "Not because it is easy, but because we don't know how to do it"
 
 A generation of people grew up convinced that the Stone Age looked something like The Flintstones: cave dwellers commuting in foot-powered cars, dinosaurs serving as household appliances, and wheels everywhere. Crude, heavy, but everywhere. It is a surprisingly durable image. Growing up, we then discovered that this image is also almost entirely wrong. For a start, despite the name, most prehistoric humans did not actually live in caves; caves were occasional shelter, not real estate. Human beings and dinosaurs missed each other by about 65 million years, which is the kind of scheduling conflict that tends to be permanent. And the wheel, that symbol of prehistoric obviousness, turns out to be a surprisingly recent and rare invention, one that several advanced civilisations never developed at all.
 
