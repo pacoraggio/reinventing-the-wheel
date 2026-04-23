@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The Foul, the Whistle and the Doubt: building a statistical case from football data – Reinventing the Wheel</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Reinventing the Wheel</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../articles/index.html"> 
+<span class="menu-text">Articles</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#surprisingly-consistent-what-football-fouls-tell-us-about-everything-else" id="toc-surprisingly-consistent-what-football-fouls-tell-us-about-everything-else" class="nav-link active" data-scroll-target="#surprisingly-consistent-what-football-fouls-tell-us-about-everything-else">Surprisingly Consistent: What Football Fouls Tell Us About Everything Else</a></li>
+  <li><a href="#where-do-we-start" id="toc-where-do-we-start" class="nav-link" data-scroll-target="#where-do-we-start">1. Where Do We Start?</a>
+  <ul class="collapse">
+  <li><a href="#choosing-a-starting-point" id="toc-choosing-a-starting-point" class="nav-link" data-scroll-target="#choosing-a-starting-point">Choosing a starting point</a></li>
+  <li><a href="#what-do-we-see" id="toc-what-do-we-see" class="nav-link" data-scroll-target="#what-do-we-see">What do we see?</a></li>
+  </ul></li>
+  <li><a href="#the-model-and-the-reality" id="toc-the-model-and-the-reality" class="nav-link" data-scroll-target="#the-model-and-the-reality">The Model and the Reality</a></li>
+  <li><a href="#outliers-and-unlikely-events-a-necessary-distinction" id="toc-outliers-and-unlikely-events-a-necessary-distinction" class="nav-link" data-scroll-target="#outliers-and-unlikely-events-a-necessary-distinction">3. Outliers and Unlikely Events: a Necessary Distinction</a></li>
+  <li><a href="#normal-but-how-normal" id="toc-normal-but-how-normal" class="nav-link" data-scroll-target="#normal-but-how-normal">4. Normal, But How Normal?</a></li>
+  <li><a href="#is-there-a-home-advantage-in-fouling" id="toc-is-there-a-home-advantage-in-fouling" class="nav-link" data-scroll-target="#is-there-a-home-advantage-in-fouling">Is There a Home Advantage in Fouling?</a></li>
+  <li><a href="#introducing-hypothesis-testing" id="toc-introducing-hypothesis-testing" class="nav-link" data-scroll-target="#introducing-hypothesis-testing">Introducing Hypothesis Testing</a>
+  <ul class="collapse">
+  <li><a href="#football-and-pregnancy-tests" id="toc-football-and-pregnancy-tests" class="nav-link" data-scroll-target="#football-and-pregnancy-tests">Football and Pregnancy Tests</a></li>
+  <li><a href="#checking-assumptions-before-running-the-test" id="toc-checking-assumptions-before-running-the-test" class="nav-link" data-scroll-target="#checking-assumptions-before-running-the-test">Checking Assumptions Before Running the Test</a></li>
+  <li><a href="#a-brief-and-entirely-justified-historical-detour" id="toc-a-brief-and-entirely-justified-historical-detour" class="nav-link" data-scroll-target="#a-brief-and-entirely-justified-historical-detour">A Brief and Entirely Justified Historical Detour</a></li>
+  </ul></li>
+  <li><a href="#do-some-teams-foul-more-than-others" id="toc-do-some-teams-foul-more-than-others" class="nav-link" data-scroll-target="#do-some-teams-foul-more-than-others">Do Some Teams Foul More Than Others?</a></li>
+  <li><a href="#what-we-found-and-what-we-didnt" id="toc-what-we-found-and-what-we-didnt" class="nav-link" data-scroll-target="#what-we-found-and-what-we-didnt">What we found, and what we didn’t</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Foul, the Whistle and the Doubt: building a statistical case from football data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="5fa82387" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">'whitegrid'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><em>How to turn a pub argument into a statistical test.</em></p>
+<section id="surprisingly-consistent-what-football-fouls-tell-us-about-everything-else" class="level2">
+<h2 class="anchored" data-anchor-id="surprisingly-consistent-what-football-fouls-tell-us-about-everything-else">Surprisingly Consistent: What Football Fouls Tell Us About Everything Else</h2>
+<p>Every football fan, and I am among them, has watched the same match twice: once on the pitch, once in their head on the way home. The referee was biased. The opposition dived. Your team’s fouls were marginal challenges; theirs were cynical and deliberate. The scoreline was wrong.</p>
+<p>This is not a complaint. This is data.</p>
+<p>Across a full season, some teams are whistled for fouls at rates that differ significantly from others. Some receive a yellow card every seven fouls; others every eleven. Whether that gap reflects how teams play, how referees decide, or simply how crowds behave is exactly the kind of question statistics was built to answer.</p>
+<p>We are going to look at fouls. Fouls committed, if you prefer to assign responsibility to the team. Fouls called by the referee, if you prefer to assign it to the official. The data is the same either way. Which framing you instinctively reach for probably says something about which team you support.</p>
+<p>By the end of this article, you will have the tools to take that instinct seriously. Not to confirm it. To test it.</p>
+<div id="8da527d7" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'./data/processed/team_matches.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> f:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    team_matches <span class="op">=</span> pickle.load(f)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span><span class="bu">len</span>(team_matches)<span class="sc">:,}</span><span class="ss">"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Leagues: </span><span class="sc">{</span><span class="bu">sorted</span>(team_matches[<span class="st">'league'</span>].unique())<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Seasons: </span><span class="sc">{</span><span class="bu">sorted</span>(team_matches[<span class="st">'season'</span>].unique())<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 50,060
+Leagues: ['Bundesliga', 'La_Liga', 'Ligue_1', 'Premier_League', 'Serie_A']
+Seasons: ['1112', '1213', '1314', '1415', '1516', '1617', '1718', '1819', '1920', '2021', '2122', '2223', '2324', '2425']</code></pre>
+</div>
+</div>
+</section>
+<section id="where-do-we-start" class="level2">
+<h2 class="anchored" data-anchor-id="where-do-we-start">1. Where Do We Start?</h2>
+<p>Before testing anything, we need to understand the data we are working with. This is not a formality. Every statistical test makes assumptions about the shape and behaviour of the data it receives. Running a test without checking those assumptions first is like cross-examining a witness without reading their statement. You might still reach the right conclusion, but you will not know why, and you will not notice when you are wrong.</p>
+<p>We start with a single question:</p>
+<blockquote class="blockquote">
+<p>how are fouls distributed across a match?</p>
+</blockquote>
+<p>Not which team fouls more, not whether referees are consistent, not whether home teams behave differently from away teams. Just: if you picked a random match from our dataset, what would you expect to see? And how much would you expect that number to vary?</p>
+<p>This is always the right first question. Everything else follows from it. Maybe non everything, but a lot.</p>
+<section id="choosing-a-starting-point" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-a-starting-point">Choosing a starting point</h3>
+<p>We have data from five leagues and fourteen seasons. We could look at everything at once, but that would mix together leagues with very different styles of play, referees with different thresholds, and seasons separated by a decade of rule changes.</p>
+<p>Instead we start with a single league and a single season. Once we understand the patterns in one controlled setting, we can ask whether they hold more broadly. This is standard analytical practice: understand one thing well before generalising.</p>
+<p>We use the most recent complete season in our dataset, 2024/25, and we begin with Serie A.</p>
+<div id="2057b135" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>serie_a_2425 <span class="op">=</span> team_matches[</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    (team_matches[<span class="st">'league'</span>] <span class="op">==</span> <span class="st">'Serie_A'</span>) <span class="op">&amp;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    (team_matches[<span class="st">'season'</span>] <span class="op">==</span> <span class="st">'2425'</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>].copy()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows: </span><span class="sc">{</span><span class="bu">len</span>(serie_a_2425)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Matches: </span><span class="sc">{</span><span class="bu">len</span>(serie_a_2425) <span class="op">//</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Teams: </span><span class="sc">{</span>serie_a_2425[<span class="st">'team'</span>]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Date range: </span><span class="sc">{</span>serie_a_2425[<span class="st">'date'</span>]<span class="sc">.</span><span class="bu">min</span>()<span class="sc">.</span>date()<span class="sc">}</span><span class="ss"> to </span><span class="sc">{</span>serie_a_2425[<span class="st">'date'</span>]<span class="sc">.</span><span class="bu">max</span>()<span class="sc">.</span>date()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 760
+Matches: 380
+Teams: 20
+Date range: 2024-08-17 to 2025-05-25</code></pre>
+</div>
+</div>
+<p>A complete season: 380 matches, 20 teams, running from August 2024 to May 2025. Each match appears twice in the dataframe, once for each team’s perspective, giving 760 rows. This is exactly what we expect from a 20-team league and a useful first confirmation that the data is intact.</p>
+<p>Now let us look at the fouls.</p>
+<div id="4b29be50" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>match_fouls <span class="op">=</span> serie_a_2425[serie_a_2425[<span class="st">'venue'</span>] <span class="op">==</span> <span class="st">'home'</span>].copy()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>match_fouls[<span class="st">'total_fouls'</span>] <span class="op">=</span> match_fouls[<span class="st">'fouls_committed'</span>] <span class="op">+</span> match_fouls[<span class="st">'fouls_received'</span>]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> sns.axes_style(<span class="st">"whitegrid"</span>):</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax, (data, title, xlabel, color, bins) <span class="kw">in</span> <span class="bu">zip</span>(axes, [</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        (serie_a_2425[<span class="st">'fouls_committed'</span>],</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Fouls committed per team — Serie A 2024/25'</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Fouls committed (team perspective)'</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>         <span class="st">'steelblue'</span>, <span class="dv">15</span>),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        (match_fouls[<span class="st">'total_fouls'</span>],</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Total fouls per match — Serie A 2024/25'</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>         <span class="st">'Total fouls (referee perspective)'</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>         <span class="st">'seagreen'</span>, <span class="dv">12</span>),</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    ]):</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        ax.set_facecolor(<span class="st">'#f0f0f0'</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        sns.histplot(data, bins<span class="op">=</span>bins, kde<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span>color, alpha<span class="op">=</span><span class="fl">0.7</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        ax.axvline(data.mean(), color<span class="op">=</span><span class="st">'tomato'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>                   label<span class="op">=</span><span class="ss">f"Mean: </span><span class="sc">{</span>data<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        ax.axvline(data.median(), color<span class="op">=</span><span class="st">'darkorange'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>                   label<span class="op">=</span><span class="ss">f"Median: </span><span class="sc">{</span>data<span class="sc">.</span>median()<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        ax.set_xlabel(xlabel)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        ax.set_ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        ax.set_title(title)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        ax.legend()</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="the_foul_the_whistle_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="what-do-we-see" class="level3">
+<h3 class="anchored" data-anchor-id="what-do-we-see">What do we see?</h3>
+<p>Two distributions, two perspectives on the same matches, and already two different stories.</p>
+<p>On the left, fouls <strong><em>committed per team</em></strong>. The distribution is roughly bell-shaped and centred around 12.5 fouls per match, with mean and median almost identical. This near-symmetry is our first useful signal: when mean and median sit this close together, the distribution is not being pulled hard in either direction by extreme values. A team committing 5 fouls in a match is about as unusual as a team committing 20.</p>
+<p>On the right, <strong><em>total fouls per match</em></strong> from the referee’s perspective. The average is exactly double, as it should be: 25 fouls per match is simply two teams each committing around 12.5. But the shape is less clean. There is a peak around 20, a dip, and then a second bump around 28. This irregularity is worth noting. It might be noise, it might reflect two distinct refereeing styles in the league, or it might be a seasonal effect. We will not chase it here, but we will keep it in mind.</p>
+<p>For now, the left plot is the one we need. A roughly symmetric distribution with mean and median close together is well-behaved enough to apply the tools we are about to introduce. Not perfectly normal, but close enough to start. We will verify that assumption formally in a moment.</p>
+<div id="036b1ab7" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Fouls committed per team — summary statistics"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(serie_a_2425[<span class="st">'fouls_committed'</span>].describe().<span class="bu">round</span>(<span class="dv">2</span>))</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total fouls per match — summary statistics"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(match_fouls[<span class="st">'total_fouls'</span>].describe().<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fouls committed per team — summary statistics
+count    760.00
+mean      12.50
+std        4.18
+min        1.00
+25%       10.00
+50%       12.00
+75%       15.00
+max       29.00
+Name: fouls_committed, dtype: float64
+
+Total fouls per match — summary statistics
+count    380.00
+mean      25.00
+std        5.79
+min       11.00
+25%       21.00
+50%       25.00
+75%       29.00
+max       40.00
+Name: total_fouls, dtype: float64</code></pre>
+</div>
+</div>
+<p>The numbers confirm what the plots suggested, and add a few details worth unpacking.</p>
+<p><strong>Fouls committed per team:</strong> the mean is 12.5 and the median is 12.0, close but not identical. The standard deviation of 4.2 tells us that roughly two thirds of observations fall between 8 and 17 fouls, which feels intuitively right for a professional football match. The minimum of 1 is unusual but possible: a team that barely challenges for the ball, or a match where the referee was unusually lenient. The maximum of 29 is at the other extreme, a very physical performance from someone.</p>
+<p><strong>Total fouls per match:</strong> mean and median are both exactly 25, and the standard deviation of 5.8 is slightly less than double the per-team value of 4.2. If the two teams’ foul counts were completely independent, we would expect the match total to have a standard deviation of roughly 4.2 times the square root of 2, which is about 5.9. The fact that we observe 5.8 is reassuringly close to that theoretical value.</p>
+<p>One thing to carry forward: the interquartile range for per-team fouls runs from 10 to 15, a spread of 5 fouls. Half of all team performances in Serie A 2024/25 sit within that narrow band. Football feels chaotic from the stands. The foul count, it turns out, is surprisingly predictable.</p>
+</section>
+</section>
+<section id="the-model-and-the-reality" class="level2">
+<h2 class="anchored" data-anchor-id="the-model-and-the-reality">The Model and the Reality</h2>
+<p>The distribution we just looked at has a familiar shape: roughly symmetric, centred around a single peak, tailing off on both sides. This is what statisticians call a normal distribution, or Gaussian. Before we use it to run any tests, it is worth asking what it actually means to say that data follows a normal distribution, and whether we should trust that claim here.</p>
+<p>A model is an approximation of reality. When we say that fouls per match follow a normal distribution, we are not claiming that football is secretly governed by a mathematical equation. We are saying that the normal distribution is a reasonable description of what we observe, close enough to be useful without pretending to be exact.</p>
+<p>The normal distribution has a convenient property: it is fully described by just two numbers, the mean and the standard deviation. If the model fits, those two numbers tell us almost everything: where the centre of the distribution is, how wide the spread is, and how likely any particular value is. The familiar 68-95-99.7 rule follows directly: roughly 68% of observations fall within one standard deviation of the mean, 95% within two, and 99.7% within three.</p>
+<p>But how do we know if the model fits well enough to trust? We check it against the data.</p>
+<div id="233956fa" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># fit the Gaussian model to the data: estimate mean and standard deviation</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> match_fouls[<span class="st">'total_fouls'</span>].mean()</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> match_fouls[<span class="st">'total_fouls'</span>].std()</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ask the model: what fraction of matches should exceed 30 fouls?</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># norm.cdf gives the probability of being BELOW a threshold</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># so 1 - norm.cdf gives the probability of being ABOVE it</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>threshold <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>p_model <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> norm.cdf(threshold, loc<span class="op">=</span>mu, scale<span class="op">=</span>sigma)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># ask the data: what fraction of matches actually exceeded 30 fouls?</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>p_actual <span class="op">=</span> (match_fouls[<span class="st">'total_fouls'</span>] <span class="op">&gt;</span> threshold).mean()</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Gaussian model: mean = </span><span class="sc">{</span>mu<span class="sc">:.1f}</span><span class="ss">, std = </span><span class="sc">{</span>sigma<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"P(total fouls &gt; </span><span class="sc">{</span>threshold<span class="sc">}</span><span class="ss">) according to the model:  </span><span class="sc">{</span>p_model<span class="sc">:.3f}</span><span class="ss"> (</span><span class="sc">{</span>p_model<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Fraction of matches with &gt; </span><span class="sc">{</span>threshold<span class="sc">}</span><span class="ss"> fouls in data: </span><span class="sc">{</span>p_actual<span class="sc">:.3f}</span><span class="ss"> (</span><span class="sc">{</span>p_actual<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Difference: </span><span class="sc">{</span><span class="bu">abs</span>(p_model <span class="op">-</span> p_actual)<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss"> percentage points"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Gaussian model: mean = 25.0, std = 5.8
+
+P(total fouls &gt; 30) according to the model:  0.194 (19.4%)
+Fraction of matches with &gt; 30 fouls in data: 0.166 (16.6%)
+Difference: 2.8 percentage points</code></pre>
+</div>
+</div>
+<p>Let us walk through what the code is doing, because each step maps directly onto a conceptual choice.</p>
+<p><code>mu</code> and <code>sigma</code> are estimated from the data itself. We are not choosing these values arbitrarily: we are letting the data tell us where the centre of the distribution is and how wide the spread is. This is called <em>fitting the model</em>.</p>
+<p><code>norm.cdf(threshold, loc=mu, scale=sigma)</code> is the cumulative distribution function of the Gaussian evaluated at 30. In plain terms: given our model, what is the probability that a randomly picked match has 30 or fewer total fouls? The CDF always returns a value between 0 and 1. Subtracting from 1 gives us the probability of exceeding the threshold, which is what we want.</p>
+<p><code>(match_fouls['total_fouls'] &gt; threshold).mean()</code> does something much simpler: it counts how many rows in the actual data have more than 30 fouls and divides by the total number of rows. No model, no assumptions. Just counting.</p>
+<p>The comparison between the two numbers is the whole point. The model gives us a prediction. The data gives us the ground truth. How close they are tells us how much we can trust the model when we use it to make statements about matches we have not seen yet.</p>
+<p>The model predicts that roughly 19% of matches should have more than 30 total fouls. The actual figure in the data is 16.6%. A gap of 2.8 percentage points.</p>
+<p>That is larger than I would like, and it is worth being honest about why. Cast your mind back to the right-hand plot from the previous section: the total fouls distribution had an irregular shape, with a peak around 20, a dip, and a second bump around 28. A symmetric Gaussian centred at 25 does not capture that shape particularly well. It overestimates the probability of high-foul matches because it assumes the data spreads evenly in both directions from the mean, which it does not quite do here.</p>
+<p>So should we abandon the Gaussian? Not necessarily. The question is not whether the model is perfect but whether it is good enough for what we need it to do. For a rough sense of what is likely and unlikely, a 2.8 percentage point error is acceptable. For a precise forecast of how many matches will exceed 30 fouls, it is not.</p>
+<p>This is the tradeoff at the heart of statistical modelling. A more complex model could fit the data more precisely, but it would be <strong><em>harder to interpret</em></strong>, <strong><em>slower to compute</em></strong>, and more <strong><em>difficult to explain</em></strong>. The normal distribution earns its place not because it is always exactly right, but because it is the simplest model that is often close enough, and because its two parameters, the mean and the standard deviation, have an immediate intuitive meaning that more complex alternatives do not.</p>
+<p>For the team-level analysis that follows, we will be working with fouls committed per team rather than total fouls per match. That distribution, as we saw, is better behaved. We will check it formally in a moment. But it is worth carrying this example as a reminder: every time we use a model, we are making a choice about how much approximation we are willing to accept.</p>
+</section>
+<section id="outliers-and-unlikely-events-a-necessary-distinction" class="level2">
+<h2 class="anchored" data-anchor-id="outliers-and-unlikely-events-a-necessary-distinction">3. Outliers and Unlikely Events: a Necessary Distinction</h2>
+<p>Before we run any formal test, I want to draw a distinction that gets blurred surprisingly often, including by people who should know better.</p>
+<p>When something unusual appears in the data, there are two very different ways to describe it. The first is to call it an <strong>outlier</strong>: a data point that sits far from the centre of the distribution by a geometric criterion. The second is to call it <strong>statistically unlikely</strong>: a result that would be surprising if the underlying process were random.</p>
+<p>These sound like the same thing. They are not.</p>
+<p>An outlier is defined by where a data point sits relative to the rest of the data. The standard definition uses the interquartile range: any point that falls more than 1.5 times the IQR below the first quartile or above the third quartile is flagged as an outlier. This is a rule of thumb about distance. It says nothing about probability.</p>
+<p>Statistical likelihood, by contrast, is about the model. A p-value asks: if the data were generated by a random process with no systematic effect, how often would we see a result at least as extreme as this one? It is a statement about a hypothetical world, not about the data point itself.</p>
+<p>A team can be an outlier without being statistically significant: it might sit just beyond the 1.5 IQR boundary but still be well within the range of what random variation can produce. Equally, a result can be statistically significant without any individual data point being an outlier: a small but consistent shift in the mean across hundreds of matches will show up in a hypothesis test long before it produces a visible outlier.</p>
+<p>We will use both tools in this article. The important thing is to know which question each one is answering.</p>
+<div id="245f13c0" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_outliers(series):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    q1 <span class="op">=</span> series.quantile(<span class="fl">0.25</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    q3 <span class="op">=</span> series.quantile(<span class="fl">0.75</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    iqr <span class="op">=</span> q3 <span class="op">-</span> q1</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    lower <span class="op">=</span> q1 <span class="op">-</span> <span class="fl">1.5</span> <span class="op">*</span> iqr</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    upper <span class="op">=</span> q3 <span class="op">+</span> <span class="fl">1.5</span> <span class="op">*</span> iqr</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> series[(series <span class="op">&lt;</span> lower) <span class="op">|</span> (series <span class="op">&gt;</span> upper)], lower, upper</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>outliers, lower, upper <span class="op">=</span> get_outliers(serie_a_2425[<span class="st">'fouls_committed'</span>])</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"IQR boundaries: [</span><span class="sc">{</span>lower<span class="sc">:.1f}</span><span class="ss">, </span><span class="sc">{</span>upper<span class="sc">:.1f}</span><span class="ss">]"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Outliers found: </span><span class="sc">{</span><span class="bu">len</span>(outliers)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"As a fraction of all observations: </span><span class="sc">{</span><span class="bu">len</span>(outliers)<span class="op">/</span><span class="bu">len</span>(serie_a_2425)<span class="sc">:.3f}</span><span class="ss"> (</span><span class="sc">{</span><span class="bu">len</span>(outliers)<span class="op">/</span><span class="bu">len</span>(serie_a_2425)<span class="op">*</span><span class="dv">100</span><span class="sc">:.1f}</span><span class="ss">%)"</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(outliers.describe().<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>IQR boundaries: [2.5, 22.5]
+Outliers found: 12
+As a fraction of all observations: 0.016 (1.6%)
+
+count    12.00
+mean     22.50
+std       6.97
+min       1.00
+25%      23.00
+50%      24.00
+75%      24.25
+max      29.00
+Name: fouls_committed, dtype: float64</code></pre>
+</div>
+</div>
+<p>Twelve data points fall outside the IQR boundaries, six on each side roughly speaking, representing 1.6% of all observations. The boundaries sit at 2.5 fouls on the lower end and 22.5 on the upper end.</p>
+<p>A few things worth noting here.</p>
+<p>The lower boundary of 2.5 means that any team committing fewer than 3 fouls in a match is flagged as an outlier. Looking at the minimum of 1 foul in the dataset, that is a genuinely unusual match: a team that barely made a challenge all game, whether through exceptional discipline, an extremely passive tactical approach, or a particularly lenient referee.</p>
+<p>The upper outliers cluster tightly between 23 and 29 fouls. Their mean is 22.5, almost exactly at the boundary, which tells us these are not extreme cases far out in the tail but rather points sitting just beyond the geometric cutoff. Whether they represent genuinely anomalous performances or simply the natural right tail of the distribution is exactly the kind of question a hypothesis test, rather than the outlier criterion, is designed to answer.</p>
+<p>This is the distinction in action. The IQR rule has flagged these 12 observations. It has not told us whether they are surprising. For that, we need the model.</p>
+<p>There is a second reason to look at outliers that has nothing to do with statistics: data quality.</p>
+<p>Before treating an extreme value as a signal, it is worth asking whether it is actually correct. A team committing 1 foul in a match is unusual. A team committing 0 fouls in a match is suspicious. When I first ran this check on an earlier version of the dataset, I found matches recorded with zero fouls for one or both teams. Some of them turned out to be genuine edge cases: matches where the referee was exceptionally lenient or where the data source had a known gap. Others were errors: matches that had been incorrectly scraped or recorded, where the real foul count was missing and had silently been filled with zero.</p>
+<p>The outlier check did not tell me which was which. It just told me where to look. I had to go back to the source for each flagged match and verify manually. This is unglamorous work, but it is the kind of work that sits between having data and trusting data.</p>
+<p>In the current dataset, after the cleaning steps described in the appendix, the minimum recorded foul count is 1. We have no zero-foul matches remaining. But the lesson holds: always check your outliers before you analyse them. An extreme value that turns out to be a data error will distort every test you run downstream, often in ways that are difficult to detect after the fact.</p>
+<div id="dfe03e2a" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>zero_fouls <span class="op">=</span> team_matches[team_matches[<span class="st">'fouls_committed'</span>] <span class="op">==</span> <span class="dv">0</span>][</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    [<span class="st">'league'</span>, <span class="st">'season'</span>, <span class="st">'date'</span>, <span class="st">'team'</span>, <span class="st">'opponent'</span>, <span class="st">'fouls_committed'</span>, <span class="st">'yellow_cards'</span>, <span class="st">'venue'</span>]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>].sort_values(<span class="st">'date'</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Matches with zero fouls recorded for one team: </span><span class="sc">{</span><span class="bu">len</span>(zero_fouls)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zero_fouls.to_string(index<span class="op">=</span><span class="va">False</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Matches with zero fouls recorded for one team: 4
+
+        league season       date     team opponent  fouls_committed  yellow_cards venue
+       La_Liga   1718 2018-04-22 Sociedad   Malaga              0.0           1.0  away
+Premier_League   1819 2019-04-20   Wolves Brighton              0.0           0.0  home
+Premier_League   1920 2019-11-30  Chelsea West Ham              0.0           0.0  home
+       Ligue_1   2122 2022-05-21   Rennes    Lille              0.0           2.0  away</code></pre>
+</div>
+</div>
+<p>When I first ran this check across the full dataset, covering five leagues and fourteen seasons, I went looking for zero-foul matches. Not because I expected them to be errors, but because zero fouls in a professional football match is the kind of number that makes you pause.</p>
+<p>I found four of them, spread across three different leagues. Three turned out to be genuine: verified against a second source, one team really had not been whistled for a single foul. The Malaga vs Real Sociedad case is my personal favourite: the visiting team committed zero fouls and still received a yellow card, presumably for time-wasting. A player who managed to irritate the referee without ever making a challenge. I like to think that takes a specific kind of talent.</p>
+<p>The fourth match, Lille vs Rennes, was a data error. The source recorded zero fouls for one team; a second source reported a normal-looking number. Someone had entered the wrong value, or the scraper had picked up an empty field and interpreted it as zero.</p>
+<p>I will be honest: verifying these required going back to match records and, in two cases, watching enough old highlights on YouTube to confirm what the referee had or had not whistled. This is not the glamorous part of data science. And also, the popcorn were too salty and not enough beer. Come to think of it, this is precisely what I was doing during my PhD. The only difference is that back then I called it research.</p>
+<p>The lesson from this exercise is worth stating clearly. An outlier is a data point that sits far from the rest by a geometric criterion. It is not automatically an error, and it is not automatically a signal. It is a flag that says: look here before you proceed. What you find when you look determines everything else.</p>
+</section>
+<section id="normal-but-how-normal" class="level2">
+<h2 class="anchored" data-anchor-id="normal-but-how-normal">4. Normal, But How Normal?</h2>
+<p>We have established that a Gaussian model is a reasonable approximation for fouls data, and we have seen that it is not perfect. Now we need to be more precise about what “reasonable” means before we use it to run hypothesis tests.</p>
+<p>The tests we are about to introduce, starting with the t-test, assume that the data is approximately normally distributed. If that assumption is badly violated, the test results become unreliable. Not wrong in an obvious way, just quietly untrustworthy, which is worse. Feeding an <a href="https://www.youtube.com/watch?v=Z7L3PcrhnEg">abby-normal</a> distribution into a test that expects a well-behaved one is the kind of mistake that produces results that look perfectly reasonable right up until they don’t.</p>
+<p>We check normality in two ways: one visual, one formal. Neither is definitive on its own. Together they give an honest picture.</p>
+<p>The visual check is a Q-Q plot, which compares the quantiles of our data against the quantiles of a theoretical normal distribution. If the data were perfectly normal, every point would sit exactly on the diagonal line. Deviations from the line tell us where and how the data departs from normality.</p>
+<p>The formal check is the Shapiro-Wilk test, which returns a p-value for the null hypothesis that the data was drawn from a normal distribution. A low p-value means we can reject that hypothesis. A high p-value means we cannot, which is not quite the same as confirming normality, but is good enough for our purposes.</p>
+<p>One important caveat before we run anything: with large samples, the Shapiro-Wilk test becomes extremely sensitive. It will flag even tiny, practically irrelevant departures from normality as statistically significant. So we read the two checks together, and we use judgement.</p>
+<div id="05a4f65f" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> sns.axes_style(<span class="st">"whitegrid"</span>):</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax, (data, label) <span class="kw">in</span> <span class="bu">zip</span>(axes, [</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        (serie_a_2425[<span class="st">'fouls_committed'</span>], <span class="st">'Fouls committed per team'</span>),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        (match_fouls[<span class="st">'total_fouls'</span>], <span class="st">'Total fouls per match'</span>),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    ]):</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        ax.set_facecolor(<span class="st">'#f0f0f0'</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        stats.probplot(data, dist<span class="op">=</span><span class="st">"norm"</span>, plot<span class="op">=</span>ax)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        ax.set_title(<span class="ss">f'Q-Q Plot — </span><span class="sc">{</span>label<span class="sc">}</span><span class="ss"> — Serie A 2024/25'</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="the_foul_the_whistle_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="33b3849c" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label, data <span class="kw">in</span> [</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'Fouls committed per team'</span>, serie_a_2425[<span class="st">'fouls_committed'</span>]),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'Total fouls per match'</span>,    match_fouls[<span class="st">'total_fouls'</span>]),</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>]:</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    stat, p <span class="op">=</span> stats.shapiro(data)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  W = </span><span class="sc">{</span>stat<span class="sc">:.4f}</span><span class="ss">,  p = </span><span class="sc">{</span>p<span class="sc">:.4f}</span><span class="ss">  —  </span><span class="sc">{</span><span class="st">'normal (p &gt; 0.05)'</span> <span class="cf">if</span> p <span class="op">&gt;</span> <span class="fl">0.05</span> <span class="cf">else</span> <span class="st">'not normal (p &lt; 0.05)'</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fouls committed per team
+  W = 0.9878,  p = 0.0000  —  not normal (p &lt; 0.05)
+
+Total fouls per match
+  W = 0.9916,  p = 0.0306  —  not normal (p &lt; 0.05)
+</code></pre>
+</div>
+</div>
+<p>Both distributions are flagged as not normal by the Shapiro-Wilk test. Before we panic, let us read these results carefully.</p>
+<p>The W statistics are 0.988 and 0.992. The maximum possible value is 1.0, which would indicate perfect normality. These values are very close to 1. The test is not telling us the data is badly non-normal. It is telling us the data is not <em>perfectly</em> normal, and with 760 and 380 observations respectively, it has enough <a href="https://en.wikipedia.org/wiki/Power_(statistics)">statistical power</a> to be certain about that.</p>
+<p>This is the large-sample sensitivity problem we warned about. With enough data, Shapiro-Wilk will reject normality for almost any real-world dataset, because real-world data is never exactly Gaussian. The question is not whether the test rejects, but by how much and where.</p>
+<p>The Q-Q plots give the more useful answer. For fouls committed per team, the points follow the diagonal line closely through the entire middle of the distribution. The only meaningful departures are in the lower left tail, where a cluster of points sits below the line. These correspond to the low-foul matches we identified as outliers earlier: the ones worth checking but not necessarily errors. The upper tail is clean.</p>
+<p>For total fouls per match the fit is even better, with only slight deviations at both extremes.</p>
+<p>Our conclusion: both distributions are approximately normal in the region that matters for hypothesis testing, which is the bulk of the data. The tails depart from normality, as real data almost always does. This is not a reason to abandon the Gaussian model. It is a reason to stay alert and to verify our conclusions with tests that make fewer assumptions, which we will do throughout this article.</p>
+</section>
+<section id="is-there-a-home-advantage-in-fouling" class="level2">
+<h2 class="anchored" data-anchor-id="is-there-a-home-advantage-in-fouling">Is There a Home Advantage in Fouling?</h2>
+<p>Now that we understand the shape of the data and have a model we can reasonably trust, we can ask our first real question.</p>
+<blockquote class="blockquote">
+<p>Football folklore, the kind that gets settled in pubs and reopened the following weekend, is full of claims about home advantage: home teams win more, score more, and are awarded more favourable decisions. But do they foul differently? Specifically, do away teams commit more fouls than home teams, and if so, is that difference large enough to be something other than random noise?</p>
+</blockquote>
+<p>This is exactly the kind of argument that sounds <em>settled before anyone has looked at the data</em>. Away teams are under more pressure, defending deeper, chasing the game more often. Of course they foul more. Everyone at the bar agrees.</p>
+<p>I thought so too. Let us check.</p>
+<div id="03cf5bbb" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>home_fouls <span class="op">=</span> serie_a_2425[serie_a_2425[<span class="st">'venue'</span>] <span class="op">==</span> <span class="st">'home'</span>][<span class="st">'fouls_committed'</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>away_fouls <span class="op">=</span> serie_a_2425[serie_a_2425[<span class="st">'venue'</span>] <span class="op">==</span> <span class="st">'away'</span>][<span class="st">'fouls_committed'</span>]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> sns.axes_style(<span class="st">"whitegrid"</span>):</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    ax.set_facecolor(<span class="st">'#f0f0f0'</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    sns.histplot(home_fouls, bins<span class="op">=</span><span class="dv">15</span>, kde<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">'steelblue'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                 label<span class="op">=</span><span class="st">'Home'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    sns.histplot(away_fouls, bins<span class="op">=</span><span class="dv">15</span>, kde<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">'tomato'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                 label<span class="op">=</span><span class="st">'Away'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    ax.axvline(home_fouls.mean(), color<span class="op">=</span><span class="st">'steelblue'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>               label<span class="op">=</span><span class="ss">f'Home mean: </span><span class="sc">{</span>home_fouls<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss">'</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    ax.axvline(away_fouls.mean(), color<span class="op">=</span><span class="st">'tomato'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>               label<span class="op">=</span><span class="ss">f'Away mean: </span><span class="sc">{</span>away_fouls<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss">'</span>)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'Fouls committed per match'</span>)</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">'Fouls committed — Home vs Away — Serie A 2024/25'</span>)</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>    ax.legend()</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="the_foul_the_whistle_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="d5f753d5" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Serie A 2024/25 — Fouls committed per match"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(serie_a_2425.groupby(<span class="st">'venue'</span>)[<span class="st">'fouls_committed'</span>].describe().<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Serie A 2024/25 — Fouls committed per match
+
+       count   mean   std  min   25%   50%   75%   max
+venue                                                 
+away   380.0  12.82  4.24  3.0  10.0  13.0  15.0  29.0
+home   380.0  12.18  4.09  1.0   9.0  12.0  15.0  26.0</code></pre>
+</div>
+</div>
+<p>The plot and the numbers tell the same story. Away teams average 12.8 fouls per match, home teams 12.2. A gap of 0.6 fouls per match, in the direction the pub consensus predicted.</p>
+<p>But look more carefully before declaring victory for conventional wisdom. The medians are 13 and 12 respectively, close but not identical. The standard deviations are almost the same: 4.24 for away, 4.09 for home. The interquartile ranges overlap almost completely: both groups sit between 9 and 15 fouls for the middle 50% of observations. The distributions in the plot are barely distinguishable.</p>
+<p>The 0.6 foul gap is real in the sense that it exists in the data. Whether it is real in the sense of reflecting a <strong><em>genuine systematic difference</em></strong>, rather than the kind of fluctuation you would expect simply from random variation, is a different question entirely. And that is precisely the question that a hypothesis test is designed to answer.</p>
+<p>This is the moment where the pub argument hands over to the statistics. Everyone agrees the away mean is higher. The question is whether that is signal or noise. It’s time to take the beer out (just for a moment), put on our lab coat, and find out.</p>
+</section>
+<section id="introducing-hypothesis-testing" class="level2">
+<h2 class="anchored" data-anchor-id="introducing-hypothesis-testing">Introducing Hypothesis Testing</h2>
+<p>A hypothesis test is a formal way of asking: could this difference have happened by chance?</p>
+<p>We start by assuming the most boring possible explanation is true. In our case: home and away teams foul at exactly the same rate, and the 0.6 foul gap we observed is just random variation. This assumption is called the <strong>null hypothesis</strong>. It is not what we believe. It is the position we are trying to argue against.</p>
+<p>We then ask: if the null hypothesis were true, how likely is it that we would observe a difference at least as large as 0.6 fouls per match? This probability is the <strong>p-value</strong>.</p>
+<p>If the p-value is very small, it means our data would be highly unlikely in a world where the null hypothesis is true. That gives us reason to doubt the null hypothesis and lean towards the alternative: that the difference is real.</p>
+<p>If the p-value is large, it means our data is perfectly consistent with random variation. The null hypothesis survives, not because we have proven it true, but because we have not found enough evidence to reject it.</p>
+<p>The threshold we use to decide between “small enough” and “not small enough” is called <strong>alpha</strong>, typically set at 0.05. This is a convention, not a law of nature. It means we are willing to incorrectly reject a true null hypothesis 5% of the time. That accepted error rate is a choice, and like all choices in statistics, it has consequences.</p>
+<p>One thing alpha is not: a measure of how important or large the effect is. A p-value below 0.05 tells you the result is unlikely under the null hypothesis. It tells you nothing about whether the effect is worth caring about. We will come back to this distinction.</p>
+<section id="football-and-pregnancy-tests" class="level3">
+<h3 class="anchored" data-anchor-id="football-and-pregnancy-tests">Football and Pregnancy Tests</h3>
+<p><span class="math inline">\(\alpha\)</span> needs a closer look, because it is one of those concepts that sounds simple and turns out to have real consequences when you get it wrong.</p>
+<p>When we set <span class="math inline">\(\alpha\)</span> to 0.05, we are not saying “results with a p-value below 0.05 are true and results above it are false.” We are saying something more specific and more uncomfortable: if we repeated this experiment one hundred times in a world where the null hypothesis is actually true, we would expect to incorrectly reject it up to five times. Those five cases are false positives. We have decided, in advance, that we can live with that error rate.</p>
+<p>This is not a flaw in the method. It is an honest acknowledgement of what statistical testing can and cannot do. The choice of alpha is a choice about how many false positives you are willing to accept, and it should be made before you look at the results, not after.</p>
+<p>Why does this matter beyond football? Because the same framework governs every diagnostic test ever designed.</p>
+<p>Think of a pregnancy test. No diagnostic test is 100% accurate: it is possible to get a positive result when you are not pregnant, and possible, though rarer, to get a negative result when you are. When a test is developed, its designers choose thresholds that determine the false positive rate and the false negative rate. <span class="math inline">\(\alpha\)</span> is one of the parameters that influences this balance. A stricter threshold reduces false positives but increases false negatives. A looser threshold does the opposite. The choice depends on what is at stake.</p>
+<p>The mathematics underneath a test for home advantage in Serie A and a test for the presence of a virus in a blood sample are, structurally, identical. The hypotheses are different. The data is different. The stakes are very different. But the logic is the same: assume the null, quantify the surprise, decide whether the evidence is strong enough to act on.</p>
+<p>This is why statistical literacy is not a niche skill for people who like spreadsheets. It is the language in which a large fraction of consequential decisions in medicine, public health, economics and science are made. Learning to read it, even imperfectly, gives you something increasingly rare: the ability to ask the right questions about the numbers being used to justify those decisions.</p>
+<p>Football is just a good place to start. The referee decisions are lower stakes. The data is public. And at least one person in every pub already has a strong opinion about the result.</p>
+</section>
+<section id="checking-assumptions-before-running-the-test" class="level3">
+<h3 class="anchored" data-anchor-id="checking-assumptions-before-running-the-test">Checking Assumptions Before Running the Test</h3>
+<p>Every statistical test comes with a set of assumptions. Running a test without checking them is like reading the verdict before hearing the evidence: you might still reach the right conclusion, but you have no way of knowing.</p>
+<p>The t-test has two main assumptions:</p>
+<p><strong>Normality</strong>: the data in each group should be approximately normally distributed. We have already checked this for the overall distribution of fouls. Now we need to check it separately for the home and away groups.</p>
+<p><strong>Equal variance</strong>: the Student’s t-test assumes that the two groups have similar spread. If the variances are very different, the test can give misleading results. We check this with Levene’s test, which returns a p-value for the null hypothesis that the two groups have equal variance. A low p-value means the variances differ significantly and we should use a version of the t-test that does not require this assumption.</p>
+<p>We check both before we run anything.</p>
+</section>
+<section id="a-brief-and-entirely-justified-historical-detour" class="level3">
+<h3 class="anchored" data-anchor-id="a-brief-and-entirely-justified-historical-detour">A Brief and Entirely Justified Historical Detour</h3>
+<p>Before we run the t-test, I want to tell you where it comes from. Bear with me. This is relevant, I promise, and it involves gambling and beer.</p>
+<p>If you think probability and statistics were born from the minds of brilliant mathematicians pondering the nature of the universe, you are partly right. A very small part. The calculus of probability begins with <a href="https://en.wikipedia.org/wiki/Gerolamo_Cardano">Gerolamo Cardano</a>, an astrologer and compulsive gambler, and two of the most extraordinary mathematical minds in history: <a href="https://en.wikipedia.org/wiki/Pierre_de_Fermat">Pierre de Fermat</a> and <a href="https://en.wikipedia.org/wiki/Blaise_Pascal">Blaise Pascal</a>.</p>
+<p>Cardano wrote the first book on games of chance, the <em>Liber de ludo aleae</em>, in which he attempted to explain gambling in terms of probability. He also included, with admirable candour, instructions for cheating. Whether his mathematical insights helped him at the table is answered by the fact that he spent most of his life drowning in debt. Brilliant, but not quite brilliant enough where it counted.</p>
+<p>Fermat and Pascal are another matter. Two of the greatest mathematicians of the seventeenth century, and when they found time to correspond with each other, what were they discussing? Gambling. Specifically, how to correctly evaluate the fairness of a bet and whether a player could gain a systematic statistical advantage in games of chance. Pascal later used the same principles to construct a philosophical argument for the existence of God, which is either a natural extension of the same logic or a sign that he needed to get out more. As for whether their correspondence solved the gambling problem: the answer is provided by the life of the <a href="https://en.wikipedia.org/wiki/Antoine_Gombaud">Chevalier de Méré</a>, the nobleman who had originally consulted them seeking an edge. He kept losing.</p>
+<p>Now, what about hypothesis testing? What about this t-test we are about to use to decide whether home and away teams foul at different rates? Where does that come from?</p>
+<p>Beer. Guinness, to be precise.</p>
+<p>The Student’s t-test was developed by <a href="https://en.wikipedia.org/wiki/William_Sealy_Gosset">William Sealy Gosset</a>, a statistician and chemist employed by the Guinness brewery whose job was to monitor the quality of barley and hops. Working with small samples, he needed a rigorous way to compare means and determine whether differences were real or just noise. He invented one. When he published his findings, however, Guinness would not allow him to use his real name, concerned about revealing their methods to competitors. So he published under a pseudonym. He chose <em>Student</em>. And that is why, when you run a Student’s t-test in any statistical software in the world, you are using a method invented to improve the consistency of Irish stout.</p>
+<p>Gambling and beer. If you cannot find these topics engaging, I am not sure what else I can offer you.</p>
+<p>End of historical detour. We are moving from beer to football, so at least the narrative continuity holds.</p>
+<div id="b467d587" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check equal variance assumption before choosing which t-test to use</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>lev_stat, lev_p <span class="op">=</span> stats.levene(home_fouls, away_fouls)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Levene's test for equal variance"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  F = </span><span class="sc">{</span>lev_stat<span class="sc">:.4f}</span><span class="ss">,  p = </span><span class="sc">{</span>lev_p<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  Equal variance? </span><span class="sc">{</span><span class="st">'Yes (p &gt; 0.05)'</span> <span class="cf">if</span> lev_p <span class="op">&gt;</span> <span class="fl">0.05</span> <span class="cf">else</span> <span class="st">'No (p &lt; 0.05)'</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># normality check on each group separately</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label, data <span class="kw">in</span> [(<span class="st">'Home'</span>, home_fouls), (<span class="st">'Away'</span>, away_fouls)]:</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    stat, p <span class="op">=</span> stats.shapiro(data)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Shapiro-Wilk — </span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">: W = </span><span class="sc">{</span>stat<span class="sc">:.4f}</span><span class="ss">,  p = </span><span class="sc">{</span>p<span class="sc">:.4f}</span><span class="ss">  —  </span><span class="sc">{</span><span class="st">'normal'</span> <span class="cf">if</span> p <span class="op">&gt;</span> <span class="fl">0.05</span> <span class="cf">else</span> <span class="st">'not normal'</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Levene's test for equal variance
+  F = 0.3883,  p = 0.5334
+  Equal variance? Yes (p &gt; 0.05)
+
+Shapiro-Wilk — Home: W = 0.9896,  p = 0.0087  —  not normal
+Shapiro-Wilk — Away: W = 0.9848,  p = 0.0005  —  not normal</code></pre>
+</div>
+</div>
+<p>The assumption checks give us a clear picture.</p>
+<p><strong>Equal variance:</strong> Levene’s test returns p = 0.53, well above <span class="math inline">\(\alpha\)</span> = 0.05. The two groups spread similarly around their means, consistent with the near-identical standard deviations we saw earlier (4.09 vs 4.24).</p>
+<p><strong>Normality:</strong> both groups are flagged as not normal, but with W statistics of 0.990 and 0.985 this is the large-sample sensitivity issue we already discussed in section 4. The departure from normality is real but negligible for our purposes.</p>
+<p>Equal variance is satisfied. Normality is approximately satisfied. We run both Student’s and Welch’s t-test: since the variances are equal, they should agree. If they do, we can trust the conclusion.</p>
+<div id="b98c7cef" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Student's t-test (assumes equal variance)</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>t_stat_s, p_s <span class="op">=</span> stats.ttest_ind(home_fouls, away_fouls, equal_var<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Welch's t-test (does not assume equal variance)</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>t_stat_w, p_w <span class="op">=</span> stats.ttest_ind(home_fouls, away_fouls, equal_var<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Observed difference (away - home): </span><span class="sc">{</span>away_fouls<span class="sc">.</span>mean() <span class="op">-</span> home_fouls<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss"> fouls per match"</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Student's t-test:  t = </span><span class="sc">{</span>t_stat_s<span class="sc">:.4f}</span><span class="ss">,  p = </span><span class="sc">{</span>p_s<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Welch's t-test:    t = </span><span class="sc">{</span>t_stat_w<span class="sc">:.4f}</span><span class="ss">,  p = </span><span class="sc">{</span>p_w<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Significant at alpha = 0.05? </span><span class="sc">{</span><span class="st">'Yes'</span> <span class="cf">if</span> p_w <span class="op">&lt;</span> <span class="fl">0.05</span> <span class="cf">else</span> <span class="st">'No'</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Observed difference (away - home): 0.63 fouls per match
+
+Student's t-test:  t = -2.0963,  p = 0.0364
+Welch's t-test:    t = -2.0963,  p = 0.0364
+
+Significant at alpha = 0.05? Yes</code></pre>
+</div>
+</div>
+<p>Both tests return identical results, as we expected given that Levene’s test confirmed equal variance. When the assumptions are met, Student’s and Welch’s t-test agree. That consistency is itself reassuring.</p>
+<p>The result is statistically significant: p = 0.036, below our <span class="math inline">\(\alpha\)</span> of 0.05. Away teams commit significantly more fouls than home teams in Serie A 2024/25. The pub consensus, it turns out, had a point.</p>
+<p>But before anyone orders a celebratory round, let us read this result carefully.</p>
+<p>The difference is 0.63 fouls per match. Over a 38-match season that amounts to roughly 24 extra fouls committed away from home. Spread across 38 matches, that is less than one additional foul per game. The effect is real in the statistical sense: it is unlikely to be noise. Whether it is meaningful in any practical sense is a different question entirely.</p>
+<p>This is the distinction between <strong><em>statistical significance</em></strong> and <strong><em>practical significance</em></strong>. A p-value below <span class="math inline">\(\alpha\)</span> tells us the result is unlikely under the null hypothesis. It says nothing about whether the effect is large enough to matter. With 380 observations per group, even a very small true difference will eventually produce a significant p-value. The test is sensitive enough to detect it. Sensitive enough to care about it is a judgement call that no p-value can make for you.</p>
+<p>We will quantify the size of the effect properly in a moment. For now, note that <span class="math inline">\(p = 0.036\)</span> is significant but not emphatic. It sits just below the threshold. Had we chosen <span class="math inline">\(\alpha\)</span> = 0.01 instead of 0.05, this result would not have cleared the bar. That is not a reason to dismiss it, but it is a reason to hold it lightly.</p>
+<div id="9814ad44" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cohen's d: a standardised measure of effect size</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>pooled_std <span class="op">=</span> np.sqrt((home_fouls.std()<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> away_fouls.std()<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>cohens_d <span class="op">=</span> (away_fouls.mean() <span class="op">-</span> home_fouls.mean()) <span class="op">/</span> pooled_std</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cohen's d: </span><span class="sc">{</span>cohens_d<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Conventional benchmarks:"</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"  Small effect:  d ~ 0.2"</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"  Medium effect: d ~ 0.5"</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"  Large effect:  d ~ 0.8"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Cohen's d: 0.1521
+
+Conventional benchmarks:
+  Small effect:  d ~ 0.2
+  Medium effect: d ~ 0.5
+  Large effect:  d ~ 0.8</code></pre>
+</div>
+</div>
+<p>Cohen’s d of 0.15 is below the conventional threshold for a small effect. To put it concretely: if you picked a random home performance and a random away performance, the away team would have more fouls roughly 54% of the time. That figure comes directly from <span class="math inline">\(d\)</span>: for a normally distributed effect, the probability that a random observation from one group exceeds a random observation from the other is approximately equal to the area under the normal curve up to <span class="math inline">\(d\)</span> divided by the square root of 2, which for <span class="math inline">\(d = 0.15\)</span> gives us about 0.54. Barely better than a coin flip.</p>
+<p>This is what “statistically significant but practically small” looks like in numbers. The test detected a real signal. The signal is just not very loud.</p>
+<p>A useful way to think about it: the 0.63 foul difference is real, in the sense that it almost certainly exists in the population and is not a fluke of this particular season. But it is small relative to the natural variation in the data, a standard deviation of roughly 4 fouls per match. The difference between the most and least aggressive teams in the league will turn out to be many times larger than the home-away gap. That is the comparison that actually matters if you are trying to understand which teams foul differently, and it is where we are heading next.</p>
+<p>For now, the home-away question has an honest answer: yes, away teams foul slightly more, the difference is statistically real, and it is too small to build any strong conclusions on. The pub argument was directionally correct and quantitatively unimpressive. Welcome to statistics.</p>
+<p>Before we zoom into individual teams, I want to try something. We have just built a hypothesis testing toolkit: check the assumptions, run the test, measure the effect size, interpret honestly. It took some work to put together. It would be a shame not to take it for a spin on a different question before we move on.</p>
+<p>Here is one that has been sitting in the back of my mind since we first plotted the total fouls per match distribution:</p>
+<blockquote class="blockquote">
+<p>Do referees in England call fewer fouls than in Italy?</p>
+</blockquote>
+<p>English football has a reputation for physicality. Crunching tackles, aerial battles, relentless pressing. The kind of football where the referee puts the whistle away and lets the game flow. Italian football, by contrast, has a reputation for tactical fouling, shirt-pulling, and a creative relationship with the laws of the game. These are stereotypes, of course. But stereotypes have to come from somewhere.</p>
+<p>We have the data. We have the tools. Let us find out if the stereotypes survive contact with a t-test.</p>
+<div id="810e9958" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>prem_2425 <span class="op">=</span> team_matches[</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    (team_matches[<span class="st">'league'</span>] <span class="op">==</span> <span class="st">'Premier_League'</span>) <span class="op">&amp;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    (team_matches[<span class="st">'season'</span>] <span class="op">==</span> <span class="st">'2425'</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>].copy()</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>prem_match_fouls <span class="op">=</span> prem_2425[prem_2425[<span class="st">'venue'</span>] <span class="op">==</span> <span class="st">'home'</span>].copy()</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>prem_match_fouls[<span class="st">'total_fouls'</span>] <span class="op">=</span> prem_match_fouls[<span class="st">'fouls_committed'</span>] <span class="op">+</span> prem_match_fouls[<span class="st">'fouls_received'</span>]</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Serie A 2024/25"</span>)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  Matches: </span><span class="sc">{</span><span class="bu">len</span>(match_fouls)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  Total fouls per match: </span><span class="sc">{</span>match_fouls[<span class="st">'total_fouls'</span>]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss"> +/- </span><span class="sc">{</span>match_fouls[<span class="st">'total_fouls'</span>]<span class="sc">.</span>std()<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Premier League 2024/25"</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  Matches: </span><span class="sc">{</span><span class="bu">len</span>(prem_match_fouls)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  Total fouls per match: </span><span class="sc">{</span>prem_match_fouls[<span class="st">'total_fouls'</span>]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss"> +/- </span><span class="sc">{</span>prem_match_fouls[<span class="st">'total_fouls'</span>]<span class="sc">.</span>std()<span class="sc">:.1f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Serie A 2024/25
+  Matches: 380
+  Total fouls per match: 25.0 +/- 5.8
+
+Premier League 2024/25
+  Matches: 380
+  Total fouls per match: 22.1 +/- 5.3</code></pre>
+</div>
+</div>
+<div id="254c425a" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> sns.axes_style(<span class="st">"whitegrid"</span>):</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    ax.set_facecolor(<span class="st">'#f0f0f0'</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    sns.histplot(match_fouls[<span class="st">'total_fouls'</span>], bins<span class="op">=</span><span class="dv">12</span>, kde<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                 color<span class="op">=</span><span class="st">'steelblue'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">'Serie A'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    sns.histplot(prem_match_fouls[<span class="st">'total_fouls'</span>], bins<span class="op">=</span><span class="dv">12</span>, kde<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>                 color<span class="op">=</span><span class="st">'tomato'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">'Premier League'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    ax.axvline(match_fouls[<span class="st">'total_fouls'</span>].mean(), color<span class="op">=</span><span class="st">'steelblue'</span>,</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>               linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>               label<span class="op">=</span><span class="ss">f"Serie A mean: </span><span class="sc">{</span>match_fouls[<span class="st">'total_fouls'</span>]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    ax.axvline(prem_match_fouls[<span class="st">'total_fouls'</span>].mean(), color<span class="op">=</span><span class="st">'tomato'</span>,</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>               linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>               label<span class="op">=</span><span class="ss">f"Premier League mean: </span><span class="sc">{</span>prem_match_fouls[<span class="st">'total_fouls'</span>]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'Total fouls per match (referee perspective)'</span>)</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">'Total fouls per match — Serie A vs Premier League 2024/25'</span>)</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>    ax.legend()</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="the_foul_the_whistle_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="3a5aa5d6" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>lev_stat, lev_p <span class="op">=</span> stats.levene(match_fouls[<span class="st">'total_fouls'</span>], prem_match_fouls[<span class="st">'total_fouls'</span>])</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>t_stat, p_val <span class="op">=</span> stats.ttest_ind(match_fouls[<span class="st">'total_fouls'</span>], </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>                                 prem_match_fouls[<span class="st">'total_fouls'</span>], </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                                 equal_var<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>pooled_std <span class="op">=</span> np.sqrt((match_fouls[<span class="st">'total_fouls'</span>].std()<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> </span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>                      prem_match_fouls[<span class="st">'total_fouls'</span>].std()<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>cohens_d <span class="op">=</span> (match_fouls[<span class="st">'total_fouls'</span>].mean() <span class="op">-</span> </span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>            prem_match_fouls[<span class="st">'total_fouls'</span>].mean()) <span class="op">/</span> pooled_std</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Observed difference (Serie A - Premier League): </span><span class="sc">{</span>match_fouls[<span class="st">'total_fouls'</span>]<span class="sc">.</span>mean() <span class="op">-</span> prem_match_fouls[<span class="st">'total_fouls'</span>]<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss"> fouls per match"</span>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Levene's test:   F = </span><span class="sc">{</span>lev_stat<span class="sc">:.4f}</span><span class="ss">,  p = </span><span class="sc">{</span>lev_p<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Welch's t-test:  t = </span><span class="sc">{</span>t_stat<span class="sc">:.4f}</span><span class="ss">,  p = </span><span class="sc">{</span>p_val<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Cohen's d:       </span><span class="sc">{</span>cohens_d<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Significant at alpha = 0.05? </span><span class="sc">{</span><span class="st">'Yes'</span> <span class="cf">if</span> p_val <span class="op">&lt;</span> <span class="fl">0.05</span> <span class="cf">else</span> <span class="st">'No'</span><span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Observed difference (Serie A - Premier League): 2.94 fouls per match
+
+Levene's test:   F = 5.5035,  p = 0.0192
+Welch's t-test:  t = 7.3090,  p = 0.0000
+Cohen's d:       0.5303
+
+Significant at alpha = 0.05? Yes</code></pre>
+</div>
+</div>
+<p>Now that is a different story entirely.</p>
+<p>A difference of 2.94 fouls per match between Serie A and the Premier League! Welch’s t-test returns <span class="math inline">\(p-value\)</span> essentially zero, and Cohen’s <span class="math inline">\(d\)</span> of 0.53 sits squarely in the <em>medium-to-large range</em>. Compare this to the home-away result: <span class="math inline">\(p-value = 0.036\)</span>, <span class="math inline">\(d = 0.15\)</span>. Same toolkit, completely different answer.</p>
+<p>Notice that Levene’s test flagged unequal variance this time (p = 0.019), which is why we used Welch’s rather than Student’s. The Serie A distribution is wider than the Premier League one, something the plot already hinted at: the blue distribution stretches further into the high-foul tail. This is exactly the kind of assumption check that matters: had we blindly applied Student’s t-test, we would have used the wrong tool without knowing it.</p>
+<p>The stereotype, it turns out, is not just a stereotype. Italian referees call significantly more fouls than English ones, by nearly three per match. Over a 38-match season that is over 100 extra fouls whistled per team in Serie A compared to the Premier League. Whether that reflects a difference in how the game is played, how referees are instructed, or how the laws are interpreted is a question the data alone cannot answer. But the gap is real, it is large, and it survives every check we have thrown at it.</p>
+<p>This is what a meaningful effect looks like. Keep it in mind as we turn back to individual teams within Serie A, where the differences will be smaller and the tests will have to work harder.</p>
+</section>
+</section>
+<section id="do-some-teams-foul-more-than-others" class="level2">
+<h2 class="anchored" data-anchor-id="do-some-teams-foul-more-than-others">Do Some Teams Foul More Than Others?</h2>
+<p>We have seen that away teams foul slightly more than home teams, and that Italian referees call significantly more fouls than English ones. Both comparisons treated teams as interchangeable: a foul is a foul, whoever commits it.</p>
+<p>Now we ask the question that every fan in every pub is actually interested in: are some teams genuinely different from the rest? Is there a team that systematically commits more fouls than the league average, or one that somehow glides through matches barely touching anyone?</p>
+<p>For each team we run the same test: their fouls per match against everyone else in the league. One team versus the rest. The groups are unequal in size, roughly 38 matches against 722, so we use Welch’s t-test throughout. We also compute Cohen’s d for each team so we can distinguish teams that are statistically different from teams that are meaningfully different.</p>
+<div id="6c160433" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>results <span class="op">=</span> []</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> team_name <span class="kw">in</span> serie_a_2425[<span class="st">'team'</span>].unique():</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    team <span class="op">=</span> serie_a_2425[serie_a_2425[<span class="st">'team'</span>] <span class="op">==</span> team_name][<span class="st">'fouls_committed'</span>]</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    rest <span class="op">=</span> serie_a_2425[serie_a_2425[<span class="st">'team'</span>] <span class="op">!=</span> team_name][<span class="st">'fouls_committed'</span>]</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    t_stat, p_val <span class="op">=</span> stats.ttest_ind(team, rest, equal_var<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    observed_diff <span class="op">=</span> team.mean() <span class="op">-</span> rest.mean()</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    pooled_std <span class="op">=</span> np.sqrt((team.std()<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> rest.std()<span class="op">**</span><span class="dv">2</span>) <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    cohens_d <span class="op">=</span> observed_diff <span class="op">/</span> pooled_std</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    results.append({</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">'team'</span>: team_name,</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">'mean'</span>: team.mean(),</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'std'</span>: team.std(),</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'n'</span>: <span class="bu">len</span>(team),</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'diff_from_rest'</span>: observed_diff,</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'p_value'</span>: p_val,</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'cohens_d'</span>: cohens_d,</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">'significant'</span>: p_val <span class="op">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>results_df <span class="op">=</span> (</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>    pd.DataFrame(results)</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>    .sort_values(<span class="st">'mean'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>    .reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">4</span>)</span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>results_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">team</th>
+<th data-quarto-table-cell-role="th">mean</th>
+<th data-quarto-table-cell-role="th">std</th>
+<th data-quarto-table-cell-role="th">n</th>
+<th data-quarto-table-cell-role="th">diff_from_rest</th>
+<th data-quarto-table-cell-role="th">p_value</th>
+<th data-quarto-table-cell-role="th">cohens_d</th>
+<th data-quarto-table-cell-role="th">significant</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Verona</td>
+<td>15.2368</td>
+<td>5.1906</td>
+<td>38</td>
+<td>2.8795</td>
+<td>0.0017</td>
+<td>0.6172</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Empoli</td>
+<td>14.8947</td>
+<td>4.6370</td>
+<td>38</td>
+<td>2.5194</td>
+<td>0.0021</td>
+<td>0.5745</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Udinese</td>
+<td>14.1053</td>
+<td>3.3352</td>
+<td>38</td>
+<td>1.6884</td>
+<td>0.0045</td>
+<td>0.4449</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Bologna</td>
+<td>14.0789</td>
+<td>3.3642</td>
+<td>38</td>
+<td>1.6607</td>
+<td>0.0055</td>
+<td>0.4362</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Monza</td>
+<td>13.4474</td>
+<td>5.1449</td>
+<td>38</td>
+<td>0.9958</td>
+<td>0.2476</td>
+<td>0.2137</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Venezia</td>
+<td>13.2368</td>
+<td>3.9211</td>
+<td>38</td>
+<td>0.7742</td>
+<td>0.2439</td>
+<td>0.1908</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>Cagliari</td>
+<td>13.1579</td>
+<td>4.2460</td>
+<td>38</td>
+<td>0.6911</td>
+<td>0.3334</td>
+<td>0.1641</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>Como</td>
+<td>13.0789</td>
+<td>4.2451</td>
+<td>38</td>
+<td>0.6080</td>
+<td>0.3941</td>
+<td>0.1444</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Genoa</td>
+<td>13.0526</td>
+<td>3.4402</td>
+<td>38</td>
+<td>0.5803</td>
+<td>0.3224</td>
+<td>0.1509</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>Juventus</td>
+<td>12.6579</td>
+<td>3.5434</td>
+<td>38</td>
+<td>0.1648</td>
+<td>0.7834</td>
+<td>0.0423</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>Torino</td>
+<td>12.6316</td>
+<td>3.5597</td>
+<td>38</td>
+<td>0.1371</td>
+<td>0.8198</td>
+<td>0.0352</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>Lecce</td>
+<td>12.2368</td>
+<td>3.3727</td>
+<td>38</td>
+<td>-0.2784</td>
+<td>0.6272</td>
+<td>-0.0729</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>Fiorentina</td>
+<td>11.5789</td>
+<td>3.8878</td>
+<td>38</td>
+<td>-0.9709</td>
+<td>0.1426</td>
+<td>-0.2402</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">13</th>
+<td>Atalanta</td>
+<td>11.4211</td>
+<td>4.2275</td>
+<td>38</td>
+<td>-1.1371</td>
+<td>0.1135</td>
+<td>-0.2707</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">14</th>
+<td>Lazio</td>
+<td>11.1579</td>
+<td>3.0002</td>
+<td>38</td>
+<td>-1.4141</td>
+<td>0.0082</td>
+<td>-0.3861</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">15</th>
+<td>Milan</td>
+<td>10.9211</td>
+<td>4.4136</td>
+<td>38</td>
+<td>-1.6634</td>
+<td>0.0285</td>
+<td>-0.3882</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>Napoli</td>
+<td>10.9211</td>
+<td>3.5745</td>
+<td>38</td>
+<td>-1.6634</td>
+<td>0.0083</td>
+<td>-0.4269</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">17</th>
+<td>Inter</td>
+<td>10.8947</td>
+<td>4.1641</td>
+<td>38</td>
+<td>-1.6911</td>
+<td>0.0191</td>
+<td>-0.4060</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">18</th>
+<td>Parma</td>
+<td>10.6579</td>
+<td>4.0154</td>
+<td>38</td>
+<td>-1.9404</td>
+<td>0.0060</td>
+<td>-0.4742</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">19</th>
+<td>Roma</td>
+<td>10.6579</td>
+<td>3.6412</td>
+<td>38</td>
+<td>-1.9404</td>
+<td>0.0028</td>
+<td>-0.4947</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The table is sorted by mean fouls committed per match, and the picture it paints is not subtle. Ten of the twenty teams cross the significance threshold of <span class="math inline">\(\alpha = 0.05\)</span>, split almost evenly between those fouling more than the rest and those fouling less.</p>
+<p>At the top, Verona and Empoli stand out with Cohen’s d above 0.5: that is a medium effect by any standard measure. Udinese and Bologna follow closely. These are not teams that are marginally rougher than their peers. The gap is real and consistent enough to survive a statistical test.</p>
+<p>At the other end, Roma and Parma have the largest negative effects. Roma is the mirror image of Verona: similar magnitude, opposite direction. Inter, Napoli, Milan and Lazio cluster just below that, all with effects between -0.38 and -0.43.</p>
+<p>The ten teams in between are statistically unremarkable. Their p-values do not cross the threshold, which does not mean they foul at exactly the same rate as everyone else. It means there is not enough evidence in one season’s data to say they are different. A distinction worth keeping.</p>
+<p>One thing the table does not tell us is why. A high-fouling team might be tactically aggressive, might play in a defensive style that invites more contact, or might simply have a squad that picks up calls more readily. A low-fouling team might press more, control the ball more, or face a different kind of opponent on average.</p>
+<p>The numbers are not a verdict. They are a starting point.</p>
+<div id="210fe956" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> sns.axes_style(<span class="st">"whitegrid"</span>):</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">7</span>))</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    ax.set_facecolor(<span class="st">'#f0f0f0'</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    plot_df <span class="op">=</span> results_df.sort_values(<span class="st">'diff_from_rest'</span>, ascending<span class="op">=</span><span class="va">False</span>).copy()</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> [</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">'tomato'</span> <span class="cf">if</span> (row[<span class="st">'significant'</span>] <span class="kw">and</span> row[<span class="st">'cohens_d'</span>] <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="st">'steelblue'</span> <span class="cf">if</span> (row[<span class="st">'significant'</span>] <span class="kw">and</span> row[<span class="st">'cohens_d'</span>] <span class="op">&lt;</span> <span class="dv">0</span>)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="st">'grey'</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> _, row <span class="kw">in</span> plot_df.iterrows()</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    ax.barh(plot_df[<span class="st">'team'</span>], plot_df[<span class="st">'diff_from_rest'</span>], color<span class="op">=</span>colors, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    ax.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'Difference from rest of league (fouls per match)'</span>)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">'Fouls committed vs. league average — Serie A 2024/25'</span>)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    ax.invert_yaxis()</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="the_foul_the_whistle_files/figure-html/cell-21-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="511a248d" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.lines <span class="im">import</span> Line2D</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> sns.axes_style(<span class="st">"whitegrid"</span>):</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    ax.set_facecolor(<span class="st">'#f0f0f0'</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    plot_df <span class="op">=</span> results_df.sort_values(<span class="st">'diff_from_rest'</span>, ascending<span class="op">=</span><span class="va">True</span>).copy()</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    ci_data <span class="op">=</span> []</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _, row <span class="kw">in</span> plot_df.iterrows():</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>        team_data <span class="op">=</span> serie_a_2425[serie_a_2425[<span class="st">'team'</span>] <span class="op">==</span> row[<span class="st">'team'</span>]][<span class="st">'fouls_committed'</span>]</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>        se <span class="op">=</span> team_data.std() <span class="op">/</span> np.sqrt(<span class="bu">len</span>(team_data))</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>        ci_data.append(se <span class="op">*</span> <span class="fl">1.96</span>)</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    plot_df[<span class="st">'ci'</span>] <span class="op">=</span> ci_data</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> [</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'tomato'</span> <span class="cf">if</span> (row[<span class="st">'significant'</span>] <span class="kw">and</span> row[<span class="st">'cohens_d'</span>] <span class="op">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="st">'steelblue'</span> <span class="cf">if</span> (row[<span class="st">'significant'</span>] <span class="kw">and</span> row[<span class="st">'cohens_d'</span>] <span class="op">&lt;</span> <span class="dv">0</span>)</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="st">'grey'</span></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> _, row <span class="kw">in</span> plot_df.iterrows()</span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>    y_pos <span class="op">=</span> <span class="bu">range</span>(<span class="bu">len</span>(plot_df))</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>    ax.errorbar(plot_df[<span class="st">'diff_from_rest'</span>], y_pos, xerr<span class="op">=</span>plot_df[<span class="st">'ci'</span>],</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>                fmt<span class="op">=</span><span class="st">'none'</span>, ecolor<span class="op">=</span><span class="st">'black'</span>, elinewidth<span class="op">=</span><span class="dv">1</span>, capsize<span class="op">=</span><span class="dv">3</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>    ax.scatter(plot_df[<span class="st">'diff_from_rest'</span>], y_pos, c<span class="op">=</span>colors, s<span class="op">=</span><span class="dv">80</span>, zorder<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>               edgecolors<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>    ax.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>    ax.set_yticks(<span class="bu">list</span>(y_pos))</span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>    ax.set_yticklabels(plot_df[<span class="st">'team'</span>])</span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'Difference from rest of league (fouls per match)'</span>)</span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">'Serie A 2024/25 — team fouling rate with 95</span><span class="sc">% c</span><span class="st">onfidence intervals'</span>)</span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>    legend_elements <span class="op">=</span> [</span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>        Line2D([<span class="dv">0</span>], [<span class="dv">0</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'w'</span>, markerfacecolor<span class="op">=</span><span class="st">'tomato'</span>,</span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>               markersize<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'Significantly above average'</span>),</span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>        Line2D([<span class="dv">0</span>], [<span class="dv">0</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'w'</span>, markerfacecolor<span class="op">=</span><span class="st">'steelblue'</span>,</span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a>               markersize<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'Significantly below average'</span>),</span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>        Line2D([<span class="dv">0</span>], [<span class="dv">0</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'w'</span>, markerfacecolor<span class="op">=</span><span class="st">'grey'</span>,</span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a>               markersize<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'Not significant'</span>),</span>
+<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>    ax.legend(handles<span class="op">=</span>legend_elements, loc<span class="op">=</span><span class="st">'lower right'</span>)</span>
+<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="the_foul_the_whistle_files/figure-html/cell-22-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="what-we-found-and-what-we-didnt" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-found-and-what-we-didnt">What we found, and what we didn’t</h2>
+<p>We started with a pub argument. Someone at the table was convinced that a particular team fouls more than anyone else, and that the referee was either blind to it or complicit. I was probably nodding along.</p>
+<p>The data gave us a more measured answer. Yes, some teams foul significantly more than the rest of their league. Yes, the differences are real enough to survive a statistical test. But the effect sizes are modest: the largest Cohen’s d values we found, around 0.6, sit at the boundary between small and medium. The teams at the extremes are genuinely different from the pack, but not by the margin that a heated conversation would suggest.</p>
+<p>We also found that home teams foul more than away teams, on average, and that the difference is statistically significant. But with a Cohen’s d of 0.15, it is small enough that it probably does not change what you see in a single match. Patterns this subtle only become visible when you average across a season.</p>
+<p>The cross-league comparison told a different story. The gap between Serie A and the Premier League, nearly three fouls per match on average, has a Cohen’s d of 0.53. That one you can actually see.</p>
+<p>One thing the analysis cannot tell us is whether the fouls we measured are the fouls that were committed or the fouls that were called. We have been careful with the language throughout, but it is worth saying plainly at the end: every number in this notebook is a referee decision, not a ground truth. Two leagues, two styles of officiating, two distributions of called fouls. Comparing them tells us something real, but not everything.</p>
+<p>The next question follows naturally. A foul is one thing. A yellow card is another. Not every foul earns a booking, and the rate at which fouls become cards varies by team, by league, and possibly by reputation. That is where we are going next.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pacoraggio\.github\.io\/reinventing-the-wheel\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

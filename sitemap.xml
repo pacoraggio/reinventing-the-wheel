@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://pacoraggio.github.io/reinventing-the-wheel/probability_illusions_flips_in_a_row/flip_heads_in_a_row.html</loc>
-    <lastmod>2026-04-22T17:05:23.870Z</lastmod>
+    <loc>https://pacoraggio.github.io/reinventing-the-wheel/the_foul_the_whistle/the_foul_the_whistle.html</loc>
+    <lastmod>2026-04-23T18:28:34.216Z</lastmod>
   </url>
   <url>
-    <loc>https://pacoraggio.github.io/reinventing-the-wheel/articles/index.html</loc>
-    <lastmod>2026-04-22T17:01:56.398Z</lastmod>
+    <loc>https://pacoraggio.github.io/reinventing-the-wheel/population_parameter_and_sample_statistic/population_and_samples.html</loc>
+    <lastmod>2026-04-22T20:44:34.935Z</lastmod>
   </url>
   <url>
     <loc>https://pacoraggio.github.io/reinventing-the-wheel/index.html</loc>
     <lastmod>2026-04-22T20:54:20.921Z</lastmod>
   </url>
   <url>
-    <loc>https://pacoraggio.github.io/reinventing-the-wheel/population_parameter_and_sample_statistic/population_and_samples.html</loc>
-    <lastmod>2026-04-22T20:44:34.935Z</lastmod>
+    <loc>https://pacoraggio.github.io/reinventing-the-wheel/articles/index.html</loc>
+    <lastmod>2026-04-23T18:30:36.758Z</lastmod>
+  </url>
+  <url>
+    <loc>https://pacoraggio.github.io/reinventing-the-wheel/probability_illusions_flips_in_a_row/flip_heads_in_a_row.html</loc>
+    <lastmod>2026-04-22T17:05:23.870Z</lastmod>
   </url>
 </urlset>
