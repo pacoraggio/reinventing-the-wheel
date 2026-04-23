@@ -6,6 +6,7 @@ project:
     - articles/index.qmd
     - population_parameter_and_sample_statistic/population_and_samples.ipynb
     - probability_illusions_flips_in_a_row/flip_heads_in_a_row.ipynb
+    - the_foul_the_whistle/the_foul_the_whistle.ipynb
 
 website:
   title: "Reinventing the Wheel"
