@@ -207,7 +207,10 @@ window.Quarto = {
   <li><a href="#a-brief-and-entirely-justified-historical-detour" id="toc-a-brief-and-entirely-justified-historical-detour" class="nav-link" data-scroll-target="#a-brief-and-entirely-justified-historical-detour">A Brief and Entirely Justified Historical Detour</a></li>
   </ul></li>
   <li><a href="#do-some-teams-foul-more-than-others" id="toc-do-some-teams-foul-more-than-others" class="nav-link" data-scroll-target="#do-some-teams-foul-more-than-others">Do Some Teams Foul More Than Others?</a></li>
-  <li><a href="#what-we-found-and-what-we-didnt" id="toc-what-we-found-and-what-we-didnt" class="nav-link" data-scroll-target="#what-we-found-and-what-we-didnt">What we found, and what we didn’t</a></li>
+  <li><a href="#what-we-found-and-what-we-didnt" id="toc-what-we-found-and-what-we-didnt" class="nav-link" data-scroll-target="#what-we-found-and-what-we-didnt">What we found, and what we didn’t</a>
+  <ul class="collapse">
+  <li><a href="#appendix---the-data" id="toc-appendix---the-data" class="nav-link" data-scroll-target="#appendix---the-data">Appendix - the data</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -1313,8 +1316,12 @@ Ligue 1         12.09  11.93        0.16</code></pre>
 <p>The cross-league comparison told a different story. The gap between Serie A and the Premier League, nearly three fouls per match on average, has a Cohen’s d of 0.53. That one you can actually see.</p>
 <p>One thing the analysis cannot tell us is whether the fouls we measured are the fouls that were committed or the fouls that were called. We have been careful with the language throughout, but it is worth saying plainly at the end: every number in this notebook is a referee decision, not a ground truth. Two leagues, two styles of officiating, two distributions of called fouls. Comparing them tells us something real, but not everything.</p>
 <p>The next question follows naturally. A foul is one thing. A yellow card is another. Not every foul earns a booking, and the rate at which fouls become cards varies by team, by league, and possibly by reputation. That is where we are going next.</p>
+<section id="appendix---the-data" class="level3">
+<h3 class="anchored" data-anchor-id="appendix---the-data">Appendix - the data</h3>
+<p>The data used in this notebook comes from <a href="https://www.football-data.co.uk/">football-data.co.uk</a>. A sample-based validation was performed across all datasets, with manual lookup against <a href="https://fbref.com/">fbref.com</a> and <a href="https://www.espn.co.uk/football/">ESPN</a> for flagged outliers.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

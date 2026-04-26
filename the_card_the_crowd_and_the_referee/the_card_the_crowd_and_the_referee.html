@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The Card, the Crowd and the Referee – Reinventing the Wheel</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Reinventing the Wheel</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../articles/index.html"> 
+<span class="menu-text">Articles</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../claude.html"> 
+<span class="menu-text">Claude and I</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#previously-on" id="toc-previously-on" class="nav-link active" data-scroll-target="#previously-on">Previously on…</a></li>
+  <li><a href="#how-are-yellow-cards-distributed" id="toc-how-are-yellow-cards-distributed" class="nav-link" data-scroll-target="#how-are-yellow-cards-distributed">How are yellow cards distributed?</a>
+  <ul class="collapse">
+  <li><a href="#the-shape-of-the-cards" id="toc-the-shape-of-the-cards" class="nav-link" data-scroll-target="#the-shape-of-the-cards">The Shape of the Cards</a></li>
+  <li><a href="#when-the-model-lies-and-tells-the-truth-anyway" id="toc-when-the-model-lies-and-tells-the-truth-anyway" class="nav-link" data-scroll-target="#when-the-model-lies-and-tells-the-truth-anyway">When the model lies, and tells the truth anyway</a></li>
+  </ul></li>
+  <li><a href="#normality-check-the-moment-of-truth" id="toc-normality-check-the-moment-of-truth" class="nav-link" data-scroll-target="#normality-check-the-moment-of-truth">Normality check: the moment of truth</a></li>
+  <li><a href="#when-the-tools-need-upgrading" id="toc-when-the-tools-need-upgrading" class="nav-link" data-scroll-target="#when-the-tools-need-upgrading">When the tools need upgrading</a>
+  <ul class="collapse">
+  <li><a href="#a-brief-and-entirely-justified-historical-detour" id="toc-a-brief-and-entirely-justified-historical-detour" class="nav-link" data-scroll-target="#a-brief-and-entirely-justified-historical-detour">A brief and entirely justified historical detour</a></li>
+  <li><a href="#how-does-it-actually-work" id="toc-how-does-it-actually-work" class="nav-link" data-scroll-target="#how-does-it-actually-work">How does it actually work?</a></li>
+  <li><a href="#permutation-test-the-same-question-asked-differently" id="toc-permutation-test-the-same-question-asked-differently" class="nav-link" data-scroll-target="#permutation-test-the-same-question-asked-differently">Permutation test: the same question, asked differently</a></li>
+  </ul></li>
+  <li><a href="#home-vs-away-do-away-teams-get-more-yellow-cards" id="toc-home-vs-away-do-away-teams-get-more-yellow-cards" class="nav-link" data-scroll-target="#home-vs-away-do-away-teams-get-more-yellow-cards">Home vs Away: do away teams get more yellow cards?</a></li>
+  <li><a href="#a-cross-league-comparison-serie-a-vs-premier-league" id="toc-a-cross-league-comparison-serie-a-vs-premier-league" class="nav-link" data-scroll-target="#a-cross-league-comparison-serie-a-vs-premier-league">A cross-league comparison: Serie A vs Premier League</a></li>
+  <li><a href="#do-some-teams-get-more-yellow-cards-than-others" id="toc-do-some-teams-get-more-yellow-cards-than-others" class="nav-link" data-scroll-target="#do-some-teams-get-more-yellow-cards-than-others">Do some teams get more yellow cards than others?</a>
+  <ul class="collapse">
+  <li><a href="#where-the-new-tests-make-a-difference" id="toc-where-the-new-tests-make-a-difference" class="nav-link" data-scroll-target="#where-the-new-tests-make-a-difference">Where the new tests make a difference</a></li>
+  </ul></li>
+  <li><a href="#fouls-and-yellow-cards-a-comparison" id="toc-fouls-and-yellow-cards-a-comparison" class="nav-link" data-scroll-target="#fouls-and-yellow-cards-a-comparison">Fouls and yellow cards: a comparison</a></li>
+  <li><a href="#what-we-found-and-what-we-didnt" id="toc-what-we-found-and-what-we-didnt" class="nav-link" data-scroll-target="#what-we-found-and-what-we-didnt">What we found, and what we didn’t</a>
+  <ul class="collapse">
+  <li><a href="#appendix---the-data" id="toc-appendix---the-data" class="nav-link" data-scroll-target="#appendix---the-data">Appendix - the data</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Card, the Crowd and the Referee</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="7d505c5b" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pickle</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>sys.path.append(<span class="st">'../src'</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> discipline_stats <span class="im">import</span> (plot_distribution, </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                              plot_home_away_distribution, </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                              plot_league_bar, </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                              plot_forest)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="10dbeedd" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../data/processed/team_matches.pkl'</span>, <span class="st">'rb'</span>) <span class="im">as</span> f:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    team_matches <span class="op">=</span> pickle.load(f)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>serie_a_2425 <span class="op">=</span> team_matches[</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    (team_matches[<span class="st">'league'</span>] <span class="op">==</span> <span class="st">'Serie_A'</span>) <span class="op">&amp;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    (team_matches[<span class="st">'season'</span>] <span class="op">==</span> <span class="st">'2425'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>].copy()</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows loaded: </span><span class="sc">{</span><span class="bu">len</span>(serie_a_2425)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Matches played: </span><span class="sc">{</span><span class="bu">len</span>(serie_a_2425) <span class="op">//</span> <span class="dv">2</span><span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Teams: </span><span class="sc">{</span>serie_a_2425[<span class="st">'team'</span>]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows loaded: 760
+Matches played: 380
+Teams: 20</code></pre>
+</div>
+</div>
+<p><em>When the data stops behaving, the tools have to change</em></p>
+<section id="previously-on" class="level2">
+<h2 class="anchored" data-anchor-id="previously-on">Previously on…</h2>
+<p>In the previous notebook we built a statistical toolkit from scratch using fouls data from Serie A 2024/25. We checked distributions, tested normality, ran Levene’s test for equal variance, and compared groups using Student’s and Welch’s t-tests. We found that away teams foul slightly more than home teams — a small but statistically real effect — and that some teams are genuinely different from the rest of the league, with Verona and Empoli at the high end and Roma and Parma at the low end.</p>
+<p>Now we ask the same questions about yellow cards. Same league, same season, same starting questions. But the data is fundamentally different, and that difference is going to force us to expand the toolkit.</p>
+</section>
+<section id="how-are-yellow-cards-distributed" class="level2">
+<h2 class="anchored" data-anchor-id="how-are-yellow-cards-distributed">How are yellow cards distributed?</h2>
+<p>Same starting point as the fouls analysis: before testing anything, we need to understand the shape of the data. A yellow card is a rarer event than a foul — a team commits roughly 12 fouls per match but receives only 2 or 3 yellow cards. Fewer events, integer values only, and a hard floor at zero. Before we even plot anything, those three facts already suggest the distribution will look nothing like the smooth bell curve we worked with before.</p>
+<p>Let us see if that instinct is right.</p>
+<div id="1e511f8c" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>home_yc <span class="op">=</span> serie_a_2425[serie_a_2425[<span class="st">'venue'</span>] <span class="op">==</span> <span class="st">'home'</span>][<span class="st">'yellow_cards'</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>away_yc <span class="op">=</span> serie_a_2425[serie_a_2425[<span class="st">'venue'</span>] <span class="op">==</span> <span class="st">'away'</span>][<span class="st">'yellow_cards'</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> sns.axes_style(<span class="st">"whitegrid"</span>):</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Left: overall distribution</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[<span class="dv">0</span>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    ax.set_facecolor(<span class="st">'#f0f0f0'</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    sns.histplot(serie_a_2425[<span class="st">'yellow_cards'</span>], bins<span class="op">=</span><span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                 kde<span class="op">=</span><span class="va">True</span>, color<span class="op">=</span><span class="st">'goldenrod'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, discrete<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    ax.axvline(serie_a_2425[<span class="st">'yellow_cards'</span>].mean(), color<span class="op">=</span><span class="st">'tomato'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>               linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="ss">f"Mean: </span><span class="sc">{</span>serie_a_2425[<span class="st">'yellow_cards'</span>]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    ax.axvline(serie_a_2425[<span class="st">'yellow_cards'</span>].median(), color<span class="op">=</span><span class="st">'darkorange'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>               linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="ss">f"Median: </span><span class="sc">{</span>serie_a_2425[<span class="st">'yellow_cards'</span>]<span class="sc">.</span>median()<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'Yellow cards per match'</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">'Yellow cards per team — Serie A 2024/25'</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    ax.legend()</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Right: home vs away</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[<span class="dv">1</span>]</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    ax.set_facecolor(<span class="st">'#f0f0f0'</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    sns.histplot(home_yc, bins<span class="op">=</span><span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">10</span>), kde<span class="op">=</span><span class="va">True</span>, discrete<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>                 color<span class="op">=</span><span class="st">'steelblue'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">'Home'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    sns.histplot(away_yc, bins<span class="op">=</span><span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">10</span>), kde<span class="op">=</span><span class="va">True</span>, discrete<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>                 color<span class="op">=</span><span class="st">'tomato'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">'Away'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    ax.axvline(home_yc.mean(), color<span class="op">=</span><span class="st">'steelblue'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>               label<span class="op">=</span><span class="ss">f'Home mean: </span><span class="sc">{</span>home_yc<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss">'</span>)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    ax.axvline(away_yc.mean(), color<span class="op">=</span><span class="st">'tomato'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>               label<span class="op">=</span><span class="ss">f'Away mean: </span><span class="sc">{</span>away_yc<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss">'</span>)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'Yellow cards per match'</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">'Yellow cards — Home vs Away'</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    ax.legend()</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(serie_a_2425.groupby(<span class="st">'venue'</span>)[<span class="st">'yellow_cards'</span>].describe().<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="the_card_the_crowd_and_the_referee_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       count  mean   std  min  25%  50%  75%  max
+venue                                            
+away   380.0  2.10  1.36  0.0  1.0  2.0  3.0  8.0
+home   380.0  1.72  1.27  0.0  1.0  2.0  2.0  6.0</code></pre>
+</div>
+</div>
+<p>The contrast with the fouls distribution is immediate. Gone is the smooth bell curve centred around a single peak. What we have instead is a jagged, right-skewed shape with a hard floor at zero and values crowded into the 0 to 4 range.</p>
+<p>A few things stand out from the numbers:</p>
+<p><strong>Mean (1.9) and median (2.0) are close</strong>, as they were for fouls, but the visual story is very different. The distribution has a strong peak at 2, a substantial bar at 0, and a long right tail that thins out slowly. This is not a bell curve with a few rough edges. It is a fundamentally different shape.</p>
+<p><strong>The standard deviation (roughly 1.3) is large relative to the mean.</strong> For fouls, the standard deviation was about 30% of the mean. Here it is nearly 70%. Yellow cards are proportionally much noisier data.</p>
+<p><strong>Zero is not rare.</strong> Home teams finished with zero yellow cards in a meaningful number of matches, as the left plot makes clear. With fouls, a zero was essentially impossible. Here it is a normal part of the distribution.</p>
+<p>On the right, the home vs away split already hints at something: away teams average 2.1 cards against 1.7 for home teams, a gap of 0.4 cards per match. Proportionally this is larger than the fouls gap we found. Whether it is real or noise is the question we will get to. But first, we need to be honest about what this shape means for the tools we plan to use.</p>
+<p>Notice also how the KDE curves look awkward, especially on the right plot. They are trying to fit a smooth continuous line through data that only takes integer values. The wiggles and dips between integers are artefacts of the smoothing, not real features of the data. This is our first warning sign: tools designed for continuous data are already struggling just to describe what they see.</p>
+<section id="the-shape-of-the-cards" class="level3">
+<h3 class="anchored" data-anchor-id="the-shape-of-the-cards">The Shape of the Cards</h3>
+<p>A distribution of rare, independent events counted over a fixed interval follows a <strong>Poisson distribution</strong>, named after the French mathematician Siméon Denis Poisson who described it in 1837. Yellow cards per match fit the description well: each card is a relatively rare event, matches are our fixed interval, and the Poisson distribution is discrete by nature, right-skewed for small means, and has a hard floor at zero — exactly what we see here.</p>
+<p>This matters because the normal distribution is sometimes used as an approximation for Poisson data, but only when the mean is large enough, roughly above 10, for the distribution to become approximately symmetric. With a mean of 1.9, we are far from that regime. The Gaussian approximation that served us reasonably well for fouls is not appropriate here.</p>
+</section>
+<section id="when-the-model-lies-and-tells-the-truth-anyway" class="level3">
+<h3 class="anchored" data-anchor-id="when-the-model-lies-and-tells-the-truth-anyway">When the model lies, and tells the truth anyway</h3>
+<p><em>A brief digression, for those who find this kind of thing as interesting as I do. Then you should be worried about yourself.</em></p>
+<p>The Poisson distribution assumes that events are independent: one yellow card should not influence the probability of the next. But yellow cards are clearly not independent. A team that just received a booking might tighten up tactically, or lose its composure entirely. A referee who has already shown three cards in twenty minutes is operating in a different emotional environment than one who has shown none. The scoreline, the crowd, the fatigue in the legs of a holding midfielder who has been chasing shadows for seventy minutes — all of these create invisible threads connecting one event to the next.</p>
+<p>And yet. The distribution looks Poisson.</p>
+<p>This is, I think, one of the genuinely surprising things about football data, and one of the reasons I keep coming back to it. The match itself is irreducibly complex: twenty-two players, a referee, a crowd of thousands, a ball that bounces in ways that defy prediction. Every minute contains a hundred micro-decisions, collisions, adjustments, moments of brilliance and stupidity. You genuinely do not know what will happen next. That is why you watch.</p>
+<p>But zoom out to the season level, aggregate all that chaos across hundreds of matches, and something strange happens: the complexity washes out. The countless dependencies, the emotional cascades, the tactical adjustments interact in so many ways, with so many small and opposing effects, that the aggregate behaviour converges to something that looks almost boringly random. A simple Poisson process. Independent events. As if none of that complexity had happened at all.</p>
+<p>This phenomenon has a name in probability theory: the <strong><em>emergence of randomness from complexity</em></strong>. It appears in queuing systems, earthquake frequencies, the number of goals scored in a match, and apparently in yellow cards too. When a system has enough interacting components, each contributing a small unpredictable effect, the macro-level outcome can look indistinguishable from a process with no structure at all.</p>
+<p>I find this genuinely beautiful. The unpredictability that makes football worth watching: the thing that keeps us in our seat at 2-0 down with ten minutes to go is the same thing that makes the data look random when you step back far enough. The passion and the statistics are not in tension. They are describing the same thing from different distances.</p>
+<p>But the practical implication of all this is uncomfortable. Yellow cards behave like a Poisson process, and the normal distribution is a poor approximation for Poisson data with a small mean. The toolkit we built in the fouls notebook was designed for bell-shaped, continuous data. We are about to find out how it handles something that is neither.</p>
+</section>
+</section>
+<section id="normality-check-the-moment-of-truth" class="level2">
+<h2 class="anchored" data-anchor-id="normality-check-the-moment-of-truth">Normality check: the moment of truth</h2>
+<p>We ran the same normality checks in the fouls notebook and the data passed, with reservations. The <span class="math inline">\(W\)</span> statistics were close to 1, the Q-Q plots followed the diagonal, and we concluded the Gaussian approximation was good enough for our purposes. We already suspect that will not be the case here. Let us see how bad it is.</p>
+<div id="b5952d27" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> sns.axes_style(<span class="st">"whitegrid"</span>):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">5</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax, (label, data) <span class="kw">in</span> <span class="bu">zip</span>(axes, [</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'All'</span>, serie_a_2425[<span class="st">'yellow_cards'</span>]),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'Home'</span>, home_yc),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'Away'</span>, away_yc)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    ]):</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        ax.set_facecolor(<span class="st">'#f0f0f0'</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        stats.probplot(data, dist<span class="op">=</span><span class="st">"norm"</span>, plot<span class="op">=</span>ax)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        ax.set_title(<span class="ss">f'Q-Q Plot — </span><span class="sc">{</span>label<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="the_card_the_crowd_and_the_referee_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="df021023" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> label, data <span class="kw">in</span> [</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'All'</span>,  serie_a_2425[<span class="st">'yellow_cards'</span>]),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'Home'</span>, home_yc),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'Away'</span>, away_yc)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>]:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    w, p <span class="op">=</span> stats.shapiro(data)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    normal <span class="op">=</span> <span class="st">'Normal (p&gt;0.05)'</span> <span class="cf">if</span> p <span class="op">&gt;</span> <span class="fl">0.05</span> <span class="cf">else</span> <span class="st">'Not normal (p&lt;0.05)'</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>label<span class="sc">:6s}</span><span class="ss"> -- W=</span><span class="sc">{</span>w<span class="sc">:.4f}</span><span class="ss">, p=</span><span class="sc">{</span>p<span class="sc">:.6f}</span><span class="ss">  </span><span class="sc">{</span>normal<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>All    -- W=0.9182, p=0.000000  Not normal (p&lt;0.05)
+Home   -- W=0.9113, p=0.000000  Not normal (p&lt;0.05)
+Away   -- W=0.9196, p=0.000000  Not normal (p&lt;0.05)</code></pre>
+</div>
+</div>
+<p>This is not the same conversation we had in the fouls notebook.</p>
+<p>With fouls, the <span class="math inline">\(W\)</span> statistics were 0.988 and 0.992: close enough to 1 that we could reasonably argue the data was approximately normal. The Q-Q plots showed only mild deviations at the tails and so we ran the t-test with some confidence.</p>
+<p>Here, the <span class="math inline">\(W\)</span> statistics sit at 0.911 to 0.920, and the p-values are not “small but debatable”. They are zero to six decimal places! The test is not raising a flag. It is screaming for help.</p>
+<p>The Q-Q plots make the problem visible. Instead of points following the diagonal with minor wobbles, we see a staircase: flat horizontal bands at 0, 1, 2, 3, 4, with gaps between them. This is what discrete data looks like when you force it through a tool built for continuous values. The normal distribution expects an infinite continuum of possible values. Yellow cards can only be integers. The two are fundamentally incompatible.</p>
+<p>This is not a case of “technically not normal but close enough.” The data lives in a different world from the bell curve. The t-test, which we used with reasonable confidence for fouls, is on genuinely shaky ground here.</p>
+<p>So what do we do? We could run the t-test anyway and hope the Central Limit Theorem provides enough protection with 380 observations per group. But we can do better. There are tests that make no assumptions about the shape of the data at all. This is the moment to introduce them.</p>
+</section>
+<section id="when-the-tools-need-upgrading" class="level2">
+<h2 class="anchored" data-anchor-id="when-the-tools-need-upgrading">When the tools need upgrading</h2>
+<section id="a-brief-and-entirely-justified-historical-detour" class="level3">
+<h3 class="anchored" data-anchor-id="a-brief-and-entirely-justified-historical-detour">A brief and entirely justified historical detour</h3>
+<p>Before we introduce the new tools, I <a href="https://www.youtube.com/watch?v=UyDqULz9ECc&amp;list=RDUyDqULz9ECc&amp;start_radio=1">want to tell you about a (not “girl” but) story</a> where they come from. As with the t-test and Gosset’s beer, the origin story is more grounded than you might expect.</p>
+<p><a href="https://en.wikipedia.org/wiki/Frank_Wilcoxon">Frank Wilcoxon</a> was a physical chemist employed by American Cyanamid, a chemical company, whose job involved comparing the effectiveness of different pesticide preparations. He had data, he had questions, and he had a problem: the standard statistical tests of the time required lengthy hand calculations. There were no computers. Every t-statistic had to be computed by hand, step by step, for every comparison. Wilcoxon was a chemist, not a mathematician, and he needed to get his work done.</p>
+<p>His insight was elegant and clever in its simplicity. Instead of working with the raw values, replace them with their ranks. If you have two groups and you want to know whether one tends to produce larger values than the other, you do not need the actual numbers. You just need to know their order. Ranks are much faster to work with than raw values, and they carry enough information to answer the question. He published his method in 1945, using data from fly spray experiments with just eight observations per group. Unglamorous problem, beautiful solution.</p>
+<p>Two years later, in 1947, <a href="https://en.wikipedia.org/wiki/Henry_Mann">Henry Mann</a> and his doctoral student <a href="https://en.wikipedia.org/wiki/D._Ransom_Whitney">Donald Whitney</a> at Ohio State University took Wilcoxon’s practical shortcut and gave it mathematical rigour. Mann was no ordinary collaborator: an Austrian-born mathematician who had fled Vienna in 1938, he had already won the Cole Prize in number theory, one of the most prestigious awards in mathematics, the year before. A real mathematician, whose PhD supervisor was second cousin of the famous director <a href="https://en.wikipedia.org/wiki/Wilhelm_Furtw%C3%A4ngler">Wilhelm Furtwängler</a>. Why I am telling you all these facts? Just in case you are preparing to participate to “Who Wants to be a Millionaire?”. Anyway, Mann, together with Whitney, proved the formal properties of Wilcoxon’s statistic, extended it to unequal sample sizes, derived its distribution, and published the probability tables that made it usable beyond Wilcoxon’s immediate problem.</p>
+<p>The test carries all three names for a reason. Wilcoxon had the practical insight. Mann and Whitney built the theory. A chemist killing flies and too lazy to learn all the arithmetic needed to solve his problem, a refugee mathematician and his student too lazy to have a true job in the industry turning the shortcut into a theorem. The usual pattern: necessity first, rigour second. And laziness as true drive.</p>
+<p>And crucially: neither Wilcoxon nor Mann and Whitney assumed anything about the shape of the data. That was the whole point. The test was designed for the messy, non-normal, real-world data that parametric methods struggled with. Which is exactly what we have in front of us.</p>
+</section>
+<section id="how-does-it-actually-work" class="level3">
+<h3 class="anchored" data-anchor-id="how-does-it-actually-work">How does it actually work?</h3>
+<p>The idea behind the Mann-Whitney test is simple enough to demonstrate by hand. Forget yellow cards for a moment. Take two small groups of matches and ask a single question: do the values in one group tend to be larger than the values in the other?</p>
+<p>Suppose you have two teams <a href="https://en.wikipedia.org/wiki/High_and_Low_(1963_film)"><em>High</em> and <em>Low</em></a>: you regard the team <em>High</em> to be very aggressive and commit a lot of fouls during games (picture someone like El Cholo Simeone, the man seen by many fans to have turned tactical fouling into an art form, as their manager), while believing that <em>Low</em> is calm and possession based (Pep Guardiola as their manager might be a good pick for <em>Low</em>)</p>
+<p>Here are six matches, three from a high-fouling team and three from a low-fouling team:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Match</th>
+<th>Team</th>
+<th>Fouls</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>High</td>
+<td>18</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>High</td>
+<td>14</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>High</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>Low</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td>E</td>
+<td>Low</td>
+<td>13</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>Low</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+<p>Step 1: ignore the group labels and rank all six values together, from lowest to highest.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Match</th>
+<th>Team</th>
+<th>Fouls</th>
+<th>Rank</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>F</td>
+<td>Low</td>
+<td>7</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>Low</td>
+<td>9</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>High</td>
+<td>11</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>E</td>
+<td>Low</td>
+<td>13</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>B</td>
+<td>High</td>
+<td>14</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>A</td>
+<td>High</td>
+<td>18</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+<p>Step 2: sum the ranks for each group.</p>
+<ul>
+<li>High-fouling team: ranks 3 + 5 + 6 = <strong>14</strong></li>
+<li>Low-fouling team: ranks 1 + 2 + 4 = <strong>7</strong></li>
+</ul>
+<p>Step 3: ask whether this split would be surprising if the two groups were identical. If there were no real difference, the ranks would mix randomly between the groups. With three observations in each group, the ranks 1 through 6 could be distributed in many ways. The Mann-Whitney U statistic formalises this question: how often would random shuffling produce a rank sum at least as extreme as the one we observed?</p>
+<p>That is the entire test. No assumption about normality. No assumption about equal variance. Just ranks, sums, and a question about how surprising the result is.</p>
+<div id="7a32e0e5" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Two small teams, three matches each</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>example <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'team'</span>: [<span class="st">'High'</span>, <span class="st">'High'</span>, <span class="st">'High'</span>, <span class="st">'Low'</span>, <span class="st">'Low'</span>, <span class="st">'Low'</span>],</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'fouls'</span>: [<span class="dv">18</span>, <span class="dv">14</span>, <span class="dv">11</span>, <span class="dv">9</span>, <span class="dv">13</span>, <span class="dv">7</span>]</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: rank all values together</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>example[<span class="st">'rank'</span>] <span class="op">=</span> example[<span class="st">'fouls'</span>].rank()</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Step 1: rank all values together"</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(example.sort_values(<span class="st">'rank'</span>).to_string(index<span class="op">=</span><span class="va">False</span>))</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: sum ranks by group</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>rank_sums <span class="op">=</span> example.groupby(<span class="st">'team'</span>)[<span class="st">'rank'</span>].<span class="bu">sum</span>()</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Step 2: rank sums by group"</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rank_sums.to_string())</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: compute U statistic</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>n1 <span class="op">=</span> n2 <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>U_high <span class="op">=</span> rank_sums[<span class="st">'High'</span>] <span class="op">-</span> n1 <span class="op">*</span> (n1 <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>U_low  <span class="op">=</span> rank_sums[<span class="st">'Low'</span>]  <span class="op">-</span> n2 <span class="op">*</span> (n2 <span class="op">+</span> <span class="dv">1</span>) <span class="op">/</span> <span class="dv">2</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Step 3: U statistic"</span>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  U (High): </span><span class="sc">{</span>U_high<span class="sc">:.0f}</span><span class="ss">"</span>)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  U (Low):  </span><span class="sc">{</span>U_low<span class="sc">:.0f}</span><span class="ss">"</span>)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  U_high + U_low = </span><span class="sc">{</span>U_high <span class="op">+</span> U_low<span class="sc">:.0f}</span><span class="ss">  (should equal n1 * n2 = </span><span class="sc">{</span>n1<span class="op">*</span>n2<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: verify with scipy</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>high_fouls <span class="op">=</span> example[example[<span class="st">'team'</span>] <span class="op">==</span> <span class="st">'High'</span>][<span class="st">'fouls'</span>]</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>low_fouls  <span class="op">=</span> example[example[<span class="st">'team'</span>] <span class="op">==</span> <span class="st">'Low'</span>][<span class="st">'fouls'</span>]</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>u_stat, p_val <span class="op">=</span> stats.mannwhitneyu(high_fouls, low_fouls, alternative<span class="op">=</span><span class="st">'two-sided'</span>)</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Step 4: scipy verification"</span>)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  U=</span><span class="sc">{</span>u_stat<span class="sc">:.0f}</span><span class="ss">, p=</span><span class="sc">{</span>p_val<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Step 1: rank all values together
+team  fouls  rank
+ Low      7   1.0
+ Low      9   2.0
+High     11   3.0
+ Low     13   4.0
+High     14   5.0
+High     18   6.0
+
+Step 2: rank sums by group
+team
+High    14.0
+Low      7.0
+
+Step 3: U statistic
+  U (High): 8
+  U (Low):  1
+  U_high + U_low = 9  (should equal n1 * n2 = 9)
+
+Step 4: scipy verification
+  U=8, p=0.2000</code></pre>
+</div>
+</div>
+<p>The numbers tell a clean story.</p>
+<p>After ranking all six values together, the High team holds ranks 3, 5 and 6 — the upper half of the table. The Low team holds ranks 1, 2 and 4 — the lower half, with one exception. The rank sums reflect this: 14 for High, 7 for Low.</p>
+<p>The U statistic formalises the question. U for High is 8, which means that in 8 out of the 9 possible head-to-head comparisons between a High match and a Low match, the High value was larger. U for Low is 1, meaning the Low team won only one of those nine comparisons. Notice that U_high + U_low = 9, which always equals n1 times n2. This is a useful sanity check.</p>
+<p>The p-value is 0.20. With only three observations per group, even a fairly clean separation like this one does not reach significance. There are simply not enough data points to rule out that this ranking happened by chance. This is the small-sample problem in action: the direction looks right, but we cannot be confident.</p>
+<p>Scipy returns U=8, confirming our hand calculation exactly. From here on, we let scipy handle the arithmetic. The logic underneath is always the same: rank everything together, count how often one group beats the other, ask whether that count would be surprising under the null hypothesis.</p>
+<p>Now let us apply it to the full dataset, where 380 observations per group give the test something real to work with.</p>
+</section>
+<section id="permutation-test-the-same-question-asked-differently" class="level3">
+<h3 class="anchored" data-anchor-id="permutation-test-the-same-question-asked-differently">Permutation test: the same question, asked differently</h3>
+<p>If the rank-based logic of Mann-Whitney feels like too much mathematical machinery (No, it is not! It is elegant and smart!) there is a completely different way to ask the same question. One that requires no formula, no ranking, and no statistical tables. Just a lot of shuffling.</p>
+<p>The permutation test starts from an even simpler question: if there were no real difference between the two groups, would it matter which label we assigned to each observation?</p>
+<p>If home and away teams receive yellow cards at the same rate, then the labels “home” and “away” are essentially arbitrary. We could shuffle them randomly and the difference in group means would not change much. But if the labels carry real information, if away teams genuinely receive more cards, then shuffling them destroys that signal, and the observed difference becomes hard to reproduce by chance.</p>
+<p>The test works exactly like that. We compute the observed difference between the two groups. Then we shuffle the labels thousands of times, computing the difference each time. The p-value is simply the proportion of shuffles that produced a difference at least as large as the one we actually observed. No assumptions about normality, no assumptions about variance. Just repeated shuffling and counting. Brute force, in the best possible sense.</p>
+<p>The permutation test and Mann-Whitney are complementary. Mann-Whitney asks whether one group tends to produce larger values than the other, based on ranks. The permutation test asks whether the observed difference in means could have happened by chance, based on repeated shuffling. When both agree, the conclusion is solid. When they disagree, it is worth understanding why.</p>
+</section>
+</section>
+<section id="home-vs-away-do-away-teams-get-more-yellow-cards" class="level2">
+<h2 class="anchored" data-anchor-id="home-vs-away-do-away-teams-get-more-yellow-cards">Home vs Away: do away teams get more yellow cards?</h2>
+<p>Same question as the fouls notebook, same structure. We know the data is not normal, so we run the full battery: Levene for equal variance, Student and Welch for comparison with what we used before, Mann-Whitney and permutation as the tools we trust here. We want to see whether they agree, and if they disagree, we want to understand why.</p>
+<div id="5b2a11ce" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> discipline_stats <span class="im">import</span> test_home_away</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests we already know: Levene, Student, Welch</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>results_ha <span class="op">=</span> test_home_away(serie_a_2425, <span class="st">'yellow_cards'</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>results_ha.show(<span class="st">'levene'</span>, <span class="st">'student_t'</span>, <span class="st">'welch_t'</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Mann-Whitney: does one group tend to produce larger values than the other?</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>u_stat, u_p <span class="op">=</span> stats.mannwhitneyu(home_yc, away_yc, alternative<span class="op">=</span><span class="st">'two-sided'</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>n1, n2 <span class="op">=</span> <span class="bu">len</span>(home_yc), <span class="bu">len</span>(away_yc)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>rank_biserial <span class="op">=</span> <span class="dv">1</span> <span class="op">-</span> (<span class="dv">2</span> <span class="op">*</span> u_stat) <span class="op">/</span> (n1 <span class="op">*</span> n2)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Mann-Whitney U:   U=</span><span class="sc">{</span>u_stat<span class="sc">:.1f}</span><span class="ss">, p=</span><span class="sc">{</span>u_p<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rank-biserial:    </span><span class="sc">{</span>rank_biserial<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Permutation test: would random shuffling produce a difference this large?</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>observed_diff <span class="op">=</span> away_yc.mean() <span class="op">-</span> home_yc.mean()</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>pooled <span class="op">=</span> np.concatenate([home_yc.values, away_yc.values])</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>n_home <span class="op">=</span> <span class="bu">len</span>(home_yc)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>perm_diffs <span class="op">=</span> np.array([</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">lambda</span> p: p[n_home:].mean() <span class="op">-</span> p[:n_home].mean())(np.random.permutation(pooled))</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10_000</span>)</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>p_perm <span class="op">=</span> np.mean(np.<span class="bu">abs</span>(perm_diffs) <span class="op">&gt;=</span> np.<span class="bu">abs</span>(observed_diff))</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Permutation test: p=</span><span class="sc">{</span>p_perm<span class="sc">:.4f}</span><span class="ss">"</span>)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Observed diff:    </span><span class="sc">{</span>observed_diff<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Home vs Away -- yellow_cards
+--------------------------------------------------
+  home_mean                 1.7237
+  away_mean                 2.0974
+  difference (away-home)    +0.3737
+  home_std                  1.2686
+  away_std                  1.3604
+  home_n                    380
+  away_n                    380
+--------------------------------------------------
+  levene                    stat=0.0275, p=0.8683  (Not sig.)
+  student_t                 stat=-3.9161, p=0.0001  (Sig.)
+  welch_t                   stat=-3.9161, p=0.0001  (Sig.)
+--------------------------------------------------
+  cohens_d                  0.2841
+  rank_biserial             0.1578
+==================================================
+
+Mann-Whitney U:   U=60804.0, p=0.0001
+Rank-biserial:    0.1578
+
+Permutation test: p=0.0000
+Observed diff:    0.3737</code></pre>
+</div>
+</div>
+<p>The rank-biserial correlation measures the same thing as Cohen’s <span class="math inline">\(d\)</span> does for the t-test: not whether the difference is significant, but how large it is. Specifically, it tells us the probability that a randomly picked away match produced more yellow cards than a randomly picked home match, expressed as a value between -1 and +1. A rank-biserial of 0.16 means that in about 58% of all possible home-away pairs, the away team received more cards. Small, but consistently pointing in the same direction.</p>
+<p>All four tests agree, and the signal is much stronger than what we found for fouls.</p>
+<p>With fouls, the home/away difference produced p=0.036 and Cohen’s d of 0.15 (significant but barely, sitting just below the threshold). Here, every test returns p=0.0001 and Cohen’s d is 0.28, nearly double. The away effect for yellow cards is not only real, it is more pronounced than the away effect for fouls.</p>
+<p>A few things worth reading carefully:</p>
+<p><strong>Levene’s test confirms equal variance</strong> (p=0.87). The spread of yellow cards is similar for home and away teams, which is why Student’s and Welch’s return identical results. No correction needed.</p>
+<p><strong>All four tests agree.</strong> This is the best possible outcome when working with non-normal data. The t-tests, which we know are on shaky ground here, reach the same conclusion as Mann-Whitney and the permutation test, which make no assumptions about shape. When parametric and non-parametric tests agree, the result is robust regardless of which tool you trust more.</p>
+<p><strong>Cohen’s d of 0.28</strong> sits between small and medium. The rank-biserial of 0.16 tells the same story in different units: if you picked a random home match and a random away match, the away team received more yellow cards about 58% of the time. Modest, but consistent.</p>
+<p><strong>Why is the yellow card effect stronger than the fouls effect?</strong> This is the interesting question. Away teams foul slightly more, but the gap is small and the effect is weak. Away teams receive meaningfully more yellow cards, and the signal is much cleaner. If fouling were the only driver of bookings, we would expect the two effects to be similar in size. The fact that they are not suggests something else is at work: referee judgement, crowd pressure, or both. The same foul committed by an away player may be more likely to produce a card than the same foul committed by a home player. We cannot prove that from this data alone, but the numbers are consistent with it. It is also worth keeping in mind that we are looking at one league and one season. This result might be specific to Serie A 2024/25: an unusually card-heavy season, a particular cohort of referees, a specific set of teams or different indications from the referee board. Testing whether the home/away yellow card effect holds across all five leagues and across fourteen seasons is exactly the kind of question the later articles in this series are built to answer.</p>
+</section>
+<section id="a-cross-league-comparison-serie-a-vs-premier-league" class="level2">
+<h2 class="anchored" data-anchor-id="a-cross-league-comparison-serie-a-vs-premier-league">A cross-league comparison: Serie A vs Premier League</h2>
+<p>In the fouls notebook, the comparison between Serie A and the Premier League produced one of the strongest effects we found: nearly three fouls per match difference, Cohen’s d of 0.53. The stereotype of Italian football as more foul-prone survived contact with a t-test.</p>
+<p>Yellow cards tell a different story, or possibly the same story told differently. Let us find out.</p>
+<div id="b2367b54" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> discipline_stats <span class="im">import</span> compare_two_groups</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>serie_a <span class="op">=</span> team_matches[</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    (team_matches[<span class="st">'league'</span>] <span class="op">==</span> <span class="st">'Serie_A'</span>) <span class="op">&amp;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    (team_matches[<span class="st">'season'</span>] <span class="op">==</span> <span class="st">'2425'</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>][<span class="st">'yellow_cards'</span>]</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>premier <span class="op">=</span> team_matches[</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    (team_matches[<span class="st">'league'</span>] <span class="op">==</span> <span class="st">'Premier_League'</span>) <span class="op">&amp;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    (team_matches[<span class="st">'season'</span>] <span class="op">==</span> <span class="st">'2425'</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>][<span class="st">'yellow_cards'</span>]</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>results_leagues <span class="op">=</span> compare_two_groups(serie_a, premier,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                                     label_a<span class="op">=</span><span class="st">'Serie A'</span>,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>                                     label_b<span class="op">=</span><span class="st">'Premier League'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="b97adf87" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pl_2425 <span class="op">=</span> team_matches[</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    (team_matches[<span class="st">'league'</span>] <span class="op">==</span> <span class="st">'Premier_League'</span>) <span class="op">&amp;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    (team_matches[<span class="st">'season'</span>] <span class="op">==</span> <span class="st">'2425'</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>][<span class="st">'yellow_cards'</span>]</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> sns.axes_style(<span class="st">"whitegrid"</span>):</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    ax.set_facecolor(<span class="st">'#f0f0f0'</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    sns.histplot(serie_a, bins<span class="op">=</span><span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">10</span>), kde<span class="op">=</span><span class="va">True</span>, discrete<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                 color<span class="op">=</span><span class="st">'steelblue'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="ss">f'Serie A (mean=</span><span class="sc">{</span>serie_a<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">)'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    sns.histplot(pl_2425, bins<span class="op">=</span><span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">10</span>), kde<span class="op">=</span><span class="va">True</span>, discrete<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>                 color<span class="op">=</span><span class="st">'tomato'</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="ss">f'Premier League (mean=</span><span class="sc">{</span>pl_2425<span class="sc">.</span>mean()<span class="sc">:.2f}</span><span class="ss">)'</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    ax.axvline(serie_a.mean(), color<span class="op">=</span><span class="st">'steelblue'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    ax.axvline(pl_2425.mean(), color<span class="op">=</span><span class="st">'tomato'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'Yellow cards per match'</span>)</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">'Yellow cards distribution — Serie A vs Premier League 2024/25'</span>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    ax.legend()</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(results_leagues)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="the_card_the_crowd_and_the_referee_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Serie A vs Premier League
+--------------------------------------------------
+  mean_Serie A              1.9105
+  mean_Premier League       2.0250
+  std_Serie A               1.3277
+  std_Premier League        1.4172
+  n_Serie A                 760
+  n_Premier League          760
+  mean_diff                 -0.1145
+--------------------------------------------------
+  student_t                 stat=-1.6250, p=0.1044  (Not sig.)
+  welch_t                   stat=-1.6250, p=0.1044  (Not sig.)
+  mann_whitney              stat=277165.5000, p=0.1629  (Not sig.)
+  permutation               p=0.1055  (Not sig.)
+--------------------------------------------------
+  cohens_d                  -0.0834
+  rank_biserial             0.0403
+==================================================</code></pre>
+</div>
+</div>
+<p>One practical note: the permutation test is the most assumption-free tool in our kit, but it comes at a cost. Running 10,000 shuffles for a single comparison is fast on modern hardware, but the bill grows quickly when we run it for twenty teams in a loop. This is the general tradeoff in statistics: <strong><em>the fewer assumptions you make, the more computation you need to substitute for them</em></strong>. You can read it from the textbooks: there is no free lunch. And when you go through your life, you also discover that there is no free alcohol as well.</p>
+<p>Going back to the visualization, the plot says it all. Two leagues with nearly three fouls per match separating them, yet their yellow card distributions overlap almost completely. The KDE curves trace almost the same path. The dashed mean lines are barely distinguishable.</p>
+<p>This is the opposite of what we found for fouls, and it is worth sitting with for a moment.</p>
+<p>For fouls, Serie A led the Premier League by nearly three per match, with Cohen’s d of 0.53. A large, unambiguous difference. The stereotype held.</p>
+<p>For yellow cards, the difference is 0.11 cards per match in the other direction — the Premier League averages slightly more than Serie A — and not one of the four tests finds it significant. Cohen’s d is -0.08, negligibly small. The two leagues are statistically indistinguishable in terms of yellow cards per match.</p>
+<p>Think about what this means. Italian referees call significantly more fouls than English ones. Yet both sets of referees end up showing roughly the same number of yellow cards. The extra fouls in Serie A do not translate into extra bookings. Either Italian referees have a higher threshold for showing a card relative to the fouls they call, or the nature of the fouls is different, more tactical, less aggressive, less card-worthy in the referee’s judgement.</p>
+<p>This is the first concrete hint that the relationship between fouls and yellow cards is not fixed. The conversion rate varies. And that rate, not the raw counts, may be where the most interesting story lives.</p>
+<p>We will come back to this in the next notebook. For now, it is enough to note that the cross-league comparison behaves very differently depending on which metric you look at. Same leagues, same season, completely different conclusion.</p>
+</section>
+<section id="do-some-teams-get-more-yellow-cards-than-others" class="level2">
+<h2 class="anchored" data-anchor-id="do-some-teams-get-more-yellow-cards-than-others">Do some teams get more yellow cards than others?</h2>
+<div id="94bcc592" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> discipline_stats <span class="im">import</span> test_all_teams</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>results_yc <span class="op">=</span> test_all_teams(serie_a_2425, <span class="st">'yellow_cards'</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>results_yc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">team</th>
+<th data-quarto-table-cell-role="th">team_mean</th>
+<th data-quarto-table-cell-role="th">rest_mean</th>
+<th data-quarto-table-cell-role="th">difference (team-rest)</th>
+<th data-quarto-table-cell-role="th">team_std</th>
+<th data-quarto-table-cell-role="th">rest_std</th>
+<th data-quarto-table-cell-role="th">team_n</th>
+<th data-quarto-table-cell-role="th">rest_n</th>
+<th data-quarto-table-cell-role="th">student_t_stat</th>
+<th data-quarto-table-cell-role="th">student_t_p</th>
+<th data-quarto-table-cell-role="th">welch_t_stat</th>
+<th data-quarto-table-cell-role="th">welch_t_p</th>
+<th data-quarto-table-cell-role="th">mannwhitney_stat</th>
+<th data-quarto-table-cell-role="th">mannwhitney_p</th>
+<th data-quarto-table-cell-role="th">permutation_p</th>
+<th data-quarto-table-cell-role="th">cohens_d</th>
+<th data-quarto-table-cell-role="th">rank_biserial</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">15</th>
+<td>Verona</td>
+<td>2.4737</td>
+<td>1.8809</td>
+<td>0.5928</td>
+<td>1.4282</td>
+<td>1.3166</td>
+<td>38</td>
+<td>722</td>
+<td>2.6937</td>
+<td>0.0072</td>
+<td>2.5032</td>
+<td>0.0164</td>
+<td>17083.0</td>
+<td>0.0087</td>
+<td>0.0091</td>
+<td>0.4316</td>
+<td>-0.2453</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">10</th>
+<td>Lazio</td>
+<td>2.4211</td>
+<td>1.8837</td>
+<td>0.5374</td>
+<td>1.4072</td>
+<td>1.3189</td>
+<td>38</td>
+<td>722</td>
+<td>2.4399</td>
+<td>0.0149</td>
+<td>2.3016</td>
+<td>0.0266</td>
+<td>16784.5</td>
+<td>0.0168</td>
+<td>0.0170</td>
+<td>0.3941</td>
+<td>-0.2235</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Monza</td>
+<td>2.3684</td>
+<td>1.8864</td>
+<td>0.4820</td>
+<td>1.5143</td>
+<td>1.3139</td>
+<td>38</td>
+<td>722</td>
+<td>2.1867</td>
+<td>0.0291</td>
+<td>1.9244</td>
+<td>0.0614</td>
+<td>16178.5</td>
+<td>0.0550</td>
+<td>0.0302</td>
+<td>0.3400</td>
+<td>-0.1794</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">17</th>
+<td>Como</td>
+<td>2.2895</td>
+<td>1.8906</td>
+<td>0.3989</td>
+<td>1.4870</td>
+<td>1.3169</td>
+<td>38</td>
+<td>722</td>
+<td>1.8079</td>
+<td>0.0710</td>
+<td>1.6205</td>
+<td>0.1130</td>
+<td>15659.5</td>
+<td>0.1300</td>
+<td>0.0786</td>
+<td>0.2840</td>
+<td>-0.1415</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">13</th>
+<td>Udinese</td>
+<td>2.2105</td>
+<td>1.8947</td>
+<td>0.3158</td>
+<td>1.2768</td>
+<td>1.3293</td>
+<td>38</td>
+<td>722</td>
+<td>1.4301</td>
+<td>0.1531</td>
+<td>1.4830</td>
+<td>0.1457</td>
+<td>15748.0</td>
+<td>0.1134</td>
+<td>0.1674</td>
+<td>0.2423</td>
+<td>-0.1480</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Fiorentina</td>
+<td>2.1316</td>
+<td>1.8989</td>
+<td>0.2327</td>
+<td>1.2119</td>
+<td>1.3333</td>
+<td>38</td>
+<td>722</td>
+<td>1.0531</td>
+<td>0.2926</td>
+<td>1.1476</td>
+<td>0.2577</td>
+<td>15548.5</td>
+<td>0.1534</td>
+<td>0.3064</td>
+<td>0.1826</td>
+<td>-0.1334</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">7</th>
+<td>Torino</td>
+<td>2.1053</td>
+<td>1.9003</td>
+<td>0.2050</td>
+<td>1.2256</td>
+<td>1.3328</td>
+<td>38</td>
+<td>722</td>
+<td>0.9276</td>
+<td>0.3539</td>
+<td>1.0003</td>
+<td>0.3229</td>
+<td>15207.5</td>
+<td>0.2454</td>
+<td>0.3784</td>
+<td>0.1601</td>
+<td>-0.1086</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">14</th>
+<td>Venezia</td>
+<td>2.0000</td>
+<td>1.9058</td>
+<td>0.0942</td>
+<td>1.2081</td>
+<td>1.3343</td>
+<td>38</td>
+<td>722</td>
+<td>0.4260</td>
+<td>0.6702</td>
+<td>0.4659</td>
+<td>0.6437</td>
+<td>14321.5</td>
+<td>0.6381</td>
+<td>0.7015</td>
+<td>0.0740</td>
+<td>-0.0440</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>Parma</td>
+<td>1.9474</td>
+<td>1.9086</td>
+<td>0.0388</td>
+<td>1.4322</td>
+<td>1.3230</td>
+<td>38</td>
+<td>722</td>
+<td>0.1754</td>
+<td>0.8608</td>
+<td>0.1633</td>
+<td>0.8711</td>
+<td>13904.0</td>
+<td>0.8850</td>
+<td>0.8983</td>
+<td>0.0281</td>
+<td>-0.0136</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Genoa</td>
+<td>1.8684</td>
+<td>1.9127</td>
+<td>-0.0443</td>
+<td>1.0947</td>
+<td>1.3394</td>
+<td>38</td>
+<td>722</td>
+<td>-0.2004</td>
+<td>0.8412</td>
+<td>-0.2403</td>
+<td>0.8112</td>
+<td>13672.0</td>
+<td>0.9717</td>
+<td>0.8581</td>
+<td>-0.0362</td>
+<td>0.0034</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">9</th>
+<td>Cagliari</td>
+<td>1.7895</td>
+<td>1.9169</td>
+<td>-0.1274</td>
+<td>1.4172</td>
+<td>1.3235</td>
+<td>38</td>
+<td>722</td>
+<td>-0.5764</td>
+<td>0.5645</td>
+<td>-0.5419</td>
+<td>0.5908</td>
+<td>12672.5</td>
+<td>0.4150</td>
+<td>0.5763</td>
+<td>-0.0929</td>
+<td>0.0762</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Milan</td>
+<td>1.7895</td>
+<td>1.9169</td>
+<td>-0.1274</td>
+<td>1.4733</td>
+<td>1.3204</td>
+<td>38</td>
+<td>722</td>
+<td>-0.5764</td>
+<td>0.5645</td>
+<td>-0.5222</td>
+<td>0.6044</td>
+<td>12685.5</td>
+<td>0.4208</td>
+<td>0.5683</td>
+<td>-0.0911</td>
+<td>0.0753</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>Atalanta</td>
+<td>1.7632</td>
+<td>1.9183</td>
+<td>-0.1551</td>
+<td>1.1492</td>
+<td>1.3367</td>
+<td>38</td>
+<td>722</td>
+<td>-0.7018</td>
+<td>0.4830</td>
+<td>-0.8039</td>
+<td>0.4259</td>
+<td>12954.0</td>
+<td>0.5515</td>
+<td>0.4839</td>
+<td>-0.1245</td>
+<td>0.0557</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Empoli</td>
+<td>1.7368</td>
+<td>1.9197</td>
+<td>-0.1828</td>
+<td>1.4830</td>
+<td>1.3195</td>
+<td>38</td>
+<td>722</td>
+<td>-0.8272</td>
+<td>0.4084</td>
+<td>-0.7446</td>
+<td>0.4608</td>
+<td>12492.5</td>
+<td>0.3393</td>
+<td>0.4127</td>
+<td>-0.1303</td>
+<td>0.0893</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">18</th>
+<td>Juventus</td>
+<td>1.7368</td>
+<td>1.9197</td>
+<td>-0.1828</td>
+<td>1.3087</td>
+<td>1.3289</td>
+<td>38</td>
+<td>722</td>
+<td>-0.8272</td>
+<td>0.4084</td>
+<td>-0.8387</td>
+<td>0.4065</td>
+<td>12566.0</td>
+<td>0.3691</td>
+<td>0.4105</td>
+<td>-0.1386</td>
+<td>0.0840</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">12</th>
+<td>Roma</td>
+<td>1.6842</td>
+<td>1.9224</td>
+<td>-0.2382</td>
+<td>1.2543</td>
+<td>1.3312</td>
+<td>38</td>
+<td>722</td>
+<td>-1.0782</td>
+<td>0.2813</td>
+<td>-1.1376</td>
+<td>0.2618</td>
+<td>12473.5</td>
+<td>0.3319</td>
+<td>0.2830</td>
+<td>-0.1842</td>
+<td>0.0907</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Bologna</td>
+<td>1.6053</td>
+<td>1.9266</td>
+<td>-0.3213</td>
+<td>1.2201</td>
+<td>1.3319</td>
+<td>38</td>
+<td>722</td>
+<td>-1.4552</td>
+<td>0.1460</td>
+<td>-1.5749</td>
+<td>0.1228</td>
+<td>11796.5</td>
+<td>0.1340</td>
+<td>0.1472</td>
+<td>-0.2516</td>
+<td>0.1401</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">19</th>
+<td>Lecce</td>
+<td>1.5789</td>
+<td>1.9280</td>
+<td>-0.3490</td>
+<td>1.0813</td>
+<td>1.3377</td>
+<td>38</td>
+<td>722</td>
+<td>-1.5811</td>
+<td>0.1143</td>
+<td>-1.9141</td>
+<td>0.0622</td>
+<td>11966.0</td>
+<td>0.1719</td>
+<td>0.1126</td>
+<td>-0.2870</td>
+<td>0.1277</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Inter</td>
+<td>1.5000</td>
+<td>1.9321</td>
+<td>-0.4321</td>
+<td>1.2892</td>
+<td>1.3270</td>
+<td>38</td>
+<td>722</td>
+<td>-1.9592</td>
+<td>0.0505</td>
+<td>-2.0109</td>
+<td>0.0509</td>
+<td>11296.0</td>
+<td>0.0589</td>
+<td>0.0466</td>
+<td>-0.3303</td>
+<td>0.1766</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>Napoli</td>
+<td>1.2105</td>
+<td>1.9474</td>
+<td>-0.7368</td>
+<td>0.9052</td>
+<td>1.3366</td>
+<td>38</td>
+<td>722</td>
+<td>-3.3570</td>
+<td>0.0008</td>
+<td>-4.7527</td>
+<td>0.0000</td>
+<td>9350.5</td>
+<td>0.0007</td>
+<td>0.0010</td>
+<td>-0.6455</td>
+<td>0.3184</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="9a044744" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> discipline_stats <span class="im">import</span> team_summary, plot_league_bar</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>summary_yc <span class="op">=</span> team_summary(serie_a_2425, <span class="st">'yellow_cards'</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plot_league_bar(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    summary_yc.sort_values(<span class="st">'diff_from_league'</span>, ascending<span class="op">=</span><span class="va">False</span>),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Yellow cards vs. league average — Serie A 2024/25'</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    xlabel<span class="op">=</span><span class="st">'Difference from league average (yellow cards per match)'</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>ax.invert_yaxis()</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="the_card_the_crowd_and_the_referee_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="90e0beee" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>forest_df <span class="op">=</span> results_yc.rename(columns<span class="op">=</span>{</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'difference (team-rest)'</span>: <span class="st">'diff'</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'welch_t_p'</span>: <span class="st">'welch_p'</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plot_forest(</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    forest_df, serie_a_2425, <span class="st">'yellow_cards'</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'Serie A 2024/25 — yellow cards: effect size and 95</span><span class="sc">% c</span><span class="st">onfidence intervals'</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="the_card_the_crowd_and_the_referee_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The picture is sparser than the fouls analysis. With fouls, ten teams crossed the significance threshold. Here, only three do so convincingly.</p>
+<p><strong>Significantly above average:</strong> Verona (d=0.43) and Lazio (d=0.39) stand out at the top. Both reach significance across all four tests. Verona was also the most fouling team in the league, so the pattern is consistent. Lazio, however, was one of the least fouling teams for fouls — yet here they sit near the top for yellow cards. A team that fouls relatively little but collects cards at an above-average rate. That discrepancy will matter in the next notebook.</p>
+<p><strong>Significantly below average:</strong> Napoli is the clearest signal in the entire table. A mean of 1.2 cards per match against a league average of 1.9, Cohen’s d of -0.65, and p-values near zero across all four tests. This is not a borderline result. Napoli received significantly fewer yellow cards than any other team in the league by a considerable margin.</p>
+<p><strong>The grey zone:</strong> Monza and Inter sit in interesting territory. For Monza, Welch returns p=0.061 — just above the threshold — while the permutation test returns p=0.030. For Inter, the situation is nearly identical: Welch p=0.051, permutation p=0.047. Both teams hover at the boundary, and the parametric and non-parametric tests disagree slightly. With non-normal discrete data, this is exactly the kind of divergence we warned about. The permutation test is the more trustworthy reading here, but neither result is emphatic enough to treat as a strong finding.</p>
+<p><strong>Everyone else</strong> is indistinguishable from the league average. The forest plot makes this visible: most confidence intervals comfortably straddle zero.</p>
+<p>The sparsity of significant results is not a failure of the analysis. It is a property of the data. Yellow cards are noisy, rare events. Detecting a genuine signal above that noise requires either a large effect or a lot of data. Napoli clears that bar easily. Most teams do not.</p>
+<p>One final note on the forest plot. The error bars shown are symmetric 95% confidence intervals based on the standard error of the mean — a parametric construction that assumes the sampling distribution is approximately normal. This is a visualisation convenience, not a test result. The actual significance flags come from Mann-Whitney and the permutation test, which make no such assumption. A team whose error bar barely crosses zero might still be flagged as significant by the non-parametric tests, and vice versa. Read the plot as a guide to effect size and direction, not as a substitute for the p-values in the table.</p>
+<section id="where-the-new-tests-make-a-difference" class="level3">
+<h3 class="anchored" data-anchor-id="where-the-new-tests-make-a-difference">Where the new tests make a difference</h3>
+<p>For most teams the four tests agree, which is reassuring. But three cases are worth examining closely:</p>
+<p><strong>Monza</strong>: Student’s t returns p=0.029 — significant. Welch returns p=0.061 — not significant. Mann-Whitney p=0.055, permutation p=0.030. The parametric tests disagree with each other, and the non-parametric tests split as well. This is a team sitting right on the boundary, and the answer you get depends on which tool you pick. With non-normal data, Welch and Mann-Whitney are the more trustworthy pair. Neither clears 0.05 convincingly. Treat Monza as inconclusive.</p>
+<p><strong>Inter</strong>: Welch p=0.051, Mann-Whitney p=0.059, permutation p=0.047. The permutation test alone crosses the threshold. A single test crossing 0.05 on the wrong side of the boundary is not a finding. It is a flag that says: more data needed.</p>
+<p><strong>Napoli</strong>: all four tests agree emphatically, but notice something specific. Welch returns p=0.0000 while Student’s t returns p=0.0008. The difference arises because Napoli’s standard deviation (0.91) is dramatically lower than the rest of the league (1.34). Unequal variance, exactly the condition where Welch and Student diverge. Had we used Student’s t uncritically, we would have underestimated the significance. This is a small but concrete example of why checking assumptions before choosing a test is not a formality.</p>
+</section>
+</section>
+<section id="fouls-and-yellow-cards-a-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="fouls-and-yellow-cards-a-comparison">Fouls and yellow cards: a comparison</h2>
+<p>We have now run the same analysis twice on the same league and season. Before we close, it is worth putting the two sets of results side by side. Not to rank the metrics, but to see what they agree on, where they diverge, and what those divergences might mean.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Team</th>
+<th style="text-align: center;">Fouls rank</th>
+<th style="text-align: center;">Fouls d</th>
+<th style="text-align: center;">Yellow cards rank</th>
+<th style="text-align: center;">YC d</th>
+<th>Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Verona</td>
+<td style="text-align: center;">1st</td>
+<td style="text-align: center;">+0.62</td>
+<td style="text-align: center;">1st</td>
+<td style="text-align: center;">+0.43</td>
+<td>Consistently aggressive</td>
+</tr>
+<tr class="even">
+<td>Empoli</td>
+<td style="text-align: center;">2nd</td>
+<td style="text-align: center;">+0.58</td>
+<td style="text-align: center;">12th</td>
+<td style="text-align: center;">-0.13</td>
+<td>Many fouls, average cards</td>
+</tr>
+<tr class="odd">
+<td>Udinese</td>
+<td style="text-align: center;">3rd</td>
+<td style="text-align: center;">+0.45</td>
+<td style="text-align: center;">5th</td>
+<td style="text-align: center;">+0.24</td>
+<td>Consistently physical</td>
+</tr>
+<tr class="even">
+<td>Bologna</td>
+<td style="text-align: center;">4th</td>
+<td style="text-align: center;">+0.44</td>
+<td style="text-align: center;">17th</td>
+<td style="text-align: center;">-0.25</td>
+<td>Many fouls, few cards</td>
+</tr>
+<tr class="odd">
+<td>Lazio</td>
+<td style="text-align: center;">19th</td>
+<td style="text-align: center;">-0.39</td>
+<td style="text-align: center;">2nd</td>
+<td style="text-align: center;">+0.39</td>
+<td>Few fouls, many cards</td>
+</tr>
+<tr class="even">
+<td>Roma</td>
+<td style="text-align: center;">18th</td>
+<td style="text-align: center;">-0.50</td>
+<td style="text-align: center;">15th</td>
+<td style="text-align: center;">-0.18</td>
+<td>Few fouls, average cards</td>
+</tr>
+<tr class="odd">
+<td>Napoli</td>
+<td style="text-align: center;">17th</td>
+<td style="text-align: center;">-0.43</td>
+<td style="text-align: center;">20th</td>
+<td style="text-align: center;">-0.65</td>
+<td>Consistently clean</td>
+</tr>
+<tr class="even">
+<td>Inter</td>
+<td style="text-align: center;">16th</td>
+<td style="text-align: center;">-0.41</td>
+<td style="text-align: center;">19th</td>
+<td style="text-align: center;">-0.33</td>
+<td>Consistently clean</td>
+</tr>
+</tbody>
+</table>
+<p>The teams at the extremes tell three different stories.</p>
+<p><strong>Consistent teams</strong>: Verona is aggressive by both measures. Napoli and Inter are clean by both measures. The two metrics point in the same direction.</p>
+<p><strong>High fouls, average or low cards</strong>: Empoli and Bologna commit significantly more fouls than the league average but do not receive significantly more yellow cards. Either their fouls are less card-worthy in nature, or referees apply a different threshold to them.</p>
+<p><strong>Low fouls, high cards</strong>: Lazio is the most striking case. One of the least fouling teams in the league, yet one of the most booked. This is the anomaly that the rate analysis in the next notebook is built to investigate.</p>
+<div id="0e1291ee" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fouls_results <span class="op">=</span> test_all_teams(serie_a_2425, <span class="st">'fouls_committed'</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>yc_results <span class="op">=</span> results_yc.copy()</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>fouls_results[<span class="st">'fouls_rank'</span>] <span class="op">=</span> fouls_results[<span class="st">'team_mean'</span>].rank(ascending<span class="op">=</span><span class="va">False</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>yc_results[<span class="st">'yc_rank'</span>] <span class="op">=</span> yc_results[<span class="st">'team_mean'</span>].rank(ascending<span class="op">=</span><span class="va">False</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> fouls_results[[<span class="st">'team'</span>, <span class="st">'fouls_rank'</span>]].merge(</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    yc_results[[<span class="st">'team'</span>, <span class="st">'yc_rank'</span>]], on<span class="op">=</span><span class="st">'team'</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>merged[<span class="st">'distance'</span>] <span class="op">=</span> merged[<span class="st">'yc_rank'</span>] <span class="op">-</span> merged[<span class="st">'fouls_rank'</span>]</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>max_dist <span class="op">=</span> merged[<span class="st">'distance'</span>].<span class="bu">abs</span>().<span class="bu">max</span>()</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> sns.axes_style(<span class="st">"whitegrid"</span>):</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    ax.set_facecolor(<span class="st">'#f0f0f0'</span>)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    scatter <span class="op">=</span> ax.scatter(</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>        merged[<span class="st">'fouls_rank'</span>], merged[<span class="st">'yc_rank'</span>],</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>        c<span class="op">=</span>merged[<span class="st">'distance'</span>], cmap<span class="op">=</span><span class="st">'RdBu'</span>, vmin<span class="op">=-</span>max_dist, vmax<span class="op">=</span>max_dist,</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>        s<span class="op">=</span>merged[<span class="st">'distance'</span>].<span class="bu">abs</span>() <span class="op">*</span> <span class="dv">8</span> <span class="op">+</span> <span class="dv">60</span>,</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>        zorder<span class="op">=</span><span class="dv">2</span>, edgecolors<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _, row <span class="kw">in</span> merged.iterrows():</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>        ax.annotate(row[<span class="st">'team'</span>], (row[<span class="st">'fouls_rank'</span>], row[<span class="st">'yc_rank'</span>]),</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>                    textcoords<span class="op">=</span><span class="st">'offset points'</span>, xytext<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>), fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    ax.plot([<span class="dv">1</span>, <span class="dv">20</span>], [<span class="dv">1</span>, <span class="dv">20</span>], color<span class="op">=</span><span class="st">'black'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>,</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>            linewidth<span class="op">=</span><span class="dv">1</span>, label<span class="op">=</span><span class="st">'Perfect agreement'</span>)</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    plt.colorbar(scatter, ax<span class="op">=</span>ax, label<span class="op">=</span><span class="st">'Yellow cards rank minus fouls rank</span><span class="ch">\n</span><span class="st">(positive = more cards than fouls)'</span>)</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">'Fouls rank (1 = most fouls)'</span>)</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">'Yellow cards rank (1 = most cards)'</span>)</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">'Fouls vs yellow cards ranking — Serie A 2024/25'</span>)</span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="dv">0</span>, <span class="dv">21</span>)</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="dv">0</span>, <span class="dv">21</span>)</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>    ax.legend()</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="the_card_the_crowd_and_the_referee_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The scatter plot makes the story visible in a way the table cannot.</p>
+<p>Teams close to the diagonal are consistent: their fouling rank and yellow cards rank tell the same story. Verona sits almost exactly on the line — the most fouling team and one of the most booked. Napoli sits near the diagonal too, at the opposite extreme: few fouls, few cards.</p>
+<p>The interesting teams are the ones far from the line.</p>
+<p><strong>Blue (more fouls than cards):</strong> Bologna and Empoli stand out. Both commit significantly more fouls than average, yet their yellow card rates are unremarkable. They foul, but they do not get booked for it at the same rate. Whether this reflects the nature of their fouls, their style of play, or a degree of referee leniency is a question the data alone cannot answer.</p>
+<p><strong>Red (more cards than fouls):</strong> Lazio is the most striking point on the entire plot. One of the least fouling teams in the league, yet the second most booked. The gap between their fouls rank (15th) and their yellow cards rank (2nd) is the largest in the dataset. Roma and Parma show a similar but milder pattern: fewer fouls than you would expect given their card count.</p>
+<p>This is the question the next notebook is built to answer. The conversion rate from foul to yellow card is not constant. It varies by team, and the variation is large enough to be visible. Whether that variation reflects tactical style, referee perception, or something else entirely is where the investigation goes next.</p>
+</section>
+<section id="what-we-found-and-what-we-didnt" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-found-and-what-we-didnt">What we found, and what we didn’t</h2>
+<p>We started with the same questions as the fouls notebook and the same league and season. The answers came out differently, and understanding why is the point.</p>
+<p>Away teams receive significantly more yellow cards than home teams, with a stronger and cleaner signal than we found for fouls. The effect is small in absolute terms — 0.4 cards per match — but consistent across all four tests. The most plausible explanation is referee judgement influenced by crowd pressure, but that is a hypothesis the data is consistent with, not one it proves.</p>
+<p>The cross-league comparison surprised us. Italian referees call nearly three more fouls per match than English ones, yet the two leagues are statistically indistinguishable in yellow cards per match. The extra fouls in Serie A do not become extra bookings. The conversion rate from foul to card is not the same everywhere.</p>
+<p>At the team level, only three teams stand out convincingly: Verona and Lazio above average, Napoli below. Far fewer than the ten significant teams we found for fouls. This is not a failure of the analysis. Yellow cards are rarer and noisier than fouls, and rarer events require larger effects or more data to produce a clear signal.</p>
+<p>The new tools earned their place. Mann-Whitney and the permutation test agreed with the t-tests in most cases, which is reassuring. Where they disagreed — Monza, Inter — the disagreement was itself informative: those teams sit at a boundary where no single test should be trusted alone.</p>
+<p>The scatter plot at the end is the most important result in the notebook. Fouls and yellow cards do not tell the same story for every team. Bologna fouls a lot and gets average cards. Lazio fouls little and gets many cards. The gap between the two metrics is the question we have been building towards since the first notebook.</p>
+<p>That is where we are going next.</p>
+<section id="appendix---the-data" class="level3">
+<h3 class="anchored" data-anchor-id="appendix---the-data">Appendix - the data</h3>
+<p>The data used in this notebook comes from <a href="https://www.football-data.co.uk/">football-data.co.uk</a>. A sample-based validation was performed across all datasets, with manual lookup against <a href="https://fbref.com/">fbref.com</a> and <a href="https://www.espn.co.uk/football/">ESPN</a> for flagged outliers.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/pacoraggio\.github\.io\/reinventing-the-wheel\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
