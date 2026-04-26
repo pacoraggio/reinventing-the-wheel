@@ -1,0 +1,12 @@
+---
+title: "Claude and I"
+page-layout: article
+---
+
+All analysis conducted in this project was done with assistance from Claude Code.
+
+Claude was most useful in three areas. Web scraping: knowing the principles is one thing; implementing the routines reliably is another, and Claude handled the bulk of that implementation — although we are still figuring out how to get past the tests that ask us to prove we are human, which feels increasingly ironic. Data visualisation: once given the right instructions, Claude delivered plot functions quickly and was precise in axis labelling, formatting, and all the detail work that a perfectionist can spend hours on. I meant a perfectionist. Coding output: Claude formatted statistical output, refactored exploratory cell code into reusable functions in the project's `.py` libraries, and kept the codebase cleaner than it would otherwise have been.
+
+The statistical plan, the choice of methods, the evaluation of results, and the narrative are mine. If something is incorrect, that is on me. Claude was also used to double-check scientific accuracy and to keep the writing from going off track.
+
+As for the editorial relationship: Claude was asked to review every joke I tried to land. We disagreed regularly. We are now seeking couple therapy.

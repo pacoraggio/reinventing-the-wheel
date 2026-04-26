@@ -1,0 +1,21 @@
+---
+title: "About"
+about:
+  template: trestles
+  image: img/author.png
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/pacoraggio
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/pacoraggio
+---
+
+I am a physicist by training and a data professional by trade, which mostly means I spend a lot of time explaining to people why their intuition about probability is wrong, and why that is actually interesting.
+
+My background is in measurement, uncertainty, and the kind of scientific thinking that transfers surprisingly well across industries — data analysis, technical roles, product, and anything that involves turning numbers into decisions.
+
+This project is a record of taking things apart to understand how they work. The topics are probability, statistics, hypothesis testing, and measurement, implemented in Python and tested against real and simulated data. The goal is not to replace existing tools but to understand them well enough to use them deliberately.
+
+When not doing this, I follow football more carefully than is probably healthy, read books about why humans are bad at reasoning, and maintain an unreasonable interest in how wheels were invented.
