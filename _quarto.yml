@@ -10,7 +10,7 @@ project:
     - probability_illusions_flips_in_a_row/flip_heads_in_a_row.ipynb
     - the_foul_the_whistle_and_the_doubt/the_foul_the_whistle_and_the_doubt.ipynb
     - the_card_the_crowd_and_the_referee/the_card_the_crowd_and_the_referee.ipynb
-    - the_foul_the_card_the_gap/the_foul_the_card_the_gap.ipynb
+    - the_foul_the_card_and_the_gap/the_foul_the_card_and_the_gap.ipynb
 
 website:
   title: "Reinventing the Wheel"
