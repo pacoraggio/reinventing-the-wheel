@@ -4,9 +4,13 @@ project:
   render:
     - index.qmd
     - articles/index.qmd
+    - about.qmd
+    - claude.qmd
     - population_parameter_and_sample_statistic/population_and_samples.ipynb
     - probability_illusions_flips_in_a_row/flip_heads_in_a_row.ipynb
     - the_foul_the_whistle/the_foul_the_whistle.ipynb
+    - the_card_the_crowd_and_the_referee/the_card_the_crowd_and_the_referee.ipynb
+    - the_foul_the_card_the_gap/the_foul_the_card_the_gap.ipynb
 
 website:
   title: "Reinventing the Wheel"
@@ -16,6 +20,10 @@ website:
         text: Home
       - href: articles/index.qmd
         text: Articles
+      - href: about.qmd
+        text: About
+      - href: claude.qmd
+        text: Claude and I
 
 format:
   html:
