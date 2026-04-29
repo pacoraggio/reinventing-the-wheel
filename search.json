@@ -4,7 +4,7 @@
     "href": "the_foul_the_card_and_the_gap/the_foul_the_card_and_the_gap.html",
     "title": "The Foul, the Card and the Gap",
     "section": "",
-    "text": "import pandas as pd\nimport numpy as np\nfrom scipy import stats\nfrom scipy.stats import binom, norm\nfrom statsmodels.stats.proportion import proportions_ztest\n\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nimport pickle\nimport sys\n\nsys.path.append('./src')\nfrom discipline_stats import (\n    filter_league_season,\n    team_summary,\n    rate_summary,\n    plot_league_bar,\n    plot_forest,\n    compare_mean_to_threshold\n)\nwith open('./data/processed/team_matches.pkl', 'rb') as f:\n    team_matches = pickle.load(f)\n\nserie_a_2425 = team_matches[\n    (team_matches['league'] == 'Serie_A') &\n    (team_matches['season'] == '2425')\n].copy()\n\nprint(f\"Rows: {len(serie_a_2425):,}\")\nprint(f\"Teams: {serie_a_2425['team'].nunique()}\")\nprint(f\"Matches per team: {len(serie_a_2425) // serie_a_2425['team'].nunique()}\")\n\nRows: 760\nTeams: 20\nMatches per team: 38\nNot all fouls are created equal. Some are more equal than others."
+    "text": "import pandas as pd\nimport numpy as np\nfrom scipy import stats\nfrom scipy.stats import binom, norm\nfrom statsmodels.stats.proportion import proportions_ztest\n\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nimport pickle\nimport sys\n\nsys.path.append('./src')\nfrom discipline_stats import (\n    filter_league_season,\n    team_summary,\n    rate_summary,\n    plot_league_bar,\n    plot_forest,\n    compare_mean_to_threshold\n)\nwith open('./data/processed/team_matches.pkl', 'rb') as f:\n    team_matches = pickle.load(f)\n\nserie_a_2425 = team_matches[\n    (team_matches['league'] == 'Serie_A') &\n    (team_matches['season'] == '2425')\n].copy()\n\nprint(f\"Rows: {len(serie_a_2425):,}\")\nprint(f\"Teams: {serie_a_2425['team'].nunique()}\")\nprint(f\"Matches per team: {len(serie_a_2425) // serie_a_2425['team'].nunique()}\")\n\nRows: 760\nTeams: 20\nMatches per team: 38"
   },
   {
     "objectID": "the_foul_the_card_and_the_gap/the_foul_the_card_and_the_gap.html#previously-on",
@@ -102,7 +102,7 @@
     "href": "the_foul_the_whistle_and_the_doubt/the_foul_the_whistle_and_the_doubt.html",
     "title": "The Foul, the Whistle and the Doubt",
     "section": "",
-    "text": "import pandas as pd\nimport numpy as np\nfrom scipy import stats\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nimport pickle\n\nsns.set_style('whitegrid')\nHow to turn a pub argument into a statistical test."
+    "text": "import pandas as pd\nimport numpy as np\nfrom scipy import stats\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nimport pickle\n\nsns.set_style('whitegrid')"
   },
   {
     "objectID": "the_foul_the_whistle_and_the_doubt/the_foul_the_whistle_and_the_doubt.html#the-case-for-looking-at-the-numbers",
@@ -172,7 +172,7 @@
     "href": "population_parameter_and_sample_statistic/population_and_samples.html",
     "title": "Measuring the Measurement: Variation, Samples and the Precision of an Estimate",
     "section": "",
-    "text": "# importing libraries\n\nimport pandas as pd\nimport numpy as np\nfrom scipy import stats\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nsns.set_style(\"whitegrid\")\nWhy your sample is lying to you: the surprisingly honest art of not knowing everything"
+    "text": "# importing libraries\n\nimport pandas as pd\nimport numpy as np\nfrom scipy import stats\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nsns.set_style(\"whitegrid\")"
   },
   {
     "objectID": "population_parameter_and_sample_statistic/population_and_samples.html#surprisingly-uncertain-why-one-measurement-is-never-enoug",
@@ -270,7 +270,7 @@
     "href": "articles/index.html",
     "title": "Articles",
     "section": "",
-    "text": "Measuring the Measurement: Variation, Samples and the Precision of an Estimate\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe Coin Has No Memory, But You Do\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe Foul, the Whistle and the Doubt\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe Card, the Crowd and the Referee\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe Foul, the Card and the Gap\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "The Foul, the Card and the Gap\n\n\n\nfootball-in-data\n\n\n\nNot all fouls are created equal. Some are more equal than others.\n\n\n\n\n\nApr 29, 2026\n\n\nPaolo Coraggio\n\n\n\n\n\n\n\n\n\n\n\n\nThe Card, the Crowd and the Referee\n\n\n\nfootball-in-data\n\n\n\nWhen the data stops behaving, the tools have to change\n\n\n\n\n\nApr 26, 2026\n\n\nPaolo Coraggio\n\n\n\n\n\n\n\n\n\n\n\n\nThe Foul, the Whistle and the Doubt\n\n\n\nfootball-in-data\n\n\n\nHow to turn a pub argument into a statistical test\n\n\n\n\n\nApr 23, 2026\n\n\nPaolo Coraggio\n\n\n\n\n\n\n\n\n\n\n\n\nThe Coin Has No Memory, But You Do\n\n\n\nstatistical-illusions\n\n\n\nAgainst Your Gut: The Hidden Probability of Coin Streaks\n\n\n\n\n\nApr 22, 2026\n\n\nPaolo Coraggio\n\n\n\n\n\n\n\n\n\n\n\n\nMeasuring the Measurement: Variation, Samples and the Precision of an Estimate\n\n\n\nprobability-and-statistics\n\n\n\nWhy your sample is lying to you: the surprisingly honest art of not knowing everything\n\n\n\n\n\nApr 17, 2026\n\n\nPaolo Coraggio\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "claude.html",
@@ -284,7 +284,7 @@
     "href": "probability_illusions_flips_in_a_row/flip_heads_in_a_row.html",
     "title": "The Coin Has No Memory, But You Do",
     "section": "",
-    "text": "import pandas as pd\nimport numpy as np\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nsns.set_style(\"whitegrid\")\nAgainst Your Gut: The Hidden Probability of Coin Streaks"
+    "text": "import pandas as pd\nimport numpy as np\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nsns.set_style(\"whitegrid\")"
   },
   {
     "objectID": "probability_illusions_flips_in_a_row/flip_heads_in_a_row.html#surprisingly-likely-the-mathematics-of-streaks",
@@ -326,7 +326,7 @@
     "href": "the_card_the_crowd_and_the_referee/the_card_the_crowd_and_the_referee.html",
     "title": "The Card, the Crowd and the Referee",
     "section": "",
-    "text": "import pandas as pd\nimport numpy as np\nfrom scipy import stats\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nimport pickle\n\nimport sys\nsys.path.append('./src')\n\nfrom discipline_stats import (plot_distribution, \n                              plot_home_away_distribution, \n                              plot_league_bar, \n                              plot_forest)\nwith open('./data/processed/team_matches.pkl', 'rb') as f:\n    team_matches = pickle.load(f)\n\nserie_a_2425 = team_matches[\n    (team_matches['league'] == 'Serie_A') &\n    (team_matches['season'] == '2425')\n].copy()\n\nprint(f\"Rows loaded: {len(serie_a_2425)}\")\nprint(f\"Matches played: {len(serie_a_2425) // 2}\")\nprint(f\"Teams: {serie_a_2425['team'].nunique()}\")\n\nRows loaded: 760\nMatches played: 380\nTeams: 20\nWhen the data stops behaving, the tools have to change"
+    "text": "import pandas as pd\nimport numpy as np\nfrom scipy import stats\n\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\nimport pickle\n\nimport sys\nsys.path.append('./src')\n\nfrom discipline_stats import (plot_distribution, \n                              plot_home_away_distribution, \n                              plot_league_bar, \n                              plot_forest)\nwith open('./data/processed/team_matches.pkl', 'rb') as f:\n    team_matches = pickle.load(f)\n\nserie_a_2425 = team_matches[\n    (team_matches['league'] == 'Serie_A') &\n    (team_matches['season'] == '2425')\n].copy()\n\nprint(f\"Rows loaded: {len(serie_a_2425)}\")\nprint(f\"Matches played: {len(serie_a_2425) // 2}\")\nprint(f\"Teams: {serie_a_2425['team'].nunique()}\")\n\nRows loaded: 760\nMatches played: 380\nTeams: 20"
   },
   {
     "objectID": "the_card_the_crowd_and_the_referee/the_card_the_crowd_and_the_referee.html#previously-on",

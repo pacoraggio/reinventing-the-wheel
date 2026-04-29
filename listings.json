@@ -2,11 +2,11 @@
   {
     "listing": "/articles/index.html",
     "items": [
-      "/population_parameter_and_sample_statistic/population_and_samples.html",
-      "/probability_illusions_flips_in_a_row/flip_heads_in_a_row.html",
-      "/the_foul_the_whistle_and_the_doubt/the_foul_the_whistle_and_the_doubt.html",
+      "/the_foul_the_card_and_the_gap/the_foul_the_card_and_the_gap.html",
       "/the_card_the_crowd_and_the_referee/the_card_the_crowd_and_the_referee.html",
-      "/the_foul_the_card_and_the_gap/the_foul_the_card_and_the_gap.html"
+      "/the_foul_the_whistle_and_the_doubt/the_foul_the_whistle_and_the_doubt.html",
+      "/probability_illusions_flips_in_a_row/flip_heads_in_a_row.html",
+      "/population_parameter_and_sample_statistic/population_and_samples.html"
     ]
   }
 ]

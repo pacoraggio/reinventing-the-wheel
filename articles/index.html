@@ -82,9 +82,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -178,9 +178,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    </div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Zm9vdGJhbGwtaW4tZGF0YQ==">football-in-data <span class="quarto-category-count">(3)</span></div><div class="category" data-category="cHJvYmFiaWxpdHktYW5kLXN0YXRpc3RpY3M=">probability-and-statistics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3RhdGlzdGljYWwtaWxsdXNpb25z">statistical-illusions <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -208,84 +208,14 @@ window.Quarto = {
 
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="listing-actions-group">
+    <div class="input-group input-group-sm quarto-listing-filter">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="search form-control" placeholder="Filter">
+    </div>
+</div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1776890674935" data-listing-reading-time-sort="14" data-listing-word-count-sort="2687">
-<div class="thumbnail"><a href="../population_parameter_and_sample_statistic/population_and_samples.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="..\population_parameter_and_sample_statistic\population_and_samples_files\figure-html\cell-4-output-1.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../population_parameter_and_sample_statistic/population_and_samples.html" class="no-external">Measuring the Measurement: Variation, Samples and the Precision of an Estimate</a>
-</h3>
-<div class="delink listing-description"><a href="../population_parameter_and_sample_statistic/population_and_samples.html" class="no-external">
-<em>Why your sample is lying to you: the surprisingly honest art of not knowing everything</em>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../population_parameter_and_sample_statistic/population_and_samples.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-file-modified-sort="1776877523870" data-listing-reading-time-sort="16" data-listing-word-count-sort="3163">
-<div class="thumbnail"><a href="../probability_illusions_flips_in_a_row/flip_heads_in_a_row.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="..\probability_illusions_flips_in_a_row\flip_heads_in_a_row_files\figure-html\cell-6-output-2.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../probability_illusions_flips_in_a_row/flip_heads_in_a_row.html" class="no-external">The Coin Has No Memory, But You Do</a>
-</h3>
-<div class="delink listing-description"><a href="../probability_illusions_flips_in_a_row/flip_heads_in_a_row.html" class="no-external">
-<em>Against Your Gut: The Hidden Probability of Coin Streaks</em>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../probability_illusions_flips_in_a_row/flip_heads_in_a_row.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-file-modified-sort="1777465820188" data-listing-reading-time-sort="36" data-listing-word-count-sort="7073">
-<div class="thumbnail"><a href="../the_foul_the_whistle_and_the_doubt/the_foul_the_whistle_and_the_doubt.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="..\the_foul_the_whistle_and_the_doubt\the_foul_the_whistle_and_the_doubt_files\figure-html\cell-4-output-1.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../the_foul_the_whistle_and_the_doubt/the_foul_the_whistle_and_the_doubt.html" class="no-external">The Foul, the Whistle and the Doubt</a>
-</h3>
-<div class="delink listing-description"><a href="../the_foul_the_whistle_and_the_doubt/the_foul_the_whistle_and_the_doubt.html" class="no-external">
-<em>How to turn a pub argument into a statistical test.</em>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../the_foul_the_whistle_and_the_doubt/the_foul_the_whistle_and_the_doubt.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-file-modified-sort="1777464995851" data-listing-reading-time-sort="27" data-listing-word-count-sort="5306">
-<div class="thumbnail"><a href="../the_card_the_crowd_and_the_referee/the_card_the_crowd_and_the_referee.html" class="no-external">
-
-<p class="card-img-top"><img loading='lazy' src="..\the_card_the_crowd_and_the_referee\the_card_the_crowd_and_the_referee_files\figure-html\cell-4-output-1.png"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="../the_card_the_crowd_and_the_referee/the_card_the_crowd_and_the_referee.html" class="no-external">The Card, the Crowd and the Referee</a>
-</h3>
-<div class="delink listing-description"><a href="../the_card_the_crowd_and_the_referee/the_card_the_crowd_and_the_referee.html" class="no-external">
-<em>When the data stops behaving, the tools have to change</em>
-</a></div>
-</div>
-<div class="metadata">
-<a href="../the_card_the_crowd_and_the_referee/the_card_the_crowd_and_the_referee.html" class="no-external">
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-listing-file-modified-sort="1777465695923" data-listing-reading-time-sort="30" data-listing-word-count-sort="5902">
+<div class="quarto-post image-right" data-index="0" data-categories="Zm9vdGJhbGwtaW4tZGF0YQ==" data-listing-date-sort="1777417200000" data-listing-file-modified-sort="1777485662254" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="30" data-listing-word-count-sort="5904">
 <div class="thumbnail"><a href="../the_foul_the_card_and_the_gap/the_foul_the_card_and_the_gap.html" class="no-external">
 
 <p class="card-img-top"><img loading='lazy' src="..\the_foul_the_card_and_the_gap\the_foul_the_card_and_the_gap_files\figure-html\cell-5-output-1.png"  class="thumbnail-image card-img"/></p>
@@ -295,12 +225,143 @@ window.Quarto = {
 <h3 class="no-anchor listing-title">
 <a href="../the_foul_the_card_and_the_gap/the_foul_the_card_and_the_gap.html" class="no-external">The Foul, the Card and the Gap</a>
 </h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Zm9vdGJhbGwtaW4tZGF0YQ=='); return false;">football-in-data</div>
+
+</div>
 <div class="delink listing-description"><a href="../the_foul_the_card_and_the_gap/the_foul_the_card_and_the_gap.html" class="no-external">
-<em>Not all fouls are created equal. Some are more equal than others.</em>
+<p>Not all fouls are created equal. Some are more equal than others.</p>
 </a></div>
 </div>
 <div class="metadata">
 <a href="../the_foul_the_card_and_the_gap/the_foul_the_card_and_the_gap.html" class="no-external">
+<div class="listing-date">
+Apr 29, 2026
+</div>
+<div class="listing-author">
+Paolo Coraggio
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="Zm9vdGJhbGwtaW4tZGF0YQ==" data-listing-date-sort="1777158000000" data-listing-file-modified-sort="1777485606604" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5308">
+<div class="thumbnail"><a href="../the_card_the_crowd_and_the_referee/the_card_the_crowd_and_the_referee.html" class="no-external">
+
+<p class="card-img-top"><img loading='lazy' src="..\the_card_the_crowd_and_the_referee\the_card_the_crowd_and_the_referee_files\figure-html\cell-4-output-1.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../the_card_the_crowd_and_the_referee/the_card_the_crowd_and_the_referee.html" class="no-external">The Card, the Crowd and the Referee</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Zm9vdGJhbGwtaW4tZGF0YQ=='); return false;">football-in-data</div>
+
+</div>
+<div class="delink listing-description"><a href="../the_card_the_crowd_and_the_referee/the_card_the_crowd_and_the_referee.html" class="no-external">
+<p>When the data stops behaving, the tools have to change</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../the_card_the_crowd_and_the_referee/the_card_the_crowd_and_the_referee.html" class="no-external">
+<div class="listing-date">
+Apr 26, 2026
+</div>
+<div class="listing-author">
+Paolo Coraggio
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="Zm9vdGJhbGwtaW4tZGF0YQ==" data-listing-date-sort="1776898800000" data-listing-file-modified-sort="1777485544343" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="36" data-listing-word-count-sort="7080">
+<div class="thumbnail"><a href="../the_foul_the_whistle_and_the_doubt/the_foul_the_whistle_and_the_doubt.html" class="no-external">
+
+<p class="card-img-top"><img loading='lazy' src="..\the_foul_the_whistle_and_the_doubt\the_foul_the_whistle_and_the_doubt_files\figure-html\cell-4-output-1.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../the_foul_the_whistle_and_the_doubt/the_foul_the_whistle_and_the_doubt.html" class="no-external">The Foul, the Whistle and the Doubt</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Zm9vdGJhbGwtaW4tZGF0YQ=='); return false;">football-in-data</div>
+
+</div>
+<div class="delink listing-description"><a href="../the_foul_the_whistle_and_the_doubt/the_foul_the_whistle_and_the_doubt.html" class="no-external">
+<p>How to turn a pub argument into a statistical test</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../the_foul_the_whistle_and_the_doubt/the_foul_the_whistle_and_the_doubt.html" class="no-external">
+<div class="listing-date">
+Apr 23, 2026
+</div>
+<div class="listing-author">
+Paolo Coraggio
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="c3RhdGlzdGljYWwtaWxsdXNpb25z" data-listing-date-sort="1776812400000" data-listing-file-modified-sort="1777485469210" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3169">
+<div class="thumbnail"><a href="../probability_illusions_flips_in_a_row/flip_heads_in_a_row.html" class="no-external">
+
+<p class="card-img-top"><img loading='lazy' src="..\probability_illusions_flips_in_a_row\flip_heads_in_a_row_files\figure-html\cell-6-output-2.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../probability_illusions_flips_in_a_row/flip_heads_in_a_row.html" class="no-external">The Coin Has No Memory, But You Do</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('c3RhdGlzdGljYWwtaWxsdXNpb25z'); return false;">statistical-illusions</div>
+
+</div>
+<div class="delink listing-description"><a href="../probability_illusions_flips_in_a_row/flip_heads_in_a_row.html" class="no-external">
+<p>Against Your Gut: The Hidden Probability of Coin Streaks</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../probability_illusions_flips_in_a_row/flip_heads_in_a_row.html" class="no-external">
+<div class="listing-date">
+Apr 22, 2026
+</div>
+<div class="listing-author">
+Paolo Coraggio
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-categories="cHJvYmFiaWxpdHktYW5kLXN0YXRpc3RpY3M=" data-listing-date-sort="1776380400000" data-listing-file-modified-sort="1777485368611" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2735">
+<div class="thumbnail"><a href="../population_parameter_and_sample_statistic/population_and_samples.html" class="no-external">
+
+<p class="card-img-top"><img loading='lazy' src="..\population_parameter_and_sample_statistic\population_and_samples_files\figure-html\cell-4-output-1.png"  class="thumbnail-image card-img"/></p>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../population_parameter_and_sample_statistic/population_and_samples.html" class="no-external">Measuring the Measurement: Variation, Samples and the Precision of an Estimate</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('cHJvYmFiaWxpdHktYW5kLXN0YXRpc3RpY3M='); return false;">probability-and-statistics</div>
+
+</div>
+<div class="delink listing-description"><a href="../population_parameter_and_sample_statistic/population_and_samples.html" class="no-external">
+<p>Why your sample is lying to you: the surprisingly honest art of not knowing everything</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../population_parameter_and_sample_statistic/population_and_samples.html" class="no-external">
+<div class="listing-date">
+Apr 17, 2026
+</div>
+<div class="listing-author">
+Paolo Coraggio
+</div>
 </a>
 </div>
 </div>

@@ -6,6 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Paolo Coraggio">
+<meta name="dcterms.date" content="2026-04-17">
+<meta name="description" content="Why your sample is lying to you: the surprisingly honest art of not knowing everything">
 
 <title>Measuring the Measurement: Variation, Samples and the Precision of an Estimate – Reinventing the Wheel</title>
 <style>
@@ -190,7 +193,9 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#surprisingly-uncertain-why-one-measurement-is-never-enoug" id="toc-surprisingly-uncertain-why-one-measurement-is-never-enoug" class="nav-link active" data-scroll-target="#surprisingly-uncertain-why-one-measurement-is-never-enoug">Surprisingly Uncertain: Why One Measurement Is Never Enoug</a></li>
+  <li><a href="#measuring-the-measurement-variation-samples-and-the-precision-of-an-estimate" id="toc-measuring-the-measurement-variation-samples-and-the-precision-of-an-estimate" class="nav-link active" data-scroll-target="#measuring-the-measurement-variation-samples-and-the-precision-of-an-estimate">Measuring the Measurement: Variation, Samples and the Precision of an Estimate</a>
+  <ul class="collapse">
+  <li><a href="#surprisingly-uncertain-why-one-measurement-is-never-enoug" id="toc-surprisingly-uncertain-why-one-measurement-is-never-enoug" class="nav-link" data-scroll-target="#surprisingly-uncertain-why-one-measurement-is-never-enoug">Surprisingly Uncertain: Why One Measurement Is Never Enoug</a></li>
   <li><a href="#the-population" id="toc-the-population" class="nav-link" data-scroll-target="#the-population">The Population</a></li>
   <li><a href="#visualising-the-population" id="toc-visualising-the-population" class="nav-link" data-scroll-target="#visualising-the-population">2. Visualising the population</a></li>
   <li><a href="#drawing-a-single-sample" id="toc-drawing-a-single-sample" class="nav-link" data-scroll-target="#drawing-a-single-sample">3. Drawing a single sample</a></li>
@@ -200,6 +205,7 @@ window.Quarto = {
   <li><a href="#estimating-the-population-standard-deviation" id="toc-estimating-the-population-standard-deviation" class="nav-link" data-scroll-target="#estimating-the-population-standard-deviation">7. Estimating the population standard deviation</a></li>
   <li><a href="#a-note-on-non-gaussian-populations" id="toc-a-note-on-non-gaussian-populations" class="nav-link" data-scroll-target="#a-note-on-non-gaussian-populations">8. A note on non-Gaussian populations</a></li>
   <li><a href="#bonus-extreme-samples-false-positives-and-the-logic-of-hypothesis-testing" id="toc-bonus-extreme-samples-false-positives-and-the-logic-of-hypothesis-testing" class="nav-link" data-scroll-target="#bonus-extreme-samples-false-positives-and-the-logic-of-hypothesis-testing">Bonus: Extreme Samples, False Positives and the Logic of Hypothesis Testing</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -209,13 +215,33 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Measuring the Measurement: Variation, Samples and the Precision of an Estimate</h1>
-</div>
+  <div class="quarto-categories">
+    <div class="quarto-category">probability-and-statistics</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Why your sample is lying to you: the surprisingly honest art of not knowing everything
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Paolo Coraggio </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2026-04-17</p>
+    </div>
+  </div>
   
     
   </div>
@@ -237,6 +263,8 @@ window.Quarto = {
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"whitegrid"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<section id="measuring-the-measurement-variation-samples-and-the-precision-of-an-estimate" class="level1">
+<h1>Measuring the Measurement: Variation, Samples and the Precision of an Estimate</h1>
 <p><em>Why your sample is lying to you: the surprisingly honest art of not knowing everything</em></p>
 <section id="surprisingly-uncertain-why-one-measurement-is-never-enoug" class="level2">
 <h2 class="anchored" data-anchor-id="surprisingly-uncertain-why-one-measurement-is-never-enoug">Surprisingly Uncertain: Why One Measurement Is Never Enoug</h2>
@@ -912,6 +940,7 @@ Expected false positive rate : 5.00%</code></pre>
 <p>This is not a flaw in the method. It is the method being honest about its own limitations. When you set <span class="math inline">\(\alpha = 0.05\)</span> you are explicitly accepting that 1 in 20 experiments will produce a false alarm even when nothing is happening. Lowering <span class="math inline">\(\alpha\)</span> reduces false positives but makes it harder to detect real effects. This tension, between false positives and false negatives, is the fundamental trade-off of hypothesis testing, and it begins here, with the shape of the sampling distribution.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
