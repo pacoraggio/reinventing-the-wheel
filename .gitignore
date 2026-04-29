@@ -1,4 +1,37 @@
+# Quarto build output
 _site/
 .quarto/
 /.quarto/
 **/*.quarto_ipynb
+
+# Jupyter
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+**/*.pyc
+__pycache__/
+**/__pycache__/
+
+# Claude Code
+.claude/
+CLAUDE.md
+
+# Docs folder (generated)
+docs/
+
+# Personal notes
+probability_illusions_flips_in_a_row/ARTICLE_NOTES.md
+
+# Python environment
+.env
+*.env
+environment.yml.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data files (large or sensitive)
+**/*.pkl
+**/*.parquet
+**/*.h5
+**/*.hdf5
